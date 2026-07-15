@@ -62,24 +62,12 @@
       return element;
     };
 
-    function smoothPath(points, includeMove = true) {
+    function linearPath(points, includeMove = true) {
       if (points.length === 0) return '';
       let path = includeMove ? 'M ' + points[0].x + ' ' + points[0].y : '';
 
-      for (let index = 0; index < points.length - 1; index++) {
-        const before = points[index - 1] ?? points[index];
-        const current = points[index];
-        const next = points[index + 1];
-        const after = points[index + 2] ?? next;
-        const control1X = current.x + (next.x - before.x) / 6;
-        const control1Y = current.y + (next.y - before.y) / 6;
-        const control2X = next.x - (after.x - current.x) / 6;
-        const control2Y = next.y - (after.y - current.y) / 6;
-        path +=
-          ' C ' +
-          control1X + ' ' + control1Y + ', ' +
-          control2X + ' ' + control2Y + ', ' +
-          next.x + ' ' + next.y;
+      for (let index = 1; index < points.length; index++) {
+        path += ' L ' + points[index].x + ' ' + points[index].y;
       }
 
       return path;
@@ -158,23 +146,48 @@
         );
         const reversedLowerPoints = [...lowerPoints].reverse();
         const areaPath =
-          smoothPath(upperPoints) +
+          linearPath(upperPoints) +
           ' L ' + reversedLowerPoints[0].x + ' ' + reversedLowerPoints[0].y +
-          smoothPath(reversedLowerPoints, false) +
+          linearPath(reversedLowerPoints, false) +
           ' Z';
         chart.append(svgElement('path', {
           d: areaPath, fill: itemSeries.color, class: '[stroke:none]'
         }));
       }
 
-      for (const itemSeries of series) {
+      const lastObservation = observations.at(-1);
+      const valueLabelPositions = series.map(
+        itemSeries => y(itemSeries.upper(lastObservation)) + 4
+      );
+      const minimumLabelGap = 14;
+      if (Math.abs(valueLabelPositions[0] - valueLabelPositions[1]) < minimumLabelGap) {
+        const topIndex = 1;
+        const bottomIndex = 0;
+        const midpoint = (valueLabelPositions[0] + valueLabelPositions[1]) / 2;
+        let top = midpoint - minimumLabelGap / 2;
+        let bottom = midpoint + minimumLabelGap / 2;
+        const minimumY = margin.top + 12;
+        const maximumY = margin.top + innerHeight;
+        if (top < minimumY) {
+          bottom += minimumY - top;
+          top = minimumY;
+        }
+        if (bottom > maximumY) {
+          top -= bottom - maximumY;
+          bottom = maximumY;
+        }
+        valueLabelPositions[topIndex] = top;
+        valueLabelPositions[bottomIndex] = bottom;
+      }
+
+      for (const [seriesIndex, itemSeries] of series.entries()) {
         const points = observations.map(
           (item, index) => ({ x: x(index), y: y(itemSeries.upper(item)) })
         );
         chart.append(svgElement('path', {
-          d: smoothPath(points),
+          d: linearPath(points),
           stroke: itemSeries.color,
-          class: 'fill-none [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:3]'
+          class: 'fill-none [stroke-linecap:butt] [stroke-linejoin:miter] [stroke-width:3]'
         }));
         observations.forEach((item, index) => {
           const circle = svgElement('circle', {
@@ -189,10 +202,9 @@
           circle.append(title);
           chart.append(circle);
         });
-        const lastObservation = observations.at(-1);
         const valueLabel = svgElement('text', {
           x: width - margin.right + 8,
-          y: y(itemSeries.upper(lastObservation)) + 4,
+          y: valueLabelPositions[seriesIndex],
           fill: itemSeries.color,
           class: 'text-xs font-bold'
         });
