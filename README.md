@@ -53,4 +53,6 @@ Open [localhost:8000](http://localhost:8000) in a browser.
 
 ## Automation
 
-The workflow runs at minute 17 of every hour and can also be triggered manually from GitHub Actions. When `index.json` changes, the workflow commits and pushes the updated history to the default branch.
+The workflow is scheduled at minute 17 of every hour and can also be triggered manually from GitHub Actions. This avoids the start of the hour, when GitHub documents that scheduled workflows are more likely to be delayed or dropped. When `index.json` changes, the workflow commits and pushes the updated history to the default branch.
+
+See the GitHub documentation for [scheduled workflow limitations](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
