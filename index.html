@@ -132,7 +132,12 @@
           'text-anchor': textAnchor,
           class: 'fill-slate-500 text-[10px]'
         });
-        label.textContent = observations[index].time.toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
+        const [date, time] = observations[index].time.toISOString().split('T');
+        const dateLine = svgElement('tspan', { x: x(index), dy: 0 });
+        dateLine.textContent = date;
+        const timeLine = svgElement('tspan', { x: x(index), dy: 12 });
+        timeLine.textContent = time.slice(0, 8) + ' UTC';
+        label.append(dateLine, timeLine);
         chart.append(label);
       }
 
