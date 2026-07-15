@@ -36,16 +36,16 @@
     const summary = document.querySelector('#summary');
     const series = [
       {
-        key: 'ingressosVendidos',
-        color: '#dc2626',
-        lower: () => 0,
-        upper: item => item.values.ingressosVendidos
-      },
-      {
         key: 'ingressosDisponiveis',
         color: '#16a34a',
-        lower: item => item.values.ingressosVendidos,
-        upper: item => item.values.ingressosVendidos + item.values.ingressosDisponiveis
+        lower: () => 0,
+        upper: item => item.values.ingressosDisponiveis
+      },
+      {
+        key: 'ingressosVendidos',
+        color: '#dc2626',
+        lower: item => item.values.ingressosDisponiveis,
+        upper: item => item.values.ingressosDisponiveis + item.values.ingressosVendidos
       }
     ];
     const svgElement = (name, attributes = {}) => {
