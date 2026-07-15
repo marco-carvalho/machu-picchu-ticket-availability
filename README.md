@@ -53,4 +53,4 @@ Open [localhost:8000](http://localhost:8000) in a browser.
 
 ## Automation
 
-The workflow runs at the start of every hour and can also be triggered manually from GitHub Actions. When `index.json` changes, the workflow commits and pushes the updated history to the default branch.
+The workflow runs at minute 17 of every hour and can also be triggered manually from GitHub Actions. When `index.json` changes, the workflow commits and pushes the updated history to the default branch.
