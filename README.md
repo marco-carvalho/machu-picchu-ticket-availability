@@ -10,7 +10,7 @@ View the live dashboard at [marco-carvalho.github.io/machu-picchu-ticket-availab
 2. Playwright opens the official page using the `America/Lima` timezone.
 3. The collector captures and normalizes the availability response.
 4. The latest observation is appended to `index.json`.
-5. The dashboard loads the JSON and renders the availability timeline.
+5. The dashboard loads the JSON and renders the availability timeline with Apache ECharts.
 
 ## Run locally
 
