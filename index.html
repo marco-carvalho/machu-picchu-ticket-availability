@@ -43,6 +43,7 @@
     const charts = document.querySelector('#charts');
     const empty = document.querySelector('#empty');
     const summary = document.querySelector('#summary');
+    const timelineWindowMilliseconds = 24 * 60 * 60 * 1000;
     const peruTimestampFormatter = new Intl.DateTimeFormat('en-CA', {
       timeZone: 'America/Lima',
       year: 'numeric',
@@ -82,6 +83,12 @@
     }
 
     function chartOptions(routeName, observations) {
+      const timestamps = observations.map(item => item.time.getTime());
+      const latestTimestamp = Math.max(...timestamps);
+      const timelineMinimum = Math.min(
+        Math.min(...timestamps),
+        latestTimestamp - timelineWindowMilliseconds
+      );
       const capacity = Math.max(
         1,
         ...observations.map(
@@ -111,12 +118,14 @@
         grid: {
           top: 18,
           right: 58,
-          bottom: 8,
+          bottom: 48,
           left: 8,
           containLabel: true
         },
         xAxis: {
           type: 'time',
+          min: timelineMinimum,
+          max: latestTimestamp,
           boundaryGap: false,
           splitNumber: 2,
           axisLine: { lineStyle: { color: '#cbd5e1' } },
@@ -129,6 +138,20 @@
           },
           splitLine: { show: false }
         },
+        dataZoom: [{
+          type: 'slider',
+          xAxisIndex: 0,
+          filterMode: 'none',
+          startValue: latestTimestamp - timelineWindowMilliseconds,
+          endValue: latestTimestamp,
+          minValueSpan: timelineWindowMilliseconds,
+          maxValueSpan: timelineWindowMilliseconds,
+          zoomLock: true,
+          brushSelect: false,
+          height: 20,
+          bottom: 4,
+          labelFormatter: value => formatTimestamp(value, ' ') + ' PET'
+        }],
         yAxis: {
           type: 'value',
           min: 0,
