@@ -43,6 +43,16 @@
     const charts = document.querySelector('#charts');
     const empty = document.querySelector('#empty');
     const summary = document.querySelector('#summary');
+    const peruTimestampFormatter = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Lima',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hourCycle: 'h23'
+    });
     const seriesDefinitions = [
       {
         name: 'Tickets available',
@@ -58,9 +68,17 @@
       }
     ];
 
-    function formatTimestamp(value) {
-      const iso = new Date(value).toISOString();
-      return iso.slice(0, 10) + '\n' + iso.slice(11, 19) + ' UTC';
+    function formatTimestamp(value, separator = '\n') {
+      const parts = Object.fromEntries(
+        peruTimestampFormatter
+          .formatToParts(new Date(value))
+          .map(part => [part.type, part.value])
+      );
+      return (
+        parts.year + '-' + parts.month + '-' + parts.day +
+        separator +
+        parts.hour + ':' + parts.minute + ':' + parts.second
+      );
     }
 
     function chartOptions(routeName, observations) {
@@ -96,7 +114,7 @@
             color: '#64748b',
             fontSize: 10,
             hideOverlap: true,
-            formatter: formatTimestamp
+            formatter: value => formatTimestamp(value) + ' PET'
           },
           splitLine: { show: false }
         },
@@ -191,9 +209,10 @@
         chartInstances.push(chart);
       }
 
-      const first = new Date(history[0].horarioUtc).toISOString();
-      const last = new Date(history.at(-1).horarioUtc).toISOString();
-      summary.textContent = history.length + ' observation(s) from ' + first + ' to ' + last;
+      const first = formatTimestamp(history[0].horarioUtc, ' ');
+      const last = formatTimestamp(history.at(-1).horarioUtc, ' ');
+      summary.textContent =
+        history.length + ' observation(s) from ' + first + ' to ' + last + ' Peru time';
     }
 
     async function loadHistory() {
