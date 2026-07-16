@@ -1,12 +1,12 @@
 # Machu Picchu Ticket Availability
 
-Tracks hourly availability for in person Machu Picchu ticket sales using data from the official [Tu Boleto page](https://tuboleto.cultura.pe/cusco/1000boletos).
+Tracks availability for in person Machu Picchu ticket sales using data from the official [Tu Boleto page](https://tuboleto.cultura.pe/cusco/1000boletos).
 
 View the live dashboard at [marco-carvalho.github.io/machu-picchu-ticket-availability](https://marco-carvalho.github.io/machu-picchu-ticket-availability/).
 
 ## How it works
 
-1. A GitHub Actions workflow runs every hour.
+1. A GitHub Actions workflow runs every 5 minutes.
 2. Playwright opens the official page using the `America/Lima` timezone.
 3. The collector captures and normalizes the availability response.
 4. The latest observation is appended to `index.json`.
@@ -49,10 +49,10 @@ Open [localhost:8000](http://localhost:8000) in a browser.
 3. `history.js` reads and writes the JSON history.
 4. `index.json` stores all collected observations.
 5. `index.html` renders the dashboard.
-6. `.github/workflows/hourly-update.yml` runs and commits hourly updates.
+6. `.github/workflows/hourly-update.yml` runs and commits updates every 5 minutes.
 
 ## Automation
 
-The workflow is scheduled at minute 17 of every hour and can also be triggered manually from GitHub Actions. This avoids the start of the hour, when GitHub documents that scheduled workflows are more likely to be delayed or dropped. When `index.json` changes, the workflow commits and pushes the updated history to the default branch.
+The workflow is scheduled to run every 5 minutes and can also be triggered manually from GitHub Actions. Five minutes is the shortest interval GitHub Actions supports for scheduled workflows; a cron of "every minute" would be silently capped at 5 minutes anyway. Scheduled workflows are also best effort and can be delayed or dropped during periods of high load on GitHub's infrastructure. When `index.json` changes, the workflow commits and pushes the updated history to the default branch.
 
 See the GitHub documentation for [scheduled workflow limitations](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
