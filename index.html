@@ -59,13 +59,15 @@
         name: 'Tickets available',
         key: 'ingressosDisponiveis',
         color: '#16a34a',
-        labelOffset: 7
+        labelOffset: 7,
+        labelFormatter: (value, percentage) => value + ' (' + percentage + '%)'
       },
       {
         name: 'Tickets sold',
         key: 'ingressosVendidos',
         color: '#dc2626',
-        labelOffset: -7
+        labelOffset: -7,
+        labelFormatter: value => value
       }
     ];
 
@@ -117,7 +119,7 @@
         },
         grid: {
           top: 18,
-          right: 58,
+          right: 78,
           bottom: 48,
           left: 8,
           containLabel: true
@@ -150,7 +152,7 @@
           brushSelect: false,
           height: 20,
           bottom: 4,
-          labelFormatter: value => formatTimestamp(value, ' ') + ' PET'
+          labelFormatter: value => formatTimestamp(value) + ' PET'
         }],
         yAxis: {
           type: 'value',
@@ -179,10 +181,12 @@
           emphasis: {
             disabled: true
           },
-          data: observations.map(item => [
-            item.time.getTime(),
-            item.values[definition.key]
-          ]),
+          data: observations.map(item => {
+            const capacity = item.values.ingressosVendidos + item.values.ingressosDisponiveis;
+            const value = item.values[definition.key];
+            const percentage = capacity > 0 ? Math.round((value / capacity) * 100) : 0;
+            return [item.time.getTime(), value, percentage];
+          }),
           lineStyle: {
             color: definition.color,
             width: 3,
@@ -205,7 +209,8 @@
             fontWeight: 700,
             distance: 8,
             offset: [0, definition.labelOffset],
-            formatter: parameters => parameters.value[1]
+            formatter: parameters =>
+              definition.labelFormatter(parameters.value[1], parameters.value[2])
           }
         }))
       };
