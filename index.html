@@ -97,6 +97,17 @@
           enabled: true,
           description: 'Ticket availability timeline for ' + routeName
         },
+        tooltip: {
+          trigger: 'item',
+          formatter: parameters =>
+            '<strong>' +
+            formatTimestamp(parameters.value[0], ' ') +
+            ' Peru time</strong><br>' +
+            parameters.marker +
+            parameters.seriesName +
+            ': ' +
+            parameters.value[1]
+        },
         grid: {
           top: 18,
           right: 58,
@@ -138,11 +149,13 @@
           name: definition.name,
           type: 'line',
           stack: 'tickets',
-          silent: true,
           smooth: false,
           showSymbol: true,
           symbol: 'circle',
           symbolSize: 7,
+          emphasis: {
+            disabled: true
+          },
           data: observations.map(item => [
             item.time.getTime(),
             item.values[definition.key]
