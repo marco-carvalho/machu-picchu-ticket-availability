@@ -61,6 +61,7 @@
         key: 'ingressosDisponiveis',
         color: '#16a34a',
         labelOffset: 7,
+        showSymbol: true,
         labelFormatter: (value, percentage) => value + ' (' + percentage + '%)'
       },
       {
@@ -68,6 +69,7 @@
         key: 'ingressosVendidos',
         color: '#dc2626',
         labelOffset: -7,
+        showSymbol: false,
         labelFormatter: value => value
       }
     ];
@@ -180,9 +182,9 @@
           type: 'line',
           stack: 'tickets',
           smooth: false,
-          showSymbol: true,
+          showSymbol: definition.showSymbol,
           symbol: 'circle',
-          symbolSize: 7,
+          symbolSize: value => (!definition.showSymbol || value[2] === 100) ? 0 : 7,
           emphasis: {
             disabled: true
           },
