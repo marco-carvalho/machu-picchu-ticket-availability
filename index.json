@@ -2865,5 +2865,52 @@
       "ingressosVendidos": 652,
       "ingressosDisponiveis": 348
     }
+  },
+  {
+    "horarioUtc": "2026-07-17T21:51:04.236Z",
+    "dataDisponibilidade": "2026-07-18",
+    "rotas": [
+      {
+        "ruta": "Ruta 1-A: Montaña Machupicchu",
+        "ingressosTotais": 50,
+        "ingressosVendidos": 0,
+        "ingressosDisponiveis": 50
+      },
+      {
+        "ruta": "Ruta 1-B: Terraza superior",
+        "ingressosTotais": 100,
+        "ingressosVendidos": 19,
+        "ingressosDisponiveis": 81
+      },
+      {
+        "ruta": "Ruta 2-A: Clásico Diseñada",
+        "ingressosTotais": 600,
+        "ingressosVendidos": 522,
+        "ingressosDisponiveis": 78
+      },
+      {
+        "ruta": "Ruta 2-B: Terraza Inferior",
+        "ingressosTotais": 100,
+        "ingressosVendidos": 80,
+        "ingressosDisponiveis": 20
+      },
+      {
+        "ruta": "Ruta 3-A: Montaña Waynapicchu",
+        "ingressosTotais": 50,
+        "ingressosVendidos": 23,
+        "ingressosDisponiveis": 27
+      },
+      {
+        "ruta": "Ruta 3-B: Realeza diseñada",
+        "ingressosTotais": 100,
+        "ingressosVendidos": 40,
+        "ingressosDisponiveis": 60
+      }
+    ],
+    "totais": {
+      "ingressosTotais": 1000,
+      "ingressosVendidos": 684,
+      "ingressosDisponiveis": 316
+    }
   }
 ]
