@@ -55,6 +55,56 @@
       second: '2-digit',
       hourCycle: 'h23'
     });
+    const crowdLevels = {
+      quiet: { label: 'Quiet', badgeClass: 'bg-green-100 text-green-700' },
+      busy: { label: 'Busy', badgeClass: 'bg-red-100 text-red-700' }
+    };
+
+    function median(values) {
+      const sorted = [...values].sort((a, b) => a - b);
+      const middle = Math.floor(sorted.length / 2);
+      return sorted.length % 2 === 0
+        ? (sorted[middle - 1] + sorted[middle]) / 2
+        : sorted[middle];
+    }
+
+    function getPeruParts(value) {
+      return Object.fromEntries(
+        peruTimestampFormatter.formatToParts(new Date(value)).map(part => [part.type, part.value])
+      );
+    }
+
+    function getPeruDateKey(value) {
+      const parts = getPeruParts(value);
+      return parts.year + '-' + parts.month + '-' + parts.day;
+    }
+
+    function getPeruMinutesOfDay(value) {
+      const parts = getPeruParts(value);
+      return Number(parts.hour) * 60 + Number(parts.minute);
+    }
+
+    function interpolateAtMinute(sortedPoints, targetMinutes) {
+      if (sortedPoints.length === 0) return null;
+      if (targetMinutes < sortedPoints[0].minutes || targetMinutes > sortedPoints.at(-1).minutes) {
+        return null;
+      }
+      for (let i = 0; i < sortedPoints.length - 1; i++) {
+        const before = sortedPoints[i];
+        const after = sortedPoints[i + 1];
+        if (targetMinutes >= before.minutes && targetMinutes <= after.minutes) {
+          if (after.minutes === before.minutes) return before.value;
+          const ratio = (targetMinutes - before.minutes) / (after.minutes - before.minutes);
+          return before.value + (after.value - before.value) * ratio;
+        }
+      }
+      return sortedPoints.at(-1).value;
+    }
+
+    function getCrowdLevel(availableNow, medianAvailable) {
+      return availableNow >= medianAvailable ? crowdLevels.quiet : crowdLevels.busy;
+    }
+
     const seriesDefinitions = [
       {
         name: 'Tickets available',
@@ -243,11 +293,49 @@
           const values = item.rotas.find(route => route.ruta === routeName);
           return values ? [{ time: new Date(item.horarioUtc), values }] : [];
         });
+        const latestObservation = observations.at(-1);
+        const latestDateKey = getPeruDateKey(latestObservation.time);
+        const targetMinutes = getPeruMinutesOfDay(latestObservation.time);
+
+        const observationsByDate = new Map();
+        for (const item of observations) {
+          const dateKey = getPeruDateKey(item.time);
+          if (!observationsByDate.has(dateKey)) observationsByDate.set(dateKey, []);
+          observationsByDate.get(dateKey).push({
+            minutes: getPeruMinutesOfDay(item.time),
+            value: item.values.ingressosDisponiveis
+          });
+        }
+
+        const interpolatedHistory = [];
+        for (const [dateKey, dayPoints] of observationsByDate) {
+          if (dateKey === latestDateKey) continue;
+          const sortedPoints = [...dayPoints].sort((a, b) => a.minutes - b.minutes);
+          const estimate = interpolateAtMinute(sortedPoints, targetMinutes);
+          if (estimate !== null) interpolatedHistory.push(estimate);
+        }
+
+        const latestAvailable = latestObservation.values.ingressosDisponiveis;
+        const medianAvailable = interpolatedHistory.length > 0
+          ? median(interpolatedHistory)
+          : median(observations.map(item => item.values.ingressosDisponiveis));
+        const routeLevel = getCrowdLevel(latestAvailable, medianAvailable);
+
         const section = document.createElement('section');
         section.className = 'min-w-0';
         const title = document.createElement('h2');
-        title.className = 'h-9 text-sm font-bold leading-[18px]';
-        title.textContent = routeName;
+        title.className = 'h-9 flex items-center gap-2 text-sm font-bold leading-[18px]';
+        const titleText = document.createElement('span');
+        titleText.textContent = routeName;
+        const routeBadge = document.createElement('span');
+        routeBadge.className =
+          'rounded-full px-2 py-0.5 text-xs font-semibold ' + routeLevel.badgeClass;
+        routeBadge.textContent = routeLevel.label;
+        routeBadge.title =
+          latestAvailable + ' available now vs. an interpolated median of ' +
+          Math.round(medianAvailable * 10) / 10 + ' from ' +
+          interpolatedHistory.length + ' comparable day(s) at the same time';
+        title.append(titleText, routeBadge);
         const chartElement = document.createElement('div');
         chartElement.className = 'w-full';
         chartElement.style.height = '280px';
