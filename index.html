@@ -56,8 +56,8 @@
       hourCycle: 'h23'
     });
     const crowdLevels = {
-      quiet: { label: 'Quiet', badgeClass: 'bg-green-100 text-green-700' },
-      busy: { label: 'Busy', badgeClass: 'bg-red-100 text-red-700' }
+      lowDemand: { label: 'Low demand', badgeClass: 'bg-green-100 text-green-700' },
+      highDemand: { label: 'High demand', badgeClass: 'bg-red-100 text-red-700' }
     };
 
     function median(values) {
@@ -102,7 +102,7 @@
     }
 
     function getCrowdLevel(availableNow, medianAvailable) {
-      return availableNow >= medianAvailable ? crowdLevels.quiet : crowdLevels.busy;
+      return availableNow >= medianAvailable ? crowdLevels.lowDemand : crowdLevels.highDemand;
     }
 
     const seriesDefinitions = [
