@@ -28,6 +28,10 @@
         <span class="h-2.5 w-2.5 rounded-full bg-green-600"></span>
         Tickets available
       </span>
+      <span class="inline-flex items-center gap-2">
+        <span class="h-0 w-4 border-t-2 border-dashed border-slate-500"></span>
+        Historical median (available)
+      </span>
     </div>
   </main>
   <footer class="px-6 pb-6 text-center text-xs text-slate-500">
@@ -101,6 +105,16 @@
       return sortedPoints.at(-1).value;
     }
 
+    function estimateHistoricalMedian(observationsByDate, excludeDateKey, targetMinutes) {
+      const estimates = [];
+      for (const [dateKey, sortedPoints] of observationsByDate) {
+        if (dateKey === excludeDateKey) continue;
+        const estimate = interpolateAtMinute(sortedPoints, targetMinutes);
+        if (estimate !== null) estimates.push(estimate);
+      }
+      return estimates.length > 0 ? { value: median(estimates), count: estimates.length } : null;
+    }
+
     function getCrowdLevel(availableNow, medianAvailable) {
       return availableNow >= medianAvailable ? crowdLevels.lowDemand : crowdLevels.highDemand;
     }
@@ -137,7 +151,7 @@
       );
     }
 
-    function chartOptions(routeName, observations) {
+    function chartOptions(routeName, observations, medianCurve) {
       const timestamps = observations.map(item => item.time.getTime());
       const latestTimestamp = Math.max(...timestamps);
       const timelineMinimum = Math.min(
@@ -229,50 +243,76 @@
             lineStyle: { color: '#e2e8f0' }
           }
         },
-        series: seriesDefinitions.map(definition => ({
-          name: definition.name,
-          type: 'line',
-          stack: 'tickets',
-          smooth: false,
-          showSymbol: definition.showSymbol,
-          symbol: 'circle',
-          symbolSize: value => (!definition.showSymbol || value[2] === 100) ? 0 : 7,
-          emphasis: {
-            disabled: true
-          },
-          data: observations.map(item => {
-            const capacity = item.values.ingressosVendidos + item.values.ingressosDisponiveis;
-            const value = item.values[definition.key];
-            const percentage = capacity > 0 ? Math.round((value / capacity) * 100) : 0;
-            return [item.time.getTime(), value, percentage];
-          }),
-          lineStyle: {
-            color: definition.color,
-            width: 3,
-            cap: 'butt',
-            join: 'miter',
-            opacity: 0.5
-          },
-          itemStyle: {
-            color: definition.color,
-            borderColor: '#ffffff',
-            borderWidth: 2
-          },
-          areaStyle: {
-            color: definition.color,
-            opacity: 0.5
-          },
-          endLabel: {
-            show: true,
-            color: definition.color,
-            fontSize: 12,
-            fontWeight: 700,
-            distance: 8,
-            offset: [0, definition.labelOffset],
-            formatter: parameters =>
-              definition.labelFormatter(parameters.value[1], parameters.value[2])
+        series: [
+          ...seriesDefinitions.map(definition => ({
+            name: definition.name,
+            type: 'line',
+            stack: 'tickets',
+            smooth: false,
+            showSymbol: definition.showSymbol,
+            symbol: 'circle',
+            symbolSize: value => (!definition.showSymbol || value[2] === 100) ? 0 : 7,
+            emphasis: {
+              disabled: true
+            },
+            data: observations.map(item => {
+              const capacity = item.values.ingressosVendidos + item.values.ingressosDisponiveis;
+              const value = item.values[definition.key];
+              const percentage = capacity > 0 ? Math.round((value / capacity) * 100) : 0;
+              return [item.time.getTime(), value, percentage];
+            }),
+            lineStyle: {
+              color: definition.color,
+              width: 3,
+              cap: 'butt',
+              join: 'miter',
+              opacity: 0.5
+            },
+            itemStyle: {
+              color: definition.color,
+              borderColor: '#ffffff',
+              borderWidth: 2
+            },
+            areaStyle: {
+              color: definition.color,
+              opacity: 0.5
+            },
+            endLabel: {
+              show: true,
+              color: definition.color,
+              fontSize: 12,
+              fontWeight: 700,
+              distance: 8,
+              offset: [0, definition.labelOffset],
+              formatter: parameters =>
+                definition.labelFormatter(parameters.value[1], parameters.value[2])
+            }
+          })),
+          {
+            name: 'Historical median (available)',
+            type: 'line',
+            smooth: false,
+            showSymbol: false,
+            symbol: 'none',
+            silent: true,
+            emphasis: {
+              disabled: true
+            },
+            data: medianCurve,
+            lineStyle: {
+              color: '#64748b',
+              width: 2,
+              type: 'dashed'
+            },
+            itemStyle: {
+              color: '#64748b'
+            },
+            tooltip: {
+              show: false
+            },
+            z: 5
           }
-        }))
+        ]
       };
     }
 
@@ -306,20 +346,36 @@
             value: item.values.ingressosDisponiveis
           });
         }
-
-        const interpolatedHistory = [];
-        for (const [dateKey, dayPoints] of observationsByDate) {
-          if (dateKey === latestDateKey) continue;
-          const sortedPoints = [...dayPoints].sort((a, b) => a.minutes - b.minutes);
-          const estimate = interpolateAtMinute(sortedPoints, targetMinutes);
-          if (estimate !== null) interpolatedHistory.push(estimate);
+        for (const dayPoints of observationsByDate.values()) {
+          dayPoints.sort((a, b) => a.minutes - b.minutes);
         }
 
+        const historicalMedianAtLatest = estimateHistoricalMedian(
+          observationsByDate,
+          latestDateKey,
+          targetMinutes
+        );
+
         const latestAvailable = latestObservation.values.ingressosDisponiveis;
-        const medianAvailable = interpolatedHistory.length > 0
-          ? median(interpolatedHistory)
+        const medianAvailable = historicalMedianAtLatest !== null
+          ? historicalMedianAtLatest.value
           : median(observations.map(item => item.values.ingressosDisponiveis));
+        const comparableDayCount = historicalMedianAtLatest !== null
+          ? historicalMedianAtLatest.count
+          : 0;
         const routeLevel = getCrowdLevel(latestAvailable, medianAvailable);
+
+        const windowStart = latestObservation.time.getTime() - timelineWindowMilliseconds;
+        const medianCurve = [];
+        for (const item of observations) {
+          if (item.time.getTime() < windowStart) continue;
+          const estimate = estimateHistoricalMedian(
+            observationsByDate,
+            getPeruDateKey(item.time),
+            getPeruMinutesOfDay(item.time)
+          );
+          if (estimate !== null) medianCurve.push([item.time.getTime(), estimate.value]);
+        }
 
         const section = document.createElement('section');
         section.className = 'min-w-0';
@@ -334,7 +390,7 @@
         routeBadge.title =
           latestAvailable + ' available now vs. an interpolated median of ' +
           Math.round(medianAvailable * 10) / 10 + ' from ' +
-          interpolatedHistory.length + ' comparable day(s) at the same time';
+          comparableDayCount + ' comparable day(s) at the same time';
         title.append(titleText, routeBadge);
         const chartElement = document.createElement('div');
         chartElement.className = 'w-full';
@@ -344,7 +400,7 @@
         section.append(title, chartElement);
         charts.append(section);
         const chart = echarts.init(chartElement, null, { renderer: 'canvas' });
-        chart.setOption(chartOptions(routeName, observations));
+        chart.setOption(chartOptions(routeName, observations, medianCurve));
         chartInstances.push(chart);
       }
 
