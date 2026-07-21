@@ -12,10 +12,35 @@
     <header class="flex flex-wrap items-end gap-4">
       <div>
         <h1 class="mb-1.5 text-2xl font-bold">Ticket availability</h1>
-        <p id="summary" class="m-0 text-slate-500"></p>
+        <p id="summary" class="m-0 min-h-6 text-slate-500"></p>
       </div>
     </header>
-    <div id="charts" class="mt-6 grid grid-cols-1 gap-x-6 gap-y-7 md:grid-cols-2 xl:grid-cols-3"></div>
+    <div id="charts" class="mt-6 grid grid-cols-1 gap-x-6 gap-y-7 md:grid-cols-2 xl:grid-cols-3">
+      <section class="min-w-0" aria-hidden="true">
+        <div class="h-9 w-40 animate-pulse rounded bg-slate-200"></div>
+        <div class="w-full animate-pulse rounded bg-slate-100" style="height: 280px"></div>
+      </section>
+      <section class="min-w-0" aria-hidden="true">
+        <div class="h-9 w-40 animate-pulse rounded bg-slate-200"></div>
+        <div class="w-full animate-pulse rounded bg-slate-100" style="height: 280px"></div>
+      </section>
+      <section class="min-w-0" aria-hidden="true">
+        <div class="h-9 w-40 animate-pulse rounded bg-slate-200"></div>
+        <div class="w-full animate-pulse rounded bg-slate-100" style="height: 280px"></div>
+      </section>
+      <section class="min-w-0" aria-hidden="true">
+        <div class="h-9 w-40 animate-pulse rounded bg-slate-200"></div>
+        <div class="w-full animate-pulse rounded bg-slate-100" style="height: 280px"></div>
+      </section>
+      <section class="min-w-0" aria-hidden="true">
+        <div class="h-9 w-40 animate-pulse rounded bg-slate-200"></div>
+        <div class="w-full animate-pulse rounded bg-slate-100" style="height: 280px"></div>
+      </section>
+      <section class="min-w-0" aria-hidden="true">
+        <div class="h-9 w-40 animate-pulse rounded bg-slate-200"></div>
+        <div class="w-full animate-pulse rounded bg-slate-100" style="height: 280px"></div>
+      </section>
+    </div>
     <div id="empty" class="hidden py-20 text-center text-slate-500">
       There are no observations in the history yet.
     </div>
