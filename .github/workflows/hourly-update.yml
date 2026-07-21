@@ -17,7 +17,7 @@ jobs:
         run: npm install --global playwright
 
       - name: Generate changes
-        run: node index.js
+        run: node update.js
 
       - name: Commit changes
         run: |
