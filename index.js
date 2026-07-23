@@ -28,47 +28,12 @@ function median(values) {
     : sorted[middle];
 }
 
-function getPeruParts(value) {
-  return Object.fromEntries(
-    peruTimestampFormatter.formatToParts(new Date(value)).map(part => [part.type, part.value])
-  );
-}
-
-function getPeruDateKey(value) {
-  const parts = getPeruParts(value);
-  return parts.year + '-' + parts.month + '-' + parts.day;
-}
-
-function getPeruMinutesOfDay(value) {
-  const parts = getPeruParts(value);
-  return Number(parts.hour) * 60 + Number(parts.minute);
-}
-
-function interpolateAtMinute(sortedPoints, targetMinutes) {
-  if (sortedPoints.length === 0) return null;
-  if (targetMinutes < sortedPoints[0].minutes || targetMinutes > sortedPoints.at(-1).minutes) {
-    return null;
-  }
-  for (let i = 0; i < sortedPoints.length - 1; i++) {
-    const before = sortedPoints[i];
-    const after = sortedPoints[i + 1];
-    if (targetMinutes >= before.minutes && targetMinutes <= after.minutes) {
-      if (after.minutes === before.minutes) return before.value;
-      const ratio = (targetMinutes - before.minutes) / (after.minutes - before.minutes);
-      return before.value + (after.value - before.value) * ratio;
-    }
-  }
-  return sortedPoints.at(-1).value;
-}
-
-function estimateHistoricalMedian(observationsByDate, excludeDateKey, targetMinutes) {
-  const estimates = [];
-  for (const [dateKey, sortedPoints] of observationsByDate) {
-    if (dateKey === excludeDateKey) continue;
-    const estimate = interpolateAtMinute(sortedPoints, targetMinutes);
-    if (estimate !== null) estimates.push(estimate);
-  }
-  return estimates.length > 0 ? { value: median(estimates), count: estimates.length } : null;
+function computeHistoricalMedian(observations, targetTimeMs) {
+  const cutoff = targetTimeMs - timelineWindowMilliseconds;
+  const values = observations
+    .filter(item => item.time.getTime() <= cutoff)
+    .map(item => item.values.ingressosDisponiveis);
+  return values.length > 0 ? { value: median(values), count: values.length } : null;
 }
 
 function getCrowdLevel(availableNow, medianAvailable) {
@@ -290,33 +255,17 @@ function render() {
       return values ? [{ time: new Date(item.horarioUtc), values }] : [];
     });
     const latestObservation = observations.at(-1);
-    const latestDateKey = getPeruDateKey(latestObservation.time);
-    const targetMinutes = getPeruMinutesOfDay(latestObservation.time);
 
-    const observationsByDate = new Map();
-    for (const item of observations) {
-      const dateKey = getPeruDateKey(item.time);
-      if (!observationsByDate.has(dateKey)) observationsByDate.set(dateKey, []);
-      observationsByDate.get(dateKey).push({
-        minutes: getPeruMinutesOfDay(item.time),
-        value: item.values.ingressosDisponiveis
-      });
-    }
-    for (const dayPoints of observationsByDate.values()) {
-      dayPoints.sort((a, b) => a.minutes - b.minutes);
-    }
-
-    const historicalMedianAtLatest = estimateHistoricalMedian(
-      observationsByDate,
-      latestDateKey,
-      targetMinutes
+    const historicalMedianAtLatest = computeHistoricalMedian(
+      observations,
+      latestObservation.time.getTime()
     );
 
     const latestAvailable = latestObservation.values.ingressosDisponiveis;
     const medianAvailable = historicalMedianAtLatest !== null
       ? historicalMedianAtLatest.value
       : median(observations.map(item => item.values.ingressosDisponiveis));
-    const comparableDayCount = historicalMedianAtLatest !== null
+    const comparablePointCount = historicalMedianAtLatest !== null
       ? historicalMedianAtLatest.count
       : 0;
     const routeLevel = getCrowdLevel(latestAvailable, medianAvailable);
@@ -325,11 +274,7 @@ function render() {
     const medianCurve = [];
     for (const item of observations) {
       if (item.time.getTime() < windowStart) continue;
-      const estimate = estimateHistoricalMedian(
-        observationsByDate,
-        getPeruDateKey(item.time),
-        getPeruMinutesOfDay(item.time)
-      );
+      const estimate = computeHistoricalMedian(observations, item.time.getTime());
       if (estimate !== null) medianCurve.push([item.time.getTime(), estimate.value]);
     }
 
@@ -344,9 +289,9 @@ function render() {
       'rounded-full px-2 py-0.5 text-xs font-semibold ' + routeLevel.badgeClass;
     routeBadge.textContent = routeLevel.label;
     routeBadge.title =
-      latestAvailable + ' available now vs. an interpolated median of ' +
+      latestAvailable + ' available now vs. a median of ' +
       Math.round(medianAvailable * 10) / 10 + ' from ' +
-      comparableDayCount + ' comparable day(s) at the same time';
+      comparablePointCount + ' observation(s) older than 24h';
     title.append(titleText, routeBadge);
     const chartElement = document.createElement('div');
     chartElement.className = 'w-full';
