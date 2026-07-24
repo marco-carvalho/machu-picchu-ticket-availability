@@ -28,16 +28,61 @@ function median(values) {
     : sorted[middle];
 }
 
-function computeHistoricalMedian(observations, targetTimeMs) {
-  const cutoff = targetTimeMs - timelineWindowMilliseconds;
-  const values = observations
-    .filter(item => item.time.getTime() <= cutoff)
-    .map(item => item.values.ingressosDisponiveis);
-  return values.length > 0 ? { value: median(values), count: values.length } : null;
+function getPeruDateAndHour(timeMs) {
+  const parts = Object.fromEntries(
+    peruTimestampFormatter.formatToParts(new Date(timeMs)).map(part => [part.type, part.value])
+  );
+  return { dateKey: parts.year + '-' + parts.month + '-' + parts.day, hour: Number(parts.hour) };
+}
+
+// Peru (America/Lima) has no DST and is always UTC-5.
+function peruDateHourToUtcMs(dateKey, hour) {
+  const [year, month, day] = dateKey.split('-').map(Number);
+  return Date.UTC(year, month - 1, day, hour + 5, 0, 0, 0);
+}
+
+function interpolateAt(sortedObservations, targetMs) {
+  let prev = null;
+  let next = null;
+  for (const item of sortedObservations) {
+    const time = item.time.getTime();
+    if (time <= targetMs) prev = item;
+    if (time >= targetMs && next === null) next = item;
+  }
+  if (!prev || !next) return null;
+  const prevTime = prev.time.getTime();
+  const nextTime = next.time.getTime();
+  if (prevTime === nextTime) return prev.values.ingressosDisponiveis;
+  const ratio = (targetMs - prevTime) / (nextTime - prevTime);
+  return prev.values.ingressosDisponiveis +
+    (next.values.ingressosDisponiveis - prev.values.ingressosDisponiveis) * ratio;
+}
+
+function computeHourlyMedians(observations, excludeDateKey) {
+  const sorted = [...observations].sort((a, b) => a.time.getTime() - b.time.getTime());
+  const dateKeys = new Set(
+    sorted.map(item => getPeruDateAndHour(item.time.getTime()).dateKey)
+  );
+  dateKeys.delete(excludeDateKey);
+
+  const valuesByHour = new Map();
+  for (const dateKey of dateKeys) {
+    for (let hour = 0; hour < 24; hour++) {
+      const value = interpolateAt(sorted, peruDateHourToUtcMs(dateKey, hour));
+      if (value === null) continue;
+      if (!valuesByHour.has(hour)) valuesByHour.set(hour, []);
+      valuesByHour.get(hour).push(value);
+    }
+  }
+  const medianByHour = new Map();
+  for (const [hour, values] of valuesByHour) {
+    medianByHour.set(hour, { value: median(values), count: values.length });
+  }
+  return medianByHour;
 }
 
 function getCrowdLevel(availableNow, medianAvailable) {
-  return availableNow >= medianAvailable ? crowdLevels.lowDemand : crowdLevels.highDemand;
+  return availableNow > medianAvailable ? crowdLevels.lowDemand : crowdLevels.highDemand;
 }
 
 const seriesDefinitions = [
@@ -255,27 +300,25 @@ function render() {
       return values ? [{ time: new Date(item.horarioUtc), values }] : [];
     });
     const latestObservation = observations.at(-1);
-
-    const historicalMedianAtLatest = computeHistoricalMedian(
-      observations,
-      latestObservation.time.getTime()
-    );
+    const latestTimeMs = latestObservation.time.getTime();
+    const { dateKey: todayKey, hour: latestHour } = getPeruDateAndHour(latestTimeMs);
+    const hourlyMedians = computeHourlyMedians(observations, todayKey);
+    const currentHourMedian = hourlyMedians.get(latestHour) ?? null;
 
     const latestAvailable = latestObservation.values.ingressosDisponiveis;
-    const medianAvailable = historicalMedianAtLatest !== null
-      ? historicalMedianAtLatest.value
+    const medianAvailable = currentHourMedian !== null
+      ? currentHourMedian.value
       : median(observations.map(item => item.values.ingressosDisponiveis));
-    const comparablePointCount = historicalMedianAtLatest !== null
-      ? historicalMedianAtLatest.count
-      : 0;
+    const comparablePointCount = currentHourMedian !== null ? currentHourMedian.count : 0;
     const routeLevel = getCrowdLevel(latestAvailable, medianAvailable);
 
-    const windowStart = latestObservation.time.getTime() - timelineWindowMilliseconds;
+    const windowStart = latestTimeMs - timelineWindowMilliseconds;
+    const hourMilliseconds = 60 * 60 * 1000;
     const medianCurve = [];
-    for (const item of observations) {
-      if (item.time.getTime() < windowStart) continue;
-      const estimate = computeHistoricalMedian(observations, item.time.getTime());
-      if (estimate !== null) medianCurve.push([item.time.getTime(), estimate.value]);
+    for (let step = 0; step <= 24; step++) {
+      const timestamp = windowStart + step * hourMilliseconds;
+      const estimate = hourlyMedians.get(getPeruDateAndHour(timestamp).hour);
+      if (estimate) medianCurve.push([timestamp, estimate.value]);
     }
 
     const section = document.createElement('section');
@@ -291,7 +334,7 @@ function render() {
     routeBadge.title =
       latestAvailable + ' available now vs. a median of ' +
       Math.round(medianAvailable * 10) / 10 + ' from ' +
-      comparablePointCount + ' observation(s) older than 24h';
+      comparablePointCount + ' observation(s) at this hour on other days';
     title.append(titleText, routeBadge);
     const chartElement = document.createElement('div');
     chartElement.className = 'w-full';
