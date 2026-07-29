@@ -1,10 +1,7 @@
-let history = [];
-let chartInstances = [];
-const charts = document.querySelector('#charts');
+const dates = document.querySelector('#dates');
 const empty = document.querySelector('#empty');
 const summary = document.querySelector('#summary');
-const timelineWindowMilliseconds = 24 * 60 * 60 * 1000;
-const xAxisLabelIntervalMilliseconds = 4 * 60 * 60 * 1000;
+const updated = document.querySelector('#updated');
 const peruTimestampFormatter = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'America/Lima',
   year: 'numeric',
@@ -15,362 +12,199 @@ const peruTimestampFormatter = new Intl.DateTimeFormat('en-CA', {
   second: '2-digit',
   hourCycle: 'h23'
 });
-const crowdLevels = {
-  lowDemand: { label: 'Low demand', badgeClass: 'bg-green-100 text-green-700' },
-  highDemand: { label: 'High demand', badgeClass: 'bg-red-100 text-red-700' }
+// Dimensões do snapshot que o placeholder assume para reservar a altura exata.
+const DATAS_POR_SNAPSHOT = 6;
+const ROTAS_POR_DATA = 6;
+const statuses = {
+  'esgotado': { label: 'Sold out', badgeClass: 'bg-red-100 text-red-700' },
+  'vendendo': { label: 'Selling', badgeClass: 'bg-amber-100 text-amber-800' },
+  'sem vendas': { label: 'No sales', badgeClass: 'bg-slate-100 text-slate-600' }
 };
 
-function median(values) {
-  const sorted = [...values].sort((a, b) => a - b);
-  const middle = Math.floor(sorted.length / 2);
-  return sorted.length % 2 === 0
-    ? (sorted[middle - 1] + sorted[middle]) / 2
-    : sorted[middle];
-}
-
-function getPeruDateAndHour(timeMs) {
+function formatTimestamp(value) {
   const parts = Object.fromEntries(
-    peruTimestampFormatter.formatToParts(new Date(timeMs)).map(part => [part.type, part.value])
-  );
-  return { dateKey: parts.year + '-' + parts.month + '-' + parts.day, hour: Number(parts.hour) };
-}
-
-// Peru (America/Lima) has no DST and is always UTC-5.
-function peruDateHourToUtcMs(dateKey, hour) {
-  const [year, month, day] = dateKey.split('-').map(Number);
-  return Date.UTC(year, month - 1, day, hour + 5, 0, 0, 0);
-}
-
-function interpolateAt(sortedObservations, targetMs) {
-  let prev = null;
-  let next = null;
-  for (const item of sortedObservations) {
-    const time = item.time.getTime();
-    if (time <= targetMs) prev = item;
-    if (time >= targetMs && next === null) next = item;
-  }
-  if (!prev || !next) return null;
-  const prevTime = prev.time.getTime();
-  const nextTime = next.time.getTime();
-  if (prevTime === nextTime) return prev.values.ingressosDisponiveis;
-  const ratio = (targetMs - prevTime) / (nextTime - prevTime);
-  return prev.values.ingressosDisponiveis +
-    (next.values.ingressosDisponiveis - prev.values.ingressosDisponiveis) * ratio;
-}
-
-function computeHourlyMedians(observations, excludeDateKey) {
-  const sorted = [...observations].sort((a, b) => a.time.getTime() - b.time.getTime());
-  const dateKeys = new Set(
-    sorted.map(item => getPeruDateAndHour(item.time.getTime()).dateKey)
-  );
-  dateKeys.delete(excludeDateKey);
-
-  const valuesByHour = new Map();
-  for (const dateKey of dateKeys) {
-    for (let hour = 0; hour < 24; hour++) {
-      const value = interpolateAt(sorted, peruDateHourToUtcMs(dateKey, hour));
-      if (value === null) continue;
-      if (!valuesByHour.has(hour)) valuesByHour.set(hour, []);
-      valuesByHour.get(hour).push(value);
-    }
-  }
-  const medianByHour = new Map();
-  for (const [hour, values] of valuesByHour) {
-    medianByHour.set(hour, { value: median(values), count: values.length });
-  }
-  return medianByHour;
-}
-
-function getCrowdLevel(availableNow, medianAvailable) {
-  return availableNow > medianAvailable ? crowdLevels.lowDemand : crowdLevels.highDemand;
-}
-
-const seriesDefinitions = [
-  {
-    name: 'Tickets available',
-    key: 'ingressosDisponiveis',
-    color: '#16a34a',
-    labelOffset: 7,
-    showSymbol: true,
-    labelFormatter: (value, percentage) => value + ' (' + percentage + '%)'
-  },
-  {
-    name: 'Tickets sold',
-    key: 'ingressosVendidos',
-    color: '#dc2626',
-    labelOffset: -7,
-    showSymbol: false,
-    labelFormatter: value => value
-  }
-];
-
-function formatTimestamp(value, separator = '\n') {
-  const parts = Object.fromEntries(
-    peruTimestampFormatter
-      .formatToParts(new Date(value))
-      .map(part => [part.type, part.value])
+    peruTimestampFormatter.formatToParts(new Date(value)).map(part => [part.type, part.value])
   );
   return (
-    parts.year + '-' + parts.month + '-' + parts.day +
-    separator +
+    parts.year + '-' + parts.month + '-' + parts.day + ' ' +
     parts.hour + ':' + parts.minute + ':' + parts.second
   );
 }
 
-function chartOptions(routeName, observations, medianCurve) {
-  const timestamps = observations.map(item => item.time.getTime());
-  const latestTimestamp = Math.max(...timestamps);
-  const timelineMinimum = Math.min(
-    Math.min(...timestamps),
-    latestTimestamp - timelineWindowMilliseconds
-  );
-  const capacity = Math.max(
-    1,
-    ...observations.map(
-      item => item.values.ingressosVendidos + item.values.ingressosDisponiveis
-    )
-  );
-  const interval = capacity <= 100 ? 10 : 100;
-  const maximum = Math.ceil(capacity / interval) * interval;
-
-  return {
-    animation: false,
-    aria: {
-      enabled: true,
-      description: 'Ticket availability timeline for ' + routeName
-    },
-    tooltip: {
-      trigger: 'item',
-      formatter: parameters =>
-        '<strong>' +
-        formatTimestamp(parameters.value[0], ' ') +
-        ' Peru time</strong><br>' +
-        parameters.marker +
-        parameters.seriesName +
-        ': ' +
-        parameters.value[1]
-    },
-    grid: {
-      top: 18,
-      right: 78,
-      bottom: 48,
-      left: 8,
-      containLabel: true
-    },
-    xAxis: {
-      type: 'time',
-      min: timelineMinimum,
-      max: latestTimestamp,
-      boundaryGap: false,
-      splitNumber: 2,
-      minInterval: xAxisLabelIntervalMilliseconds,
-      maxInterval: xAxisLabelIntervalMilliseconds,
-      axisLine: { lineStyle: { color: '#cbd5e1' } },
-      axisTick: { show: false },
-      axisLabel: {
-        color: '#64748b',
-        fontSize: 10,
-        hideOverlap: true,
-        formatter: value => formatTimestamp(value) + ' PET'
-      },
-      splitLine: {
-        show: true,
-        lineStyle: { color: '#e2e8f0' }
-      }
-    },
-    dataZoom: [{
-      type: 'slider',
-      xAxisIndex: 0,
-      filterMode: 'none',
-      startValue: latestTimestamp - timelineWindowMilliseconds,
-      endValue: latestTimestamp,
-      minValueSpan: timelineWindowMilliseconds,
-      maxValueSpan: timelineWindowMilliseconds,
-      zoomLock: true,
-      brushSelect: false,
-      height: 20,
-      bottom: 4,
-      labelFormatter: value => formatTimestamp(value) + ' PET'
-    }],
-    yAxis: {
-      type: 'value',
-      min: 0,
-      max: maximum,
-      interval: maximum / 10,
-      axisLine: { show: false },
-      axisTick: { show: false },
-      axisLabel: {
-        color: '#64748b',
-        fontSize: 10,
-        formatter: value => Math.round(value)
-      },
-      splitLine: {
-        show: true,
-        lineStyle: { color: '#e2e8f0' }
-      }
-    },
-    series: [
-      ...seriesDefinitions.map(definition => ({
-        name: definition.name,
-        type: 'line',
-        stack: 'tickets',
-        smooth: false,
-        showSymbol: definition.showSymbol,
-        symbol: 'circle',
-        symbolSize: value => (!definition.showSymbol || value[2] === 100) ? 0 : 7,
-        emphasis: {
-          disabled: true
-        },
-        data: observations.map(item => {
-          const capacity = item.values.ingressosVendidos + item.values.ingressosDisponiveis;
-          const value = item.values[definition.key];
-          const percentage = capacity > 0 ? Math.round((value / capacity) * 100) : 0;
-          return [item.time.getTime(), value, percentage];
-        }),
-        lineStyle: {
-          color: definition.color,
-          width: 3,
-          cap: 'butt',
-          join: 'miter',
-          opacity: 0.5
-        },
-        itemStyle: {
-          color: definition.color,
-          borderColor: '#ffffff',
-          borderWidth: 2
-        },
-        areaStyle: {
-          color: definition.color,
-          opacity: 0.5
-        },
-        endLabel: {
-          show: true,
-          color: definition.color,
-          fontSize: 12,
-          fontWeight: 700,
-          distance: 8,
-          offset: [0, definition.labelOffset],
-          formatter: parameters =>
-            definition.labelFormatter(parameters.value[1], parameters.value[2])
-        }
-      })),
-      {
-        name: 'Historical median (available)',
-        type: 'line',
-        smooth: false,
-        showSymbol: false,
-        symbol: 'none',
-        silent: true,
-        emphasis: {
-          disabled: true
-        },
-        data: medianCurve,
-        lineStyle: {
-          color: '#64748b',
-          width: 2,
-          type: 'dashed'
-        },
-        itemStyle: {
-          color: '#64748b'
-        },
-        tooltip: {
-          show: false
-        },
-        z: 5
-      }
-    ]
-  };
+function offsetLabel(offset) {
+  if (offset === 0) return 'today';
+  return '+' + offset + (offset === 1 ? ' day' : ' days');
 }
 
-function render() {
-  for (const chart of chartInstances) chart.dispose();
-  chartInstances = [];
-  charts.replaceChildren();
-  const routeNames = [...new Set(
-    history.flatMap(item => item.rotas.map(route => route.ruta))
-  )].sort();
-  const hasData = routeNames.length > 0;
-  charts.style.display = hasData ? 'grid' : 'none';
-  empty.style.display = hasData ? 'none' : 'block';
-  if (!hasData) return;
+// Em cartão estreito o rótulo vira "+4"; a palavra completa volta quando há espaço.
+function offsetChip(offset) {
+  const chip = document.createElement('span');
+  chip.className = 'shrink-0 text-xs font-semibold uppercase tracking-wide text-slate-500';
+  const short = document.createElement('span');
+  short.textContent = offset === 0 ? 'today' : '+' + offset;
+  const detail = document.createElement('span');
+  detail.className = 'hidden @md:inline';
+  detail.textContent = offset === 0 ? '' : offset === 1 ? ' day' : ' days';
+  chip.append(short, detail);
+  return chip;
+}
 
-  for (const routeName of routeNames) {
-    const observations = history.flatMap(item => {
-      const values = item.rotas.find(route => route.ruta === routeName);
-      return values ? [{ time: new Date(item.horarioUtc), values }] : [];
-    });
-    const latestObservation = observations.at(-1);
-    const latestTimeMs = latestObservation.time.getTime();
-    const { dateKey: todayKey, hour: latestHour } = getPeruDateAndHour(latestTimeMs);
-    const hourlyMedians = computeHourlyMedians(observations, todayKey);
-    const currentHourMedian = hourlyMedians.get(latestHour) ?? null;
+function statusBadge(status, extraClass = '') {
+  const badge = document.createElement('span');
+  const style = statuses[status];
+  badge.className =
+    'shrink-0 rounded-full px-2 py-0.5 font-semibold ' +
+    (style ? style.badgeClass : 'bg-slate-100 text-slate-600') + ' ' + extraClass;
+  badge.textContent = style ? style.label : status;
+  return badge;
+}
 
-    const latestAvailable = latestObservation.values.ingressosDisponiveis;
-    const medianAvailable = currentHourMedian !== null
-      ? currentHourMedian.value
-      : median(observations.map(item => item.values.ingressosDisponiveis));
-    const comparablePointCount = currentHourMedian !== null ? currentHourMedian.count : 0;
-    const routeLevel = getCrowdLevel(latestAvailable, medianAvailable);
+function ticketBar(sold, available) {
+  const track = document.createElement('div');
+  track.className = 'flex h-2 overflow-hidden rounded-full bg-slate-200';
+  for (const [count, color] of [[sold, 'bg-red-600'], [available, 'bg-green-600']]) {
+    const total = sold + available;
+    if (count <= 0 || total <= 0) continue;
+    const segment = document.createElement('div');
+    segment.className = color;
+    segment.style.width = (count / total) * 100 + '%';
+    track.append(segment);
+  }
+  return track;
+}
 
-    const windowStart = latestTimeMs - timelineWindowMilliseconds;
-    const hourMilliseconds = 60 * 60 * 1000;
-    const medianCurve = [];
-    for (let step = 0; step <= 24; step++) {
-      const timestamp = windowStart + step * hourMilliseconds;
-      const estimate = hourlyMedians.get(getPeruDateAndHour(timestamp).hour);
-      if (estimate) medianCurve.push([timestamp, estimate.value]);
-    }
+// A parte longa da contagem só aparece quando o cartão tem largura para ela.
+function ticketCounts(entry, extraClass = '') {
+  const counts = document.createElement('span');
+  counts.className = 'shrink-0 whitespace-nowrap tabular-nums text-slate-600 ' + extraClass;
+  const ratio = document.createElement('span');
+  ratio.textContent = entry.disponiveis + '/' + entry.cota;
+  const detail = document.createElement('span');
+  detail.className = 'hidden @md:inline';
+  detail.textContent = ' available, ' + entry.vendidos + ' sold';
+  counts.append(ratio, detail);
+  return counts;
+}
 
-    const section = document.createElement('section');
-    section.className = 'min-w-0';
-    const title = document.createElement('h2');
-    title.className = 'h-9 flex items-center gap-2 text-sm font-bold leading-[18px]';
-    const titleText = document.createElement('span');
-    titleText.textContent = routeName;
-    const routeBadge = document.createElement('span');
-    routeBadge.className =
-      'rounded-full px-2 py-0.5 text-xs font-semibold ' + routeLevel.badgeClass;
-    routeBadge.textContent = routeLevel.label;
-    routeBadge.title =
-      latestAvailable + ' available now vs. a median of ' +
-      Math.round(medianAvailable * 10) / 10 + ' from ' +
-      comparablePointCount + ' observation(s) at this hour on other days';
-    title.append(titleText, routeBadge);
-    const chartElement = document.createElement('div');
-    chartElement.className = 'w-full';
-    chartElement.style.height = '280px';
-    chartElement.setAttribute('role', 'img');
-    chartElement.setAttribute('aria-label', 'Timeline for ' + routeName);
-    section.append(title, chartElement);
-    charts.append(section);
-    const chart = echarts.init(chartElement, null, { renderer: 'canvas' });
-    chart.setOption(chartOptions(routeName, observations, medianCurve));
-    chartInstances.push(chart);
+function routeRow(route) {
+  const row = document.createElement('li');
+  row.className = 'flex items-center gap-2 text-sm @md:gap-3';
+  const name = document.createElement('span');
+  name.className = 'min-w-0 flex-1 truncate';
+  name.textContent = route.ruta;
+  const status = document.createElement('span');
+  status.className = 'hidden w-20 shrink-0 justify-end @md:flex';
+  status.append(statusBadge(route.situacao, 'text-xs'));
+  const bar = document.createElement('div');
+  bar.className = 'hidden w-16 shrink-0 @xs:block @md:w-28';
+  bar.append(ticketBar(route.vendidos, route.disponiveis));
+  row.append(name, status, bar, ticketCounts(route, 'text-right @md:w-48'));
+  return row;
+}
+
+function dateCard(entry) {
+  const card = document.createElement('section');
+  card.className = '@container rounded-lg border border-slate-200 p-4';
+
+  // Altura fixa e sem quebra de linha: o placeholder precisa saber o tamanho do cabeçalho.
+  const head = document.createElement('div');
+  head.className = 'flex h-6 items-center gap-x-2 @md:gap-x-3';
+  const heading = document.createElement('h2');
+  heading.className = 'm-0 shrink-0 text-base font-bold';
+  heading.textContent = entry.data;
+  head.append(
+    heading,
+    offsetChip(entry.offset),
+    statusBadge(entry.situacao, 'text-xs'),
+    ticketCounts(entry, 'ml-auto text-sm')
+  );
+
+  const total = document.createElement('div');
+  total.className = 'mt-3';
+  total.append(ticketBar(entry.vendidos, entry.disponiveis));
+
+  const routes = document.createElement('ul');
+  routes.className = 'm-0 mt-4 flex list-none flex-col gap-2 border-t border-slate-100 p-0 pt-3';
+  for (const route of entry.rotas) routes.append(routeRow(route));
+
+  card.append(head, total, routes);
+  return card;
+}
+
+// O placeholder repete a estrutura e os espaçamentos do cartão real para que a
+// troca não desloque nada: cabeçalho de 24px, barra de 8px e linhas de 20px.
+function skeletonCard() {
+  const card = document.createElement('section');
+  card.className = '@container rounded-lg border border-slate-200 p-4';
+  card.setAttribute('aria-hidden', 'true');
+
+  const head = document.createElement('div');
+  head.className = 'flex h-6 items-center gap-x-2';
+  const heading = document.createElement('div');
+  heading.className = 'h-4 w-24 animate-pulse rounded bg-slate-200';
+  const counts = document.createElement('div');
+  counts.className = 'ml-auto h-4 w-16 animate-pulse rounded bg-slate-200';
+  head.append(heading, counts);
+
+  const total = document.createElement('div');
+  total.className = 'mt-3 h-2 animate-pulse rounded-full bg-slate-100';
+
+  const routes = document.createElement('div');
+  routes.className = 'mt-4 flex flex-col gap-2 border-t border-slate-100 pt-3';
+  for (let linha = 0; linha < ROTAS_POR_DATA; linha++) {
+    const row = document.createElement('div');
+    row.className = 'h-5 animate-pulse rounded bg-slate-100';
+    routes.append(row);
   }
 
-  const first = formatTimestamp(history[0].horarioUtc, ' ');
-  const last = formatTimestamp(history.at(-1).horarioUtc, ' ');
-  summary.textContent =
-    history.length + ' observation(s) from ' + first + ' to ' + last + ' Peru time';
+  card.append(head, total, routes);
+  return card;
 }
 
-async function loadHistory() {
+function render(snapshot) {
+  const entries = snapshot.datas;
+  dates.replaceChildren(...entries.map(dateCard));
+  dates.classList.toggle('hidden', entries.length === 0);
+  empty.classList.toggle('hidden', entries.length > 0);
+
+  const selling = entries.filter(entry => entry.situacao === 'vendendo');
+  const lastWithSales = entries.filter(entry => entry.vendidos > 0).at(-1);
+  const sentences = [];
+  if (entries.length === 0) {
+    sentences.push('No dates were collected.');
+  } else if (selling.length === 0) {
+    sentences.push('No date has open sales in this window.');
+  } else {
+    const current = selling[0];
+    sentences.push(
+      'Selling now for ' + current.data + ' (' + offsetLabel(current.offset) + '), ' +
+      current.disponiveis + ' of ' + current.cota + ' available.'
+    );
+  }
+  if (lastWithSales) {
+    sentences.push(
+      'Sales registered up to ' + lastWithSales.data +
+      ' (' + offsetLabel(lastWithSales.offset) + ').'
+    );
+  }
+  summary.textContent = sentences.join(' ');
+  updated.textContent = 'Snapshot from ' + formatTimestamp(snapshot.horarioUtc) + ' Peru time';
+}
+
+async function loadSnapshot() {
   try {
     const response = await fetch('./index.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('HTTP ' + response.status);
-    const data = await response.json();
-    if (!Array.isArray(data)) throw new Error('the file contents must be an array');
-    history = data;
-    render();
+    const snapshot = await response.json();
+    if (!Array.isArray(snapshot?.datas)) throw new Error('the file must contain a "datas" array');
+    render(snapshot);
   } catch (error) {
-    charts.style.display = 'none';
-    empty.style.display = 'block';
-    empty.textContent = 'Could not load ticket history.';
+    dates.classList.add('hidden');
+    empty.classList.remove('hidden');
+    empty.textContent = 'Could not load the ticket sale window.';
     console.error(error);
   }
 }
 
-window.addEventListener('resize', () => {
-  for (const chart of chartInstances) chart.resize();
-});
-loadHistory();
+dates.replaceChildren(...Array.from({ length: DATAS_POR_SNAPSHOT }, () => skeletonCard()));
+loadSnapshot();

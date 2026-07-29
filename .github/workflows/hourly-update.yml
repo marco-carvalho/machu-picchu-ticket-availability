@@ -13,11 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Playwright
-        run: npm install --global playwright
-
       - name: Generate changes
-        run: node update.js
+        run: node sale-window.js
 
       - name: Commit changes
         run: |
