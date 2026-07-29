@@ -1,5 +1,5 @@
 {
-  "horarioUtc": "2026-07-29T03:00:28.500Z",
+  "horarioUtc": "2026-07-29T03:30:24.806Z",
   "datas": [
     {
       "data": "2026-07-28",
@@ -161,8 +161,8 @@
       "data": "2026-07-31",
       "offset": 3,
       "cota": 1000,
-      "disponiveis": 468,
-      "vendidos": 532,
+      "disponiveis": 459,
+      "vendidos": 541,
       "situacao": "vendendo",
       "rotas": [
         {
@@ -182,8 +182,8 @@
         {
           "ruta": "Ruta 2-A: Clásico Diseñada",
           "cota": 600,
-          "disponiveis": 146,
-          "vendidos": 454,
+          "disponiveis": 137,
+          "vendidos": 463,
           "situacao": "vendendo"
         },
         {
