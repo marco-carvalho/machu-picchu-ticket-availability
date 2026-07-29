@@ -1,5 +1,5 @@
 {
-  "horarioUtc": "2026-07-29T15:30:36.857Z",
+  "horarioUtc": "2026-07-29T16:00:40.732Z",
   "datas": [
     {
       "data": "2026-07-29",
@@ -109,8 +109,8 @@
       "data": "2026-07-31",
       "offset": 2,
       "cota": 1000,
-      "disponiveis": 85,
-      "vendidos": 915,
+      "disponiveis": 71,
+      "vendidos": 929,
       "situacao": "vendendo",
       "rotas": [
         {
@@ -123,8 +123,8 @@
         {
           "ruta": "Ruta 1-B: Terraza superior",
           "cota": 100,
-          "disponiveis": 39,
-          "vendidos": 61,
+          "disponiveis": 28,
+          "vendidos": 72,
           "situacao": "vendendo"
         },
         {
@@ -144,8 +144,8 @@
         {
           "ruta": "Ruta 3-A: Montaña Waynapicchu",
           "cota": 50,
-          "disponiveis": 7,
-          "vendidos": 43,
+          "disponiveis": 4,
+          "vendidos": 46,
           "situacao": "vendendo"
         },
         {
