@@ -1,5 +1,5 @@
 {
-  "horarioUtc": "2026-07-29T15:00:33.823Z",
+  "horarioUtc": "2026-07-29T15:30:36.857Z",
   "datas": [
     {
       "data": "2026-07-29",
@@ -109,15 +109,15 @@
       "data": "2026-07-31",
       "offset": 2,
       "cota": 1000,
-      "disponiveis": 91,
-      "vendidos": 909,
+      "disponiveis": 85,
+      "vendidos": 915,
       "situacao": "vendendo",
       "rotas": [
         {
           "ruta": "Ruta 1-A: Montaña Machupicchu",
           "cota": 50,
-          "disponiveis": 41,
-          "vendidos": 9,
+          "disponiveis": 37,
+          "vendidos": 13,
           "situacao": "vendendo"
         },
         {
@@ -144,8 +144,8 @@
         {
           "ruta": "Ruta 3-A: Montaña Waynapicchu",
           "cota": 50,
-          "disponiveis": 9,
-          "vendidos": 41,
+          "disponiveis": 7,
+          "vendidos": 43,
           "situacao": "vendendo"
         },
         {
