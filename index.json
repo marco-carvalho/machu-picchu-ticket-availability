@@ -1,5 +1,5 @@
 {
-  "horarioUtc": "2026-07-29T13:30:28.129Z",
+  "horarioUtc": "2026-07-29T14:00:42.206Z",
   "datas": [
     {
       "data": "2026-07-29",
@@ -109,8 +109,8 @@
       "data": "2026-07-31",
       "offset": 2,
       "cota": 1000,
-      "disponiveis": 191,
-      "vendidos": 809,
+      "disponiveis": 167,
+      "vendidos": 833,
       "situacao": "vendendo",
       "rotas": [
         {
@@ -123,8 +123,8 @@
         {
           "ruta": "Ruta 1-B: Terraza superior",
           "cota": 100,
-          "disponiveis": 82,
-          "vendidos": 18,
+          "disponiveis": 78,
+          "vendidos": 22,
           "situacao": "vendendo"
         },
         {
@@ -151,8 +151,8 @@
         {
           "ruta": "Ruta 3-B: Realeza diseñada",
           "cota": 100,
-          "disponiveis": 38,
-          "vendidos": 62,
+          "disponiveis": 18,
+          "vendidos": 82,
           "situacao": "vendendo"
         }
       ]
