@@ -3,27 +3,27 @@ import { writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const URL_APP = 'https://tuboleto.cultura.pe';
-const LUGAR = 'llaqta_machupicchu';
-const PUNTO = 5;
-const DIAS = 6;
+const APP_URL = 'https://tuboleto.cultura.pe';
+const PLACE = 'llaqta_machupicchu';
+const POINT = 5;
+const DAYS = 6;
 const TIMEOUT_MS = 15000;
-const HORA_MS = 60 * 60 * 1000;
-const ARQUIVO_SAIDA = path.join(path.dirname(fileURLToPath(import.meta.url)), 'index.json');
+const HOUR_MS = 60 * 60 * 1000;
+const OUTPUT_FILE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'index.json');
 
-// O WAF da API rejeita clientes sem cara de navegador.
-const CABECALHOS = {
+// The API WAF rejects clients that do not look like a browser.
+const HEADERS = {
   'user-agent':
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ' +
     '(KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',
   accept: 'application/json, text/plain, */*',
   'accept-language': 'es-PE,es;q=0.9',
-  referer: URL_APP + '/',
-  origin: URL_APP,
+  referer: APP_URL + '/',
+  origin: APP_URL,
 };
 
-function datasPeru(total) {
-  const partes = Object.fromEntries(
+function peruDates(total) {
+  const parts = Object.fromEntries(
     new Intl.DateTimeFormat('en-CA', {
       timeZone: 'America/Lima',
       year: 'numeric',
@@ -31,140 +31,138 @@ function datasPeru(total) {
       day: '2-digit',
     })
       .formatToParts(new Date())
-      .map((parte) => [parte.type, parte.value])
+      .map((part) => [part.type, part.value])
   );
-  const hojeMs = Date.UTC(Number(partes.year), Number(partes.month) - 1, Number(partes.day));
-  return Array.from({ length: total }, (_, indice) =>
-    new Date(hojeMs + indice * 24 * HORA_MS).toISOString().slice(0, 10)
+  const todayMs = Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day));
+  // The website only sells from tomorrow on.
+  return Array.from({ length: total }, (_, index) =>
+    new Date(todayMs + (index + 1) * 24 * HOUR_MS).toISOString().slice(0, 10)
   );
 }
 
-async function buscar(url, opcoes = {}) {
-  const resposta = await fetch(url, {
-    ...opcoes,
-    headers: { ...CABECALHOS, ...opcoes.headers },
+async function request(url, options = {}) {
+  const response = await fetch(url, {
+    ...options,
+    headers: { ...HEADERS, ...options.headers },
     signal: AbortSignal.timeout(TIMEOUT_MS),
   });
-  if (!resposta.ok) throw new Error(`${resposta.status} em ${url}`);
-  return resposta;
+  if (!response.ok) throw new Error(`${response.status} at ${url}`);
+  return response;
 }
 
-// A chave de assinatura vive no bundle público do app. Buscá-la a cada execução
-// evita guardar credencial de terceiro aqui e sobrevive a rotações dela.
-async function configuracaoDoApp() {
-  const html = await (await buscar(URL_APP + '/')).text();
-  const pendentes = [...html.matchAll(/main-[A-Z0-9]+\.js/g)].map((achado) => achado[0]);
-  const visitados = new Set();
+// The signing key lives in the public bundle of the app. Fetching it on every run
+// avoids keeping a third party credential here and survives rotations of the key.
+async function appConfig() {
+  const html = await (await request(APP_URL + '/')).text();
+  const pending = [...html.matchAll(/main-[A-Z0-9]+\.js/g)].map((match) => match[0]);
+  const visited = new Set();
 
-  while (pendentes.length > 0) {
-    const arquivo = pendentes.shift();
-    if (visitados.has(arquivo)) continue;
-    visitados.add(arquivo);
+  while (pending.length > 0) {
+    const file = pending.shift();
+    if (visited.has(file)) continue;
+    visited.add(file);
 
-    const codigo = await (await buscar(`${URL_APP}/${arquivo}`)).text();
-    const chave = /securitySecretKey:"([^"]+)"/.exec(codigo);
-    const api = /apiUrl:"([^"]+)"/.exec(codigo);
-    if (chave && api) return { chave: chave[1], api: api[1] };
+    const source = await (await request(`${APP_URL}/${file}`)).text();
+    const key = /securitySecretKey:"([^"]+)"/.exec(source);
+    const api = /apiUrl:"([^"]+)"/.exec(source);
+    if (key && api) return { key: key[1], api: api[1] };
 
-    for (const achado of codigo.matchAll(/chunk-[A-Z0-9]+\.js/g)) pendentes.push(achado[0]);
+    for (const match of source.matchAll(/chunk-[A-Z0-9]+\.js/g)) pending.push(match[0]);
   }
 
-  throw new Error('Não encontrei a chave de assinatura no bundle do app.');
+  throw new Error('Could not find the signing key in the app bundle.');
 }
 
-async function assinar(api, chave) {
-  const { tiempoServidor } = await (await buscar(api + '/comunes/tiempo-servidor')).json();
+async function sign(api, key) {
+  const { tiempoServidor } = await (await request(api + '/comunes/tiempo-servidor')).json();
   const timestamp = String(tiempoServidor);
   return {
     timestamp,
-    code: createHmac('sha256', chave).update(`${chave}:${timestamp}`).digest('base64'),
+    code: createHmac('sha256', key).update(`${key}:${timestamp}`).digest('base64'),
   };
 }
 
-// Uma assinatura por data: reaproveitar a mesma em chamadas paralelas leva a 403.
-async function disponibilidade(api, chave, fecha) {
-  const resposta = await buscar(api + '/comunes/disponibilidad-actual', {
+// One signature per date: reusing the same one across parallel calls leads to 403.
+async function availability(api, key, date) {
+  const response = await request(api + '/comunes/disponibilidad-actual', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ lugar: LUGAR, fecha, punto: PUNTO, ...(await assinar(api, chave)) }),
+    body: JSON.stringify({ lugar: PLACE, fecha: date, punto: POINT, ...(await sign(api, key)) }),
   });
-  const rotas = await resposta.json();
-  if (!Array.isArray(rotas)) throw new Error(`Resposta inesperada para ${fecha}`);
-  return rotas;
+  const routes = await response.json();
+  if (!Array.isArray(routes)) throw new Error(`Unexpected response for ${date}`);
+  return routes;
 }
 
-function situacaoDe(cota, disponiveis) {
-  if (disponiveis === 0) return 'esgotado';
-  return cota === disponiveis ? 'sem vendas' : 'vendendo';
+function statusOf(quota, available) {
+  if (available === 0) return 'sold out';
+  return quota === available ? 'no sales' : 'selling';
 }
 
-const { chave, api } = await configuracaoDoApp();
-const datas = datasPeru(DIAS);
-const coletado = await Promise.all(datas.map((data) => disponibilidade(api, chave, data)));
+const { key, api } = await appConfig();
+const dates = peruDates(DAYS);
+const collected = await Promise.all(dates.map((date) => availability(api, key, date)));
 
-const linhas = coletado.map((rotasCruas, indice) => {
-  const rotas = rotasCruas.map((rota) => {
-    const cota = Number(rota.ncupo);
-    const disponiveis = Number(rota.ncupoActual);
+const entries = collected.map((rawRoutes, index) => {
+  const routes = rawRoutes.map((route) => {
+    const quota = Number(route.ncupo);
+    const available = Number(route.ncupoActual);
     return {
-      ruta: rota.ruta,
-      cota,
-      disponiveis,
-      vendidos: cota - disponiveis,
-      situacao: situacaoDe(cota, disponiveis),
+      name: route.ruta,
+      quota,
+      available,
+      sold: quota - available,
+      status: statusOf(quota, available),
     };
   });
-  const cota = rotas.reduce((soma, rota) => soma + rota.cota, 0);
-  const disponiveis = rotas.reduce((soma, rota) => soma + rota.disponiveis, 0);
+  const quota = routes.reduce((sum, route) => sum + route.quota, 0);
+  const available = routes.reduce((sum, route) => sum + route.available, 0);
   return {
-    data: datas[indice],
-    offset: indice,
-    cota,
-    disponiveis,
-    vendidos: cota - disponiveis,
-    situacao: situacaoDe(cota, disponiveis),
-    rotas,
+    date: dates[index],
+    quota,
+    available,
+    sold: quota - available,
+    status: statusOf(quota, available),
+    routes,
   };
 });
 
-const snapshot = { horarioUtc: new Date().toISOString(), datas: linhas };
-writeFileSync(ARQUIVO_SAIDA, JSON.stringify(snapshot, null, 2) + '\n');
+const snapshot = { utcTime: new Date().toISOString(), dates: entries };
+writeFileSync(OUTPUT_FILE, JSON.stringify(snapshot, null, 2) + '\n');
 
-const larguraRuta = Math.max(
+const nameWidth = Math.max(
   0,
-  ...linhas.flatMap((linha) => linha.rotas.map((rota) => rota.ruta.length))
+  ...entries.flatMap((entry) => entry.routes.map((route) => route.name.length))
 );
 
-for (const linha of linhas) {
-  const rotulo = linha.offset === 0 ? 'hoje' : '+' + linha.offset;
+for (const entry of entries) {
   console.log(
-    `${linha.data} ${rotulo.padEnd(5)} ${linha.situacao.padEnd(10)} ` +
-      `${linha.disponiveis}/${linha.cota} disponíveis, ${linha.vendidos} vendidos`
+    `${entry.date} ${entry.status.padEnd(10)} ` +
+      `${entry.available}/${entry.quota} available, ${entry.sold} sold`
   );
-  for (const rota of linha.rotas) {
+  for (const route of entry.routes) {
     console.log(
-      `  ${rota.ruta.padEnd(larguraRuta)} ${rota.situacao.padEnd(10)} ` +
-        `${rota.disponiveis}/${rota.cota} disponíveis, ${rota.vendidos} vendidos`
+      `  ${route.name.padEnd(nameWidth)} ${route.status.padEnd(10)} ` +
+        `${route.available}/${route.quota} available, ${route.sold} sold`
     );
   }
 }
 
-const vendendo = linhas.filter((linha) => linha.situacao === 'vendendo');
-const ultimaComVendas = linhas.filter((linha) => linha.vendidos > 0).at(-1);
+const selling = entries.filter((entry) => entry.status === 'selling');
+const lastWithSales = entries.filter((entry) => entry.sold > 0).at(-1);
 
 console.log('');
-if (vendendo.length === 0) {
-  console.log('Nenhuma data com venda aberta nas próximas ' + DIAS + ' datas.');
+if (selling.length === 0) {
+  console.log('No date with open sales in the next ' + DAYS + ' dates.');
 } else {
-  const atual = vendendo[0];
+  const current = selling[0];
   console.log(
-    `Vendendo agora para ${atual.data} (+${atual.offset} dias), ` +
-      `${atual.disponiveis} de ${atual.cota} disponíveis`
+    `Selling now for ${current.date}, ${current.available} of ${current.quota} available`
   );
-  if (vendendo.length > 1) {
-    console.log('Também com venda aberta: ' + vendendo.slice(1).map((l) => l.data).join(', '));
+  if (selling.length > 1) {
+    console.log('Also with open sales: ' + selling.slice(1).map((entry) => entry.date).join(', '));
   }
 }
-if (ultimaComVendas) {
-  console.log(`Horizonte com vendas registradas: até ${ultimaComVendas.data} (+${ultimaComVendas.offset})`);
+if (lastWithSales) {
+  console.log(`Horizon with registered sales: up to ${lastWithSales.date}`);
 }

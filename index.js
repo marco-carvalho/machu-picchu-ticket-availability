@@ -12,13 +12,13 @@ const peruTimestampFormatter = new Intl.DateTimeFormat('en-CA', {
   second: '2-digit',
   hourCycle: 'h23'
 });
-// Dimensões do snapshot que o placeholder assume para reservar a altura exata.
-const DATAS_POR_SNAPSHOT = 6;
-const ROTAS_POR_DATA = 6;
+// Snapshot dimensions the placeholder assumes in order to reserve the exact height.
+const DATES_PER_SNAPSHOT = 6;
+const ROUTES_PER_DATE = 6;
 const statuses = {
-  'esgotado': { label: 'Sold out', badgeClass: 'bg-red-100 text-red-700' },
-  'vendendo': { label: 'Selling', badgeClass: 'bg-amber-100 text-amber-800' },
-  'sem vendas': { label: 'No sales', badgeClass: 'bg-slate-100 text-slate-600' }
+  'sold out': { label: 'Sold out', badgeClass: 'bg-red-100 text-red-700' },
+  'selling': { label: 'Selling', badgeClass: 'bg-amber-100 text-amber-800' },
+  'no sales': { label: 'No sales', badgeClass: 'bg-slate-100 text-slate-600' }
 };
 
 function formatTimestamp(value) {
@@ -29,24 +29,6 @@ function formatTimestamp(value) {
     parts.year + '-' + parts.month + '-' + parts.day + ' ' +
     parts.hour + ':' + parts.minute + ':' + parts.second
   );
-}
-
-function offsetLabel(offset) {
-  if (offset === 0) return 'today';
-  return '+' + offset + (offset === 1 ? ' day' : ' days');
-}
-
-// Em cartão estreito o rótulo vira "+4"; a palavra completa volta quando há espaço.
-function offsetChip(offset) {
-  const chip = document.createElement('span');
-  chip.className = 'shrink-0 text-xs font-semibold uppercase tracking-wide text-slate-500';
-  const short = document.createElement('span');
-  short.textContent = offset === 0 ? 'today' : '+' + offset;
-  const detail = document.createElement('span');
-  detail.className = 'hidden @md:inline';
-  detail.textContent = offset === 0 ? '' : offset === 1 ? ' day' : ' days';
-  chip.append(short, detail);
-  return chip;
 }
 
 function statusBadge(status, extraClass = '') {
@@ -73,15 +55,15 @@ function ticketBar(sold, available) {
   return track;
 }
 
-// A parte longa da contagem só aparece quando o cartão tem largura para ela.
+// The long part of the count only shows up when the card has room for it.
 function ticketCounts(entry, extraClass = '') {
   const counts = document.createElement('span');
   counts.className = 'shrink-0 whitespace-nowrap tabular-nums text-slate-600 ' + extraClass;
   const ratio = document.createElement('span');
-  ratio.textContent = entry.disponiveis + '/' + entry.cota;
+  ratio.textContent = entry.available + '/' + entry.quota;
   const detail = document.createElement('span');
   detail.className = 'hidden @md:inline';
-  detail.textContent = ' available, ' + entry.vendidos + ' sold';
+  detail.textContent = ' available, ' + entry.sold + ' sold';
   counts.append(ratio, detail);
   return counts;
 }
@@ -91,13 +73,13 @@ function routeRow(route) {
   row.className = 'flex items-center gap-2 text-sm @md:gap-3';
   const name = document.createElement('span');
   name.className = 'min-w-0 flex-1 truncate';
-  name.textContent = route.ruta;
+  name.textContent = route.name;
   const status = document.createElement('span');
   status.className = 'hidden w-20 shrink-0 justify-end @md:flex';
-  status.append(statusBadge(route.situacao, 'text-xs'));
+  status.append(statusBadge(route.status, 'text-xs'));
   const bar = document.createElement('div');
   bar.className = 'hidden w-16 shrink-0 @xs:block @md:w-28';
-  bar.append(ticketBar(route.vendidos, route.disponiveis));
+  bar.append(ticketBar(route.sold, route.available));
   row.append(name, status, bar, ticketCounts(route, 'text-right @md:w-48'));
   return row;
 }
@@ -106,33 +88,32 @@ function dateCard(entry) {
   const card = document.createElement('section');
   card.className = '@container rounded-lg border border-slate-200 p-4';
 
-  // Altura fixa e sem quebra de linha: o placeholder precisa saber o tamanho do cabeçalho.
+  // Fixed height and no line wrapping: the placeholder needs to know the header size.
   const head = document.createElement('div');
   head.className = 'flex h-6 items-center gap-x-2 @md:gap-x-3';
   const heading = document.createElement('h2');
   heading.className = 'm-0 shrink-0 text-base font-bold';
-  heading.textContent = entry.data;
+  heading.textContent = entry.date;
   head.append(
     heading,
-    offsetChip(entry.offset),
-    statusBadge(entry.situacao, 'text-xs'),
+    statusBadge(entry.status, 'text-xs'),
     ticketCounts(entry, 'ml-auto text-sm')
   );
 
   const total = document.createElement('div');
   total.className = 'mt-3';
-  total.append(ticketBar(entry.vendidos, entry.disponiveis));
+  total.append(ticketBar(entry.sold, entry.available));
 
   const routes = document.createElement('ul');
   routes.className = 'm-0 mt-4 flex list-none flex-col gap-2 border-t border-slate-100 p-0 pt-3';
-  for (const route of entry.rotas) routes.append(routeRow(route));
+  for (const route of entry.routes) routes.append(routeRow(route));
 
   card.append(head, total, routes);
   return card;
 }
 
-// O placeholder repete a estrutura e os espaçamentos do cartão real para que a
-// troca não desloque nada: cabeçalho de 24px, barra de 8px e linhas de 20px.
+// The placeholder repeats the structure and the spacings of the real card so that
+// the swap shifts nothing: 24px header, 8px bar and 20px rows.
 function skeletonCard() {
   const card = document.createElement('section');
   card.className = '@container rounded-lg border border-slate-200 p-4';
@@ -151,7 +132,7 @@ function skeletonCard() {
 
   const routes = document.createElement('div');
   routes.className = 'mt-4 flex flex-col gap-2 border-t border-slate-100 pt-3';
-  for (let linha = 0; linha < ROTAS_POR_DATA; linha++) {
+  for (let index = 0; index < ROUTES_PER_DATE; index++) {
     const row = document.createElement('div');
     row.className = 'h-5 animate-pulse rounded bg-slate-100';
     routes.append(row);
@@ -162,13 +143,13 @@ function skeletonCard() {
 }
 
 function render(snapshot) {
-  const entries = snapshot.datas;
+  const entries = snapshot.dates;
   dates.replaceChildren(...entries.map(dateCard));
   dates.classList.toggle('hidden', entries.length === 0);
   empty.classList.toggle('hidden', entries.length > 0);
 
-  const selling = entries.filter(entry => entry.situacao === 'vendendo');
-  const lastWithSales = entries.filter(entry => entry.vendidos > 0).at(-1);
+  const selling = entries.filter(entry => entry.status === 'selling');
+  const lastWithSales = entries.filter(entry => entry.sold > 0).at(-1);
   const sentences = [];
   if (entries.length === 0) {
     sentences.push('No dates were collected.');
@@ -177,18 +158,15 @@ function render(snapshot) {
   } else {
     const current = selling[0];
     sentences.push(
-      'Selling now for ' + current.data + ' (' + offsetLabel(current.offset) + '), ' +
-      current.disponiveis + ' of ' + current.cota + ' available.'
+      'Selling now for ' + current.date + ', ' +
+      current.available + ' of ' + current.quota + ' available.'
     );
   }
   if (lastWithSales) {
-    sentences.push(
-      'Sales registered up to ' + lastWithSales.data +
-      ' (' + offsetLabel(lastWithSales.offset) + ').'
-    );
+    sentences.push('Sales registered up to ' + lastWithSales.date + '.');
   }
   summary.textContent = sentences.join(' ');
-  updated.textContent = 'Snapshot from ' + formatTimestamp(snapshot.horarioUtc) + ' Peru time';
+  updated.textContent = 'Snapshot from ' + formatTimestamp(snapshot.utcTime) + ' Peru time';
 }
 
 async function loadSnapshot() {
@@ -196,7 +174,7 @@ async function loadSnapshot() {
     const response = await fetch('./index.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('HTTP ' + response.status);
     const snapshot = await response.json();
-    if (!Array.isArray(snapshot?.datas)) throw new Error('the file must contain a "datas" array');
+    if (!Array.isArray(snapshot?.dates)) throw new Error('the file must contain a "dates" array');
     render(snapshot);
   } catch (error) {
     dates.classList.add('hidden');
@@ -206,5 +184,5 @@ async function loadSnapshot() {
   }
 }
 
-dates.replaceChildren(...Array.from({ length: DATAS_POR_SNAPSHOT }, () => skeletonCard()));
+dates.replaceChildren(...Array.from({ length: DATES_PER_SNAPSHOT }, () => skeletonCard()));
 loadSnapshot();
