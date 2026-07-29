@@ -1,5 +1,5 @@
 {
-  "horarioUtc": "2026-07-29T14:00:42.206Z",
+  "horarioUtc": "2026-07-29T14:30:30.490Z",
   "datas": [
     {
       "data": "2026-07-29",
@@ -109,22 +109,22 @@
       "data": "2026-07-31",
       "offset": 2,
       "cota": 1000,
-      "disponiveis": 167,
-      "vendidos": 833,
+      "disponiveis": 125,
+      "vendidos": 875,
       "situacao": "vendendo",
       "rotas": [
         {
           "ruta": "Ruta 1-A: Montaña Machupicchu",
           "cota": 50,
-          "disponiveis": 48,
-          "vendidos": 2,
+          "disponiveis": 45,
+          "vendidos": 5,
           "situacao": "vendendo"
         },
         {
           "ruta": "Ruta 1-B: Terraza superior",
           "cota": 100,
-          "disponiveis": 78,
-          "vendidos": 22,
+          "disponiveis": 62,
+          "vendidos": 38,
           "situacao": "vendendo"
         },
         {
@@ -144,15 +144,15 @@
         {
           "ruta": "Ruta 3-A: Montaña Waynapicchu",
           "cota": 50,
-          "disponiveis": 23,
-          "vendidos": 27,
+          "disponiveis": 13,
+          "vendidos": 37,
           "situacao": "vendendo"
         },
         {
           "ruta": "Ruta 3-B: Realeza diseñada",
           "cota": 100,
-          "disponiveis": 18,
-          "vendidos": 82,
+          "disponiveis": 5,
+          "vendidos": 95,
           "situacao": "vendendo"
         }
       ]
