@@ -1,5 +1,5 @@
 {
-  "horarioUtc": "2026-07-29T11:00:38.876Z",
+  "horarioUtc": "2026-07-29T11:30:32.748Z",
   "datas": [
     {
       "data": "2026-07-29",
@@ -109,8 +109,8 @@
       "data": "2026-07-31",
       "offset": 2,
       "cota": 1000,
-      "disponiveis": 459,
-      "vendidos": 541,
+      "disponiveis": 385,
+      "vendidos": 615,
       "situacao": "vendendo",
       "rotas": [
         {
@@ -130,22 +130,22 @@
         {
           "ruta": "Ruta 2-A: Clásico Diseñada",
           "cota": 600,
-          "disponiveis": 137,
-          "vendidos": 463,
+          "disponiveis": 88,
+          "vendidos": 512,
           "situacao": "vendendo"
         },
         {
           "ruta": "Ruta 2-B: Terraza Inferior",
           "cota": 100,
-          "disponiveis": 38,
-          "vendidos": 62,
+          "disponiveis": 19,
+          "vendidos": 81,
           "situacao": "vendendo"
         },
         {
           "ruta": "Ruta 3-A: Montaña Waynapicchu",
           "cota": 50,
-          "disponiveis": 40,
-          "vendidos": 10,
+          "disponiveis": 34,
+          "vendidos": 16,
           "situacao": "vendendo"
         },
         {
