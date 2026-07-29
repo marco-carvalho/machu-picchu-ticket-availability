@@ -1,8 +1,8 @@
 {
-  "horarioUtc": "2026-07-29T04:00:30.459Z",
+  "horarioUtc": "2026-07-29T05:00:31.096Z",
   "datas": [
     {
-      "data": "2026-07-28",
+      "data": "2026-07-29",
       "offset": 0,
       "cota": 1000,
       "disponiveis": 0,
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "data": "2026-07-29",
+      "data": "2026-07-30",
       "offset": 1,
       "cota": 1000,
       "disponiveis": 0,
@@ -106,60 +106,8 @@
       ]
     },
     {
-      "data": "2026-07-30",
-      "offset": 2,
-      "cota": 1000,
-      "disponiveis": 0,
-      "vendidos": 1000,
-      "situacao": "esgotado",
-      "rotas": [
-        {
-          "ruta": "Ruta 1-A: Montaña Machupicchu",
-          "cota": 50,
-          "disponiveis": 0,
-          "vendidos": 50,
-          "situacao": "esgotado"
-        },
-        {
-          "ruta": "Ruta 1-B: Terraza superior",
-          "cota": 100,
-          "disponiveis": 0,
-          "vendidos": 100,
-          "situacao": "esgotado"
-        },
-        {
-          "ruta": "Ruta 2-A: Clásico Diseñada",
-          "cota": 600,
-          "disponiveis": 0,
-          "vendidos": 600,
-          "situacao": "esgotado"
-        },
-        {
-          "ruta": "Ruta 2-B: Terraza Inferior",
-          "cota": 100,
-          "disponiveis": 0,
-          "vendidos": 100,
-          "situacao": "esgotado"
-        },
-        {
-          "ruta": "Ruta 3-A: Montaña Waynapicchu",
-          "cota": 50,
-          "disponiveis": 0,
-          "vendidos": 50,
-          "situacao": "esgotado"
-        },
-        {
-          "ruta": "Ruta 3-B: Realeza diseñada",
-          "cota": 100,
-          "disponiveis": 0,
-          "vendidos": 100,
-          "situacao": "esgotado"
-        }
-      ]
-    },
-    {
       "data": "2026-07-31",
-      "offset": 3,
+      "offset": 2,
       "cota": 1000,
       "disponiveis": 459,
       "vendidos": 541,
@@ -211,7 +159,7 @@
     },
     {
       "data": "2026-08-01",
-      "offset": 4,
+      "offset": 3,
       "cota": 1000,
       "disponiveis": 1000,
       "vendidos": 0,
@@ -263,6 +211,58 @@
     },
     {
       "data": "2026-08-02",
+      "offset": 4,
+      "cota": 1000,
+      "disponiveis": 1000,
+      "vendidos": 0,
+      "situacao": "sem vendas",
+      "rotas": [
+        {
+          "ruta": "Ruta 1-A: Montaña Machupicchu",
+          "cota": 50,
+          "disponiveis": 50,
+          "vendidos": 0,
+          "situacao": "sem vendas"
+        },
+        {
+          "ruta": "Ruta 1-B: Terraza superior",
+          "cota": 100,
+          "disponiveis": 100,
+          "vendidos": 0,
+          "situacao": "sem vendas"
+        },
+        {
+          "ruta": "Ruta 2-A: Clásico Diseñada",
+          "cota": 600,
+          "disponiveis": 600,
+          "vendidos": 0,
+          "situacao": "sem vendas"
+        },
+        {
+          "ruta": "Ruta 2-B: Terraza Inferior",
+          "cota": 100,
+          "disponiveis": 100,
+          "vendidos": 0,
+          "situacao": "sem vendas"
+        },
+        {
+          "ruta": "Ruta 3-A: Montaña Waynapicchu",
+          "cota": 50,
+          "disponiveis": 50,
+          "vendidos": 0,
+          "situacao": "sem vendas"
+        },
+        {
+          "ruta": "Ruta 3-B: Realeza diseñada",
+          "cota": 100,
+          "disponiveis": 100,
+          "vendidos": 0,
+          "situacao": "sem vendas"
+        }
+      ]
+    },
+    {
+      "data": "2026-08-03",
       "offset": 5,
       "cota": 1000,
       "disponiveis": 1000,
