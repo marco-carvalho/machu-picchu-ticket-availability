@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-07-29T19:30:27.073Z",
+  "utcTime": "2026-07-29T20:00:37.684Z",
   "dates": [
     {
       "date": "2026-07-30",
@@ -106,8 +106,8 @@
     {
       "date": "2026-08-01",
       "quota": 1000,
-      "available": 856,
-      "sold": 144,
+      "available": 787,
+      "sold": 213,
       "status": "selling",
       "routes": [
         {
@@ -120,29 +120,29 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 100,
-          "available": 100,
-          "sold": 0,
-          "status": "no sales"
+          "available": 99,
+          "sold": 1,
+          "status": "selling"
         },
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 600,
-          "available": 492,
-          "sold": 108,
+          "available": 435,
+          "sold": 165,
           "status": "selling"
         },
         {
           "name": "Ruta 2-B: Terraza Inferior",
           "quota": 100,
-          "available": 68,
-          "sold": 32,
+          "available": 64,
+          "sold": 36,
           "status": "selling"
         },
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 50,
-          "available": 46,
-          "sold": 4,
+          "available": 39,
+          "sold": 11,
           "status": "selling"
         },
         {
