@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-07-30T16:00:28.964Z",
+  "utcTime": "2026-07-30T16:30:27.297Z",
   "dates": [
     {
       "date": "2026-07-31",
@@ -55,8 +55,8 @@
     {
       "date": "2026-08-01",
       "quota": 1000,
-      "available": 138,
-      "sold": 862,
+      "available": 133,
+      "sold": 867,
       "status": "selling",
       "routes": [
         {
@@ -69,8 +69,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 100,
-          "available": 33,
-          "sold": 67,
+          "available": 31,
+          "sold": 69,
           "status": "selling"
         },
         {
@@ -97,8 +97,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 100,
-          "available": 49,
-          "sold": 51,
+          "available": 46,
+          "sold": 54,
           "status": "selling"
         }
       ]
