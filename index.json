@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-07-30T15:00:29.673Z",
+  "utcTime": "2026-07-30T15:30:30.479Z",
   "dates": [
     {
       "date": "2026-07-31",
@@ -55,8 +55,8 @@
     {
       "date": "2026-08-01",
       "quota": 1000,
-      "available": 150,
-      "sold": 850,
+      "available": 148,
+      "sold": 852,
       "status": "selling",
       "routes": [
         {
@@ -69,8 +69,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 100,
-          "available": 37,
-          "sold": 63,
+          "available": 35,
+          "sold": 65,
           "status": "selling"
         },
         {
