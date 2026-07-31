@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-07-31T18:35:29.287Z",
+  "utcTime": "2026-07-31T19:00:29.522Z",
   "dates": [
     {
       "date": "2026-08-01",
@@ -55,16 +55,16 @@
     {
       "date": "2026-08-02",
       "quota": 1000,
-      "available": 3,
-      "sold": 997,
-      "status": "selling",
+      "available": 0,
+      "sold": 1000,
+      "status": "sold out",
       "routes": [
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 50,
-          "available": 3,
-          "sold": 47,
-          "status": "selling"
+          "available": 0,
+          "sold": 50,
+          "status": "sold out"
         },
         {
           "name": "Ruta 1-B: Terraza superior",
