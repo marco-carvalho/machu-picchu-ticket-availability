@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-07-31T01:00:33.465Z",
+  "utcTime": "2026-07-31T01:30:28.080Z",
   "dates": [
     {
       "date": "2026-07-31",
@@ -106,8 +106,8 @@
     {
       "date": "2026-08-02",
       "quota": 1000,
-      "available": 591,
-      "sold": 409,
+      "available": 588,
+      "sold": 412,
       "status": "selling",
       "routes": [
         {
@@ -127,8 +127,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 600,
-          "available": 251,
-          "sold": 349,
+          "available": 248,
+          "sold": 352,
           "status": "selling"
         },
         {
