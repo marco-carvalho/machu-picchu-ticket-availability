@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-07-31T00:30:27.072Z",
+  "utcTime": "2026-07-31T01:00:33.465Z",
   "dates": [
     {
       "date": "2026-07-31",
@@ -141,15 +141,15 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 50,
-          "available": 44,
-          "sold": 6,
+          "available": 45,
+          "sold": 5,
           "status": "selling"
         },
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 100,
-          "available": 96,
-          "sold": 4,
+          "available": 95,
+          "sold": 5,
           "status": "selling"
         }
       ]
