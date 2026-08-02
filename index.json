@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-02T23:00:29.986Z",
+  "utcTime": "2026-08-02T23:30:31.749Z",
   "dates": [
     {
       "date": "2026-08-03",
@@ -106,8 +106,8 @@
     {
       "date": "2026-08-05",
       "quota": 1000,
-      "available": 263,
-      "sold": 737,
+      "available": 257,
+      "sold": 743,
       "status": "selling",
       "routes": [
         {
@@ -120,16 +120,16 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 100,
-          "available": 87,
-          "sold": 13,
+          "available": 86,
+          "sold": 14,
           "status": "selling"
         },
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 600,
-          "available": 5,
-          "sold": 595,
-          "status": "selling"
+          "available": 0,
+          "sold": 600,
+          "status": "sold out"
         },
         {
           "name": "Ruta 2-B: Terraza Inferior",
