@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-02T13:00:28.401Z",
+  "utcTime": "2026-08-02T13:30:25.139Z",
   "dates": [
     {
       "date": "2026-08-03",
@@ -55,22 +55,22 @@
     {
       "date": "2026-08-04",
       "quota": 1000,
-      "available": 27,
-      "sold": 973,
+      "available": 1,
+      "sold": 999,
       "status": "selling",
       "routes": [
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 50,
-          "available": 5,
-          "sold": 45,
-          "status": "selling"
+          "available": 0,
+          "sold": 50,
+          "status": "sold out"
         },
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 100,
-          "available": 4,
-          "sold": 96,
+          "available": 1,
+          "sold": 99,
           "status": "selling"
         },
         {
@@ -90,16 +90,16 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 50,
-          "available": 16,
-          "sold": 34,
-          "status": "selling"
+          "available": 0,
+          "sold": 50,
+          "status": "sold out"
         },
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 100,
-          "available": 2,
-          "sold": 98,
-          "status": "selling"
+          "available": 0,
+          "sold": 100,
+          "status": "sold out"
         }
       ]
     },
