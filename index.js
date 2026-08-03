@@ -1,3 +1,5 @@
+const tablist = document.querySelector('#tabs');
+const tabs = [...document.querySelectorAll('[role="tab"]')];
 const empty = document.querySelector('#empty');
 const summary = document.querySelector('#summary');
 const updated = document.querySelector('#updated');
@@ -219,28 +221,37 @@ function describe(channel) {
   };
 }
 
+// The tab labels the channel, so the panel only repeats the sale point and the counts.
+// Both show up in the same render, which keeps the reserved line from moving twice.
 function renderChannel(channel, view) {
-  const section = document.querySelector('#' + channel.id);
-
-  const head = document.createElement('div');
-  head.className = 'flex h-7 items-center gap-2';
-  const heading = document.createElement('h2');
-  heading.className = 'm-0 text-lg font-bold';
-  heading.textContent = channel.label ?? view.label;
-  head.append(heading);
+  const note = document.createElement('div');
+  note.className =
+    'mb-3 flex min-h-10 items-start gap-2 text-sm text-slate-500 sm:min-h-5 sm:items-center';
   if (channel.point) {
     const point = document.createElement('span');
-    point.className = 'rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600';
+    point.className =
+      'shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600';
     point.textContent = 'punto ' + channel.point;
-    head.append(point);
+    note.append(point);
+  }
+  if (channel.dates || channel.routes) {
+    const detail = document.createElement('p');
+    detail.className = 'm-0';
+    detail.textContent = describe(channel).detail;
+    note.append(detail);
   }
 
-  const note = document.createElement('p');
-  note.className = 'm-0 mb-3 min-h-10 text-sm text-slate-500 sm:min-h-5';
-  if (channel.dates || channel.routes) note.textContent = describe(channel).detail;
+  document.querySelector('#' + channel.id).replaceChildren(note, view.build(channel, view.shape));
+}
 
-  section.replaceChildren(head, note, view.build(channel, view.shape));
-  section.classList.remove('hidden');
+function activate(id) {
+  for (const tab of tabs) {
+    const panel = tab.getAttribute('aria-controls');
+    const selected = panel === id;
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+    document.querySelector('#' + panel).classList.toggle('hidden', !selected);
+  }
 }
 
 function render(snapshot) {
@@ -250,9 +261,12 @@ function render(snapshot) {
   for (const channel of channels) renderChannel(channel, channelViews[channel.id]);
 
   const shown = new Set(channels.map(channel => channel.id));
-  for (const id of Object.keys(channelViews)) {
-    if (!shown.has(id)) document.querySelector('#' + id).classList.add('hidden');
+  for (const tab of tabs) tab.classList.toggle('hidden', !shown.has(tab.getAttribute('aria-controls')));
+  const available = tabs.filter(tab => !tab.classList.contains('hidden'));
+  if (!available.some(tab => tab.getAttribute('aria-selected') === 'true') && available.length > 0) {
+    activate(available[0].getAttribute('aria-controls'));
   }
+  tablist.classList.toggle('hidden', channels.length === 0);
   empty.classList.toggle('hidden', channels.length > 0);
 
   summary.textContent = channels
@@ -271,6 +285,7 @@ async function loadSnapshot() {
     }
     render(snapshot);
   } catch (error) {
+    tablist.classList.add('hidden');
     for (const id of Object.keys(channelViews)) {
       document.querySelector('#' + id).classList.add('hidden');
     }
@@ -280,5 +295,26 @@ async function loadSnapshot() {
   }
 }
 
+for (const tab of tabs) {
+  const panel = tab.getAttribute('aria-controls');
+  tab.addEventListener('click', () => {
+    activate(panel);
+    // The address bar keeps the choice, so each view can be linked and survives a reload.
+    history.replaceState(null, '', '#' + panel);
+  });
+  tab.addEventListener('keydown', event => {
+    const step = { ArrowLeft: -1, ArrowRight: 1 }[event.key];
+    if (step === undefined) return;
+    event.preventDefault();
+    const next = tabs[(tabs.indexOf(tab) + step + tabs.length) % tabs.length];
+    next.click();
+    next.focus();
+  });
+}
+
 for (const [id, view] of Object.entries(channelViews)) renderChannel({ id }, view);
+activate(
+  (tabs.find(tab => '#' + tab.getAttribute('aria-controls') === location.hash) ?? tabs[0])
+    .getAttribute('aria-controls')
+);
 loadSnapshot();

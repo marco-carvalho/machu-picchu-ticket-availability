@@ -13,8 +13,30 @@
       <p id="summary" class="m-0 min-h-18 text-slate-500 sm:min-h-12 lg:min-h-6"></p>
       <p id="updated" class="m-0 mt-0.5 min-h-5 text-sm text-slate-400"></p>
     </header>
-    <section id="in-person" class="mt-6"></section>
-    <section id="online" class="mt-8"></section>
+    <div id="tabs" role="tablist" aria-label="Sale channels" class="mt-6 flex gap-1 border-b border-slate-200">
+      <button
+        type="button"
+        role="tab"
+        id="tab-in-person"
+        aria-controls="in-person"
+        aria-selected="true"
+        class="-mb-px cursor-pointer border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-slate-500 hover:text-slate-700 aria-selected:border-slate-900 aria-selected:text-slate-900"
+      >
+        In person
+      </button>
+      <button
+        type="button"
+        role="tab"
+        id="tab-online"
+        aria-controls="online"
+        aria-selected="false"
+        class="-mb-px cursor-pointer border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-slate-500 hover:text-slate-700 aria-selected:border-slate-900 aria-selected:text-slate-900"
+      >
+        Online
+      </button>
+    </div>
+    <section id="in-person" role="tabpanel" aria-labelledby="tab-in-person" class="mt-4"></section>
+    <section id="online" role="tabpanel" aria-labelledby="tab-online" class="mt-4 hidden"></section>
     <div id="empty" class="hidden py-20 text-center text-slate-500">
       There are no observations in the history yet.
     </div>
