@@ -1,4 +1,3 @@
-const dates = document.querySelector('#dates');
 const empty = document.querySelector('#empty');
 const summary = document.querySelector('#summary');
 const updated = document.querySelector('#updated');
@@ -12,13 +11,17 @@ const peruTimestampFormatter = new Intl.DateTimeFormat('en-CA', {
   second: '2-digit',
   hourCycle: 'h23'
 });
-// Snapshot dimensions the placeholder assumes in order to reserve the exact height.
-const DATES_PER_SNAPSHOT = 6;
-const ROUTES_PER_DATE = 6;
 const statuses = {
   'sold out': { label: 'Sold out', badgeClass: 'bg-red-100 text-red-700' },
   'selling': { label: 'Selling', badgeClass: 'bg-amber-100 text-amber-800' },
   'no sales': { label: 'No sales', badgeClass: 'bg-slate-100 text-slate-600' }
+};
+// The ticket office is shown as one card per date listing its six routes, the web store
+// as one card per route listing the closest dates with tickets. The shapes are also the
+// dimensions the placeholders assume in order to reserve the exact height.
+const channelViews = {
+  'in-person': { label: 'In person', shape: { cards: 6, rows: 6 }, build: dateCards },
+  'online': { label: 'Online', shape: { cards: 10, rows: 6 }, build: routeCards }
 };
 
 function formatTimestamp(value) {
@@ -68,104 +71,193 @@ function ticketCounts(entry, extraClass = '') {
   return counts;
 }
 
-function routeRow(route) {
+function pulse(extraClass) {
+  const bar = document.createElement('div');
+  bar.className = 'animate-pulse rounded bg-slate-100 ' + extraClass;
+  return bar;
+}
+
+// A row is a route inside a date card, or a date inside a route card.
+function detailRow(label, entry) {
   const row = document.createElement('li');
-  row.className = 'flex items-center gap-2 text-sm @md:gap-3';
+  row.className = 'flex h-5 items-center gap-2 text-sm @md:gap-3';
   const name = document.createElement('span');
   name.className = 'min-w-0 flex-1 truncate';
-  name.textContent = route.name;
+  name.textContent = label;
   const status = document.createElement('span');
   status.className = 'hidden w-20 shrink-0 justify-end @md:flex';
-  status.append(statusBadge(route.status, 'text-xs'));
+  status.append(statusBadge(entry.status, 'text-xs'));
   const bar = document.createElement('div');
   bar.className = 'hidden w-16 shrink-0 @xs:block @md:w-28';
-  bar.append(ticketBar(route.sold, route.available));
-  row.append(name, status, bar, ticketCounts(route, 'text-right @md:w-48'));
+  bar.append(ticketBar(entry.sold, entry.available));
+  row.append(name, status, bar, ticketCounts(entry, 'text-right @md:w-48'));
   return row;
 }
 
-function dateCard(entry) {
-  const card = document.createElement('section');
-  card.className = '@container rounded-lg border border-slate-200 p-4';
+function emptyRow(label) {
+  const row = document.createElement('li');
+  row.className = 'flex h-5 items-center text-sm text-slate-400';
+  row.textContent = label;
+  return row;
+}
 
-  // Fixed height and no line wrapping: the placeholder needs to know the header size.
+// Cards keep the same number of rows so that every one of them has the same height,
+// which also lets the placeholder reserve the exact space: 24px header, 8px bar and
+// 20px rows.
+function spacerRow() {
+  const row = document.createElement('li');
+  row.className = 'h-5';
+  row.setAttribute('aria-hidden', 'true');
+  return row;
+}
+
+function card(title, totals, rows, rowCount, emptyLabel) {
+  const element = document.createElement('section');
+  element.className = '@container rounded-lg border border-slate-200 p-4';
+
   const head = document.createElement('div');
   head.className = 'flex h-6 items-center gap-x-2 @md:gap-x-3';
-  const heading = document.createElement('h2');
-  heading.className = 'm-0 shrink-0 text-base font-bold';
-  heading.textContent = entry.date;
-  head.append(
-    heading,
-    statusBadge(entry.status, 'text-xs'),
-    ticketCounts(entry, 'ml-auto text-sm')
-  );
+  const heading = document.createElement('h3');
+  heading.className = 'm-0 min-w-0 truncate text-base font-bold';
+  heading.textContent = title;
+  heading.title = title;
+  head.append(heading, statusBadge(totals.status, 'text-xs'));
+  if (totals.quota > 0) head.append(ticketCounts(totals, 'ml-auto text-sm'));
 
   const total = document.createElement('div');
   total.className = 'mt-3';
-  total.append(ticketBar(entry.sold, entry.available));
+  total.append(ticketBar(totals.sold, totals.available));
 
-  const routes = document.createElement('ul');
-  routes.className = 'm-0 mt-4 flex list-none flex-col gap-2 border-t border-slate-100 p-0 pt-3';
-  for (const route of entry.routes) routes.append(routeRow(route));
+  const list = document.createElement('ul');
+  list.className = 'm-0 mt-4 flex list-none flex-col gap-2 border-t border-slate-100 p-0 pt-3';
+  list.append(...(rows.length === 0 && emptyLabel ? [emptyRow(emptyLabel)] : rows));
+  while (list.children.length < rowCount) list.append(spacerRow());
 
-  card.append(head, total, routes);
-  return card;
+  element.append(head, total, list);
+  return element;
 }
 
-// The placeholder repeats the structure and the spacings of the real card so that
-// the swap shifts nothing: 24px header, 8px bar and 20px rows.
-function skeletonCard() {
-  const card = document.createElement('section');
-  card.className = '@container rounded-lg border border-slate-200 p-4';
-  card.setAttribute('aria-hidden', 'true');
+function skeletonCard(rowCount) {
+  const element = document.createElement('section');
+  element.className = '@container rounded-lg border border-slate-200 p-4';
 
   const head = document.createElement('div');
   head.className = 'flex h-6 items-center gap-x-2';
-  const heading = document.createElement('div');
-  heading.className = 'h-4 w-24 animate-pulse rounded bg-slate-200';
-  const counts = document.createElement('div');
-  counts.className = 'ml-auto h-4 w-16 animate-pulse rounded bg-slate-200';
-  head.append(heading, counts);
+  head.append(pulse('h-4 w-24 bg-slate-200'), pulse('ml-auto h-4 w-16 bg-slate-200'));
 
   const total = document.createElement('div');
-  total.className = 'mt-3 h-2 animate-pulse rounded-full bg-slate-100';
+  total.className = 'mt-3';
+  total.append(pulse('h-2 rounded-full'));
 
-  const routes = document.createElement('div');
-  routes.className = 'mt-4 flex flex-col gap-2 border-t border-slate-100 pt-3';
-  for (let index = 0; index < ROUTES_PER_DATE; index++) {
-    const row = document.createElement('div');
-    row.className = 'h-5 animate-pulse rounded bg-slate-100';
-    routes.append(row);
+  const list = document.createElement('div');
+  list.className = 'mt-4 flex flex-col gap-2 border-t border-slate-100 pt-3';
+  for (let index = 0; index < rowCount; index++) list.append(pulse('h-5'));
+
+  element.append(head, total, list);
+  return element;
+}
+
+function cardGrid(cards, shape) {
+  const grid = document.createElement('div');
+  grid.className = 'grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3';
+  grid.append(...(cards ?? Array.from({ length: shape.cards }, () => skeletonCard(shape.rows))));
+  return grid;
+}
+
+function dateCards(channel, shape) {
+  return cardGrid(
+    channel.dates?.map(entry =>
+      card(entry.date, entry, entry.routes.map(route => detailRow(route.name, route)), shape.rows)
+    ),
+    shape
+  );
+}
+
+function routeCards(channel, shape) {
+  return cardGrid(
+    channel.routes?.map(route =>
+      card(
+        route.name,
+        route,
+        route.dates.map(entry => detailRow(entry.date, entry)),
+        shape.rows,
+        'No tickets in the next ' + channel.scanned + ' dates.'
+      )
+    ),
+    shape
+  );
+}
+
+function describe(channel) {
+  if (channel.dates) {
+    const selling = channel.dates.filter(entry => entry.status === 'selling');
+    if (selling.length === 0) {
+      return { headline: 'no open sales', detail: 'No date has open sales in this window.' };
+    }
+    const closest = selling[0];
+    return {
+      headline: selling.length + ' of ' + channel.dates.length + ' dates with tickets',
+      detail:
+        selling.length + ' of ' + channel.dates.length + ' dates with tickets, the closest one ' +
+        closest.date + ' with ' + closest.available + ' of ' + closest.quota + ' available.'
+    };
   }
 
-  card.append(head, total, routes);
-  return card;
+  const open = channel.routes.filter(route => route.dates.length > 0);
+  if (open.length === 0) {
+    return {
+      headline: 'no open sales',
+      detail: 'No route has tickets in the next ' + channel.scanned + ' dates.'
+    };
+  }
+  return {
+    headline: open.length + ' of ' + channel.routes.length + ' routes with tickets',
+    detail:
+      open.length + ' of ' + channel.routes.length + ' routes with tickets in the next ' +
+      channel.scanned + ' dates, the closest one ' +
+      open.map(route => route.dates[0].date).sort()[0] + '.'
+  };
+}
+
+function renderChannel(channel, view) {
+  const section = document.querySelector('#' + channel.id);
+
+  const head = document.createElement('div');
+  head.className = 'flex h-7 items-center gap-2';
+  const heading = document.createElement('h2');
+  heading.className = 'm-0 text-lg font-bold';
+  heading.textContent = channel.label ?? view.label;
+  head.append(heading);
+  if (channel.point) {
+    const point = document.createElement('span');
+    point.className = 'rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600';
+    point.textContent = 'punto ' + channel.point;
+    head.append(point);
+  }
+
+  const note = document.createElement('p');
+  note.className = 'm-0 mb-3 min-h-10 text-sm text-slate-500 sm:min-h-5';
+  if (channel.dates || channel.routes) note.textContent = describe(channel).detail;
+
+  section.replaceChildren(head, note, view.build(channel, view.shape));
+  section.classList.remove('hidden');
 }
 
 function render(snapshot) {
-  const entries = snapshot.dates;
-  dates.replaceChildren(...entries.map(dateCard));
-  dates.classList.toggle('hidden', entries.length === 0);
-  empty.classList.toggle('hidden', entries.length > 0);
+  const channels = snapshot.channels.filter(
+    channel => channelViews[channel.id] && (channel.dates ?? channel.routes ?? []).length > 0
+  );
+  for (const channel of channels) renderChannel(channel, channelViews[channel.id]);
 
-  const selling = entries.filter(entry => entry.status === 'selling');
-  const lastWithSales = entries.filter(entry => entry.sold > 0).at(-1);
-  const sentences = [];
-  if (entries.length === 0) {
-    sentences.push('No dates were collected.');
-  } else if (selling.length === 0) {
-    sentences.push('No date has open sales in this window.');
-  } else {
-    const current = selling[0];
-    sentences.push(
-      'Selling now for ' + current.date + ', ' +
-      current.available + ' of ' + current.quota + ' available.'
-    );
+  const shown = new Set(channels.map(channel => channel.id));
+  for (const id of Object.keys(channelViews)) {
+    if (!shown.has(id)) document.querySelector('#' + id).classList.add('hidden');
   }
-  if (lastWithSales) {
-    sentences.push('Sales registered up to ' + lastWithSales.date + '.');
-  }
-  summary.textContent = sentences.join(' ');
+  empty.classList.toggle('hidden', channels.length > 0);
+
+  summary.textContent = channels
+    .map(channel => (channel.label ?? channelViews[channel.id].label) + ': ' + describe(channel).headline + '.')
+    .join(' ');
   updated.textContent = 'Snapshot from ' + formatTimestamp(snapshot.utcTime) + ' Peru time';
 }
 
@@ -174,15 +266,19 @@ async function loadSnapshot() {
     const response = await fetch('./index.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('HTTP ' + response.status);
     const snapshot = await response.json();
-    if (!Array.isArray(snapshot?.dates)) throw new Error('the file must contain a "dates" array');
+    if (!Array.isArray(snapshot?.channels)) {
+      throw new Error('the file must contain a "channels" array');
+    }
     render(snapshot);
   } catch (error) {
-    dates.classList.add('hidden');
+    for (const id of Object.keys(channelViews)) {
+      document.querySelector('#' + id).classList.add('hidden');
+    }
     empty.classList.remove('hidden');
     empty.textContent = 'Could not load the ticket sale window.';
     console.error(error);
   }
 }
 
-dates.replaceChildren(...Array.from({ length: DATES_PER_SNAPSHOT }, () => skeletonCard()));
+for (const [id, view] of Object.entries(channelViews)) renderChannel({ id }, view);
 loadSnapshot();
