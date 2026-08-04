@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-04T01:01:15.089Z",
+  "utcTime": "2026-08-04T01:31:15.578Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,22 +377,22 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 816,
-          "sold": 4284,
+          "available": 806,
+          "sold": 4294,
           "status": "selling",
           "dates": [
             {
               "date": "2026-08-30",
               "quota": 850,
-              "available": 57,
-              "sold": 793,
+              "available": 55,
+              "sold": 795,
               "status": "selling"
             },
             {
               "date": "2026-08-31",
               "quota": 850,
-              "available": 199,
-              "sold": 651,
+              "available": 191,
+              "sold": 659,
               "status": "selling"
             },
             {
@@ -683,8 +683,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3600,
-          "available": 735,
-          "sold": 2865,
+          "available": 731,
+          "sold": 2869,
           "status": "selling",
           "dates": [
             {
@@ -697,15 +697,15 @@
             {
               "date": "2026-10-27",
               "quota": 600,
-              "available": 43,
-              "sold": 557,
+              "available": 42,
+              "sold": 558,
               "status": "selling"
             },
             {
               "date": "2026-10-28",
               "quota": 600,
-              "available": 141,
-              "sold": 459,
+              "available": 142,
+              "sold": 458,
               "status": "selling"
             },
             {
@@ -718,8 +718,8 @@
             {
               "date": "2026-10-30",
               "quota": 600,
-              "available": 204,
-              "sold": 396,
+              "available": 200,
+              "sold": 400,
               "status": "selling"
             },
             {
