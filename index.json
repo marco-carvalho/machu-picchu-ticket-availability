@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-04T06:01:25.571Z",
+  "utcTime": "2026-08-04T06:31:15.144Z",
   "channels": [
     {
       "id": "in-person",
@@ -479,8 +479,8 @@
         {
           "name": "Ruta 1-D: Puente Inka",
           "quota": 480,
-          "available": 117,
-          "sold": 363,
+          "available": 118,
+          "sold": 362,
           "status": "selling",
           "dates": [
             {
@@ -493,8 +493,8 @@
             {
               "date": "2026-08-30",
               "quota": 80,
-              "available": 4,
-              "sold": 76,
+              "available": 5,
+              "sold": 75,
               "status": "selling"
             },
             {
@@ -544,8 +544,8 @@
             {
               "date": "2026-11-14",
               "quota": 800,
-              "available": 1,
-              "sold": 799,
+              "available": 3,
+              "sold": 797,
               "status": "selling"
             },
             {
@@ -558,8 +558,8 @@
             {
               "date": "2026-11-17",
               "quota": 800,
-              "available": 26,
-              "sold": 774,
+              "available": 24,
+              "sold": 776,
               "status": "selling"
             },
             {
@@ -683,8 +683,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3600,
-          "available": 690,
-          "sold": 2910,
+          "available": 682,
+          "sold": 2918,
           "status": "selling",
           "dates": [
             {
@@ -704,15 +704,15 @@
             {
               "date": "2026-10-28",
               "quota": 600,
-              "available": 134,
-              "sold": 466,
+              "available": 130,
+              "sold": 470,
               "status": "selling"
             },
             {
               "date": "2026-10-29",
               "quota": 600,
-              "available": 2,
-              "sold": 598,
+              "available": 3,
+              "sold": 597,
               "status": "selling"
             },
             {
@@ -725,8 +725,8 @@
             {
               "date": "2026-10-31",
               "quota": 600,
-              "available": 311,
-              "sold": 289,
+              "available": 306,
+              "sold": 294,
               "status": "selling"
             }
           ]
