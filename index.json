@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-04T05:01:10.480Z",
+  "utcTime": "2026-08-04T05:31:12.761Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 802,
-          "sold": 4298,
+          "available": 801,
+          "sold": 4299,
           "status": "selling",
           "dates": [
             {
@@ -391,8 +391,8 @@
             {
               "date": "2026-08-31",
               "quota": 850,
-              "available": 191,
-              "sold": 659,
+              "available": 190,
+              "sold": 660,
               "status": "selling"
             },
             {
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 243,
-          "sold": 4557,
+          "available": 242,
+          "sold": 4558,
           "status": "selling",
           "dates": [
             {
@@ -544,8 +544,8 @@
             {
               "date": "2026-11-14",
               "quota": 800,
-              "available": 2,
-              "sold": 798,
+              "available": 1,
+              "sold": 799,
               "status": "selling"
             },
             {
@@ -581,8 +581,8 @@
         {
           "name": "Ruta 2-B: Terraza Inferior",
           "quota": 2400,
-          "available": 376,
-          "sold": 2024,
+          "available": 374,
+          "sold": 2026,
           "status": "selling",
           "dates": [
             {
@@ -609,8 +609,8 @@
             {
               "date": "2026-11-18",
               "quota": 400,
-              "available": 55,
-              "sold": 345,
+              "available": 53,
+              "sold": 347,
               "status": "selling"
             },
             {
@@ -682,18 +682,11 @@
         },
         {
           "name": "Ruta 3-B: Realeza diseñada",
-          "quota": 3779,
-          "available": 387,
-          "sold": 3392,
+          "quota": 3600,
+          "available": 689,
+          "sold": 2911,
           "status": "selling",
           "dates": [
-            {
-              "date": "2026-08-06",
-              "quota": 779,
-              "available": 4,
-              "sold": 775,
-              "status": "selling"
-            },
             {
               "date": "2026-10-26",
               "quota": 600,
@@ -725,8 +718,15 @@
             {
               "date": "2026-10-30",
               "quota": 600,
-              "available": 204,
-              "sold": 396,
+              "available": 199,
+              "sold": 401,
+              "status": "selling"
+            },
+            {
+              "date": "2026-10-31",
+              "quota": 600,
+              "available": 311,
+              "sold": 289,
               "status": "selling"
             }
           ]
