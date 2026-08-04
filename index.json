@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-04T06:31:15.144Z",
+  "utcTime": "2026-08-04T07:01:20.620Z",
   "channels": [
     {
       "id": "in-person",
@@ -428,8 +428,8 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 89,
-          "sold": 691,
+          "available": 91,
+          "sold": 689,
           "status": "selling",
           "dates": [
             {
@@ -463,8 +463,8 @@
             {
               "date": "2026-09-02",
               "quota": 130,
-              "available": 39,
-              "sold": 91,
+              "available": 41,
+              "sold": 89,
               "status": "selling"
             },
             {
