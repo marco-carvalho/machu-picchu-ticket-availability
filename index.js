@@ -1,3 +1,7 @@
+// The snapshot behind index.json is regenerated hourly, so the page reloads itself to
+// stay current without anyone having to press refresh.
+const RELOAD_MS = 60 * 1000;
+const openedAt = Date.now();
 const tablist = document.querySelector('#tabs');
 const tabs = [...document.querySelectorAll('[role="tab"]')];
 const empty = document.querySelector('#empty');
@@ -312,9 +316,20 @@ for (const tab of tabs) {
   });
 }
 
+// A hidden tab waits until it is looked at again, so the reload never happens out of
+// sight and the page in front of someone is never older than the interval.
+function reloadWhenStale() {
+  if (document.visibilityState !== 'visible') return;
+  if (Date.now() - openedAt < RELOAD_MS) return;
+  location.reload();
+}
+
 for (const [id, view] of Object.entries(channelViews)) renderChannel({ id }, view);
 activate(
   (tabs.find(tab => '#' + tab.getAttribute('aria-controls') === location.hash) ?? tabs[0])
     .getAttribute('aria-controls')
 );
 loadSnapshot();
+
+setInterval(reloadWhenStale, RELOAD_MS);
+document.addEventListener('visibilitychange', reloadWhenStale);
