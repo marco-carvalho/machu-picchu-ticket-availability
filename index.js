@@ -14,9 +14,9 @@ const peruTimestampFormatter = new Intl.DateTimeFormat('en-CA', {
   hourCycle: 'h23'
 });
 const statuses = {
-  'sold out': { label: 'Sold out', badgeClass: 'bg-red-100 text-red-700' },
-  'selling': { label: 'Selling', badgeClass: 'bg-amber-100 text-amber-800' },
-  'no sales': { label: 'No sales', badgeClass: 'bg-slate-100 text-slate-600' }
+  'sold out': { label: 'Sold out', badgeClass: 'bg-red-500/15 text-red-300' },
+  'selling': { label: 'Selling', badgeClass: 'bg-amber-500/15 text-amber-300' },
+  'no sales': { label: 'No sales', badgeClass: 'bg-slate-800 text-slate-300' }
 };
 // The ticket office is shown as one card per date listing its six routes, the web store
 // as one card per route listing the closest dates with tickets. The shapes are also the
@@ -41,15 +41,15 @@ function statusBadge(status, extraClass = '') {
   const style = statuses[status];
   badge.className =
     'shrink-0 rounded-full px-2 py-0.5 font-semibold ' +
-    (style ? style.badgeClass : 'bg-slate-100 text-slate-600') + ' ' + extraClass;
+    (style ? style.badgeClass : 'bg-slate-800 text-slate-300') + ' ' + extraClass;
   badge.textContent = style ? style.label : status;
   return badge;
 }
 
 function ticketBar(sold, available) {
   const track = document.createElement('div');
-  track.className = 'flex h-2 overflow-hidden rounded-full bg-slate-200';
-  for (const [count, color] of [[sold, 'bg-red-600'], [available, 'bg-green-600']]) {
+  track.className = 'flex h-2 overflow-hidden rounded-full bg-slate-800';
+  for (const [count, color] of [[sold, 'bg-red-500'], [available, 'bg-green-500']]) {
     const total = sold + available;
     if (count <= 0 || total <= 0) continue;
     const segment = document.createElement('div');
@@ -63,7 +63,7 @@ function ticketBar(sold, available) {
 // The long part of the count only shows up when the card has room for it.
 function ticketCounts(entry, extraClass = '') {
   const counts = document.createElement('span');
-  counts.className = 'shrink-0 whitespace-nowrap tabular-nums text-slate-600 ' + extraClass;
+  counts.className = 'shrink-0 whitespace-nowrap tabular-nums text-slate-300 ' + extraClass;
   const ratio = document.createElement('span');
   ratio.textContent = entry.available + '/' + entry.quota;
   const detail = document.createElement('span');
@@ -75,7 +75,7 @@ function ticketCounts(entry, extraClass = '') {
 
 function pulse(extraClass) {
   const bar = document.createElement('div');
-  bar.className = 'animate-pulse rounded bg-slate-100 ' + extraClass;
+  bar.className = 'animate-pulse rounded bg-slate-900 ' + extraClass;
   return bar;
 }
 
@@ -98,7 +98,7 @@ function detailRow(label, entry) {
 
 function emptyRow(label) {
   const row = document.createElement('li');
-  row.className = 'flex h-5 items-center text-sm text-slate-400';
+  row.className = 'flex h-5 items-center text-sm text-slate-500';
   row.textContent = label;
   return row;
 }
@@ -115,7 +115,7 @@ function spacerRow() {
 
 function card(title, totals, rows, rowCount, emptyLabel) {
   const element = document.createElement('section');
-  element.className = '@container rounded-lg border border-slate-200 p-4';
+  element.className = '@container rounded-lg border border-slate-800 bg-slate-900/40 p-4';
 
   const head = document.createElement('div');
   head.className = 'flex h-6 items-center gap-x-2 @md:gap-x-3';
@@ -131,7 +131,7 @@ function card(title, totals, rows, rowCount, emptyLabel) {
   total.append(ticketBar(totals.sold, totals.available));
 
   const list = document.createElement('ul');
-  list.className = 'm-0 mt-4 flex list-none flex-col gap-2 border-t border-slate-100 p-0 pt-3';
+  list.className = 'm-0 mt-4 flex list-none flex-col gap-2 border-t border-slate-800 p-0 pt-3';
   list.append(...(rows.length === 0 && emptyLabel ? [emptyRow(emptyLabel)] : rows));
   while (list.children.length < rowCount) list.append(spacerRow());
 
@@ -141,18 +141,18 @@ function card(title, totals, rows, rowCount, emptyLabel) {
 
 function skeletonCard(rowCount) {
   const element = document.createElement('section');
-  element.className = '@container rounded-lg border border-slate-200 p-4';
+  element.className = '@container rounded-lg border border-slate-800 bg-slate-900/40 p-4';
 
   const head = document.createElement('div');
   head.className = 'flex h-6 items-center gap-x-2';
-  head.append(pulse('h-4 w-24 bg-slate-200'), pulse('ml-auto h-4 w-16 bg-slate-200'));
+  head.append(pulse('h-4 w-24 bg-slate-800'), pulse('ml-auto h-4 w-16 bg-slate-800'));
 
   const total = document.createElement('div');
   total.className = 'mt-3';
   total.append(pulse('h-2 rounded-full'));
 
   const list = document.createElement('div');
-  list.className = 'mt-4 flex flex-col gap-2 border-t border-slate-100 pt-3';
+  list.className = 'mt-4 flex flex-col gap-2 border-t border-slate-800 pt-3';
   for (let index = 0; index < rowCount; index++) list.append(pulse('h-5'));
 
   element.append(head, total, list);
@@ -226,11 +226,11 @@ function describe(channel) {
 function renderChannel(channel, view) {
   const note = document.createElement('div');
   note.className =
-    'mb-3 flex min-h-10 items-start gap-2 text-sm text-slate-500 sm:min-h-5 sm:items-center';
+    'mb-3 flex min-h-10 items-start gap-2 text-sm text-slate-400 sm:min-h-5 sm:items-center';
   if (channel.point) {
     const point = document.createElement('span');
     point.className =
-      'shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600';
+      'shrink-0 rounded-full bg-slate-800 px-2 py-0.5 text-xs font-semibold text-slate-300';
     point.textContent = 'punto ' + channel.point;
     note.append(point);
   }
