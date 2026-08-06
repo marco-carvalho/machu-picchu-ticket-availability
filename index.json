@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-06T08:01:15.229Z",
+  "utcTime": "2026-08-06T08:31:11.313Z",
   "channels": [
     {
       "id": "in-person",
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 223,
-          "sold": 4577,
+          "available": 221,
+          "sold": 4579,
           "status": "selling",
           "dates": [
             {
@@ -565,8 +565,8 @@
             {
               "date": "2026-11-19",
               "quota": 800,
-              "available": 79,
-              "sold": 721,
+              "available": 77,
+              "sold": 723,
               "status": "selling"
             },
             {
