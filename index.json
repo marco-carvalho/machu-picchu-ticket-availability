@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-06T08:31:11.313Z",
+  "utcTime": "2026-08-06T09:01:09.969Z",
   "channels": [
     {
       "id": "in-person",
@@ -428,8 +428,8 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 73,
-          "sold": 707,
+          "available": 72,
+          "sold": 708,
           "status": "selling",
           "dates": [
             {
@@ -470,8 +470,8 @@
             {
               "date": "2026-09-06",
               "quota": 130,
-              "available": 7,
-              "sold": 123,
+              "available": 6,
+              "sold": 124,
               "status": "selling"
             }
           ]
@@ -683,8 +683,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3600,
-          "available": 641,
-          "sold": 2959,
+          "available": 642,
+          "sold": 2958,
           "status": "selling",
           "dates": [
             {
@@ -704,8 +704,8 @@
             {
               "date": "2026-10-28",
               "quota": 600,
-              "available": 107,
-              "sold": 493,
+              "available": 108,
+              "sold": 492,
               "status": "selling"
             },
             {
