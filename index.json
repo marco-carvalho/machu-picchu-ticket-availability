@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-06T05:31:09.008Z",
+  "utcTime": "2026-08-06T06:01:16.367Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,15 +377,15 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 542,
-          "sold": 4558,
+          "available": 540,
+          "sold": 4560,
           "status": "selling",
           "dates": [
             {
               "date": "2026-08-30",
               "quota": 850,
-              "available": 15,
-              "sold": 835,
+              "available": 13,
+              "sold": 837,
               "status": "selling"
             },
             {
@@ -428,8 +428,8 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 69,
-          "sold": 711,
+          "available": 73,
+          "sold": 707,
           "status": "selling",
           "dates": [
             {
@@ -470,8 +470,8 @@
             {
               "date": "2026-09-06",
               "quota": 130,
-              "available": 3,
-              "sold": 127,
+              "available": 7,
+              "sold": 123,
               "status": "selling"
             }
           ]
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 225,
-          "sold": 4575,
+          "available": 224,
+          "sold": 4576,
           "status": "selling",
           "dates": [
             {
@@ -565,8 +565,8 @@
             {
               "date": "2026-11-19",
               "quota": 800,
-              "available": 80,
-              "sold": 720,
+              "available": 79,
+              "sold": 721,
               "status": "selling"
             },
             {
@@ -683,8 +683,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3600,
-          "available": 630,
-          "sold": 2970,
+          "available": 631,
+          "sold": 2969,
           "status": "selling",
           "dates": [
             {
@@ -704,8 +704,8 @@
             {
               "date": "2026-10-28",
               "quota": 600,
-              "available": 106,
-              "sold": 494,
+              "available": 105,
+              "sold": 495,
               "status": "selling"
             },
             {
@@ -718,8 +718,8 @@
             {
               "date": "2026-10-30",
               "quota": 600,
-              "available": 178,
-              "sold": 422,
+              "available": 180,
+              "sold": 420,
               "status": "selling"
             },
             {
