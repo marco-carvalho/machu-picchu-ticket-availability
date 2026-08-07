@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-07T07:01:18.261Z",
+  "utcTime": "2026-08-07T07:31:15.390Z",
   "channels": [
     {
       "id": "in-person",
@@ -683,15 +683,15 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3600,
-          "available": 567,
-          "sold": 3033,
+          "available": 569,
+          "sold": 3031,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-26",
               "quota": 600,
-              "available": 2,
-              "sold": 598,
+              "available": 4,
+              "sold": 596,
               "status": "selling"
             },
             {
@@ -734,8 +734,8 @@
         {
           "name": "Ruta 3-C: Gran Caverna",
           "quota": 300,
-          "available": 119,
-          "sold": 181,
+          "available": 117,
+          "sold": 183,
           "status": "selling",
           "dates": [
             {
@@ -755,8 +755,8 @@
             {
               "date": "2026-10-21",
               "quota": 50,
-              "available": 14,
-              "sold": 36,
+              "available": 12,
+              "sold": 38,
               "status": "selling"
             },
             {
