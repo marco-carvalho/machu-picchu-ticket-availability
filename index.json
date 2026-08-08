@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-08T09:31:09.529Z",
+  "utcTime": "2026-08-08T10:01:14.934Z",
   "channels": [
     {
       "id": "in-person",
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 255,
-          "sold": 4545,
+          "available": 253,
+          "sold": 4547,
           "status": "selling",
           "dates": [
             {
@@ -558,8 +558,8 @@
             {
               "date": "2026-11-23",
               "quota": 800,
-              "available": 8,
-              "sold": 792,
+              "available": 6,
+              "sold": 794,
               "status": "selling"
             },
             {
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 494,
-          "sold": 1606,
+          "available": 496,
+          "sold": 1604,
           "status": "selling",
           "dates": [
             {
@@ -653,8 +653,8 @@
             {
               "date": "2026-10-21",
               "quota": 350,
-              "available": 32,
-              "sold": 318,
+              "available": 34,
+              "sold": 316,
               "status": "selling"
             },
             {
