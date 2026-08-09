@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-09T18:31:07.809Z",
+  "utcTime": "2026-08-09T20:01:13.673Z",
   "channels": [
     {
       "id": "in-person",
@@ -112,8 +112,8 @@
         {
           "date": "2026-08-12",
           "quota": 1000,
-          "available": 668,
-          "sold": 332,
+          "available": 596,
+          "sold": 404,
           "status": "selling",
           "routes": [
             {
@@ -133,22 +133,22 @@
             {
               "name": "Ruta 2-A: Clásico Diseñada",
               "quota": 600,
-              "available": 344,
-              "sold": 256,
+              "available": 275,
+              "sold": 325,
               "status": "selling"
             },
             {
               "name": "Ruta 2-B: Terraza Inferior",
               "quota": 100,
-              "available": 29,
-              "sold": 71,
+              "available": 27,
+              "sold": 73,
               "status": "selling"
             },
             {
               "name": "Ruta 3-A: Montaña Waynapicchu",
               "quota": 50,
-              "available": 45,
-              "sold": 5,
+              "available": 44,
+              "sold": 6,
               "status": "selling"
             },
             {
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 542,
-          "sold": 1258,
+          "available": 544,
+          "sold": 1256,
           "status": "selling",
           "dates": [
             {
@@ -368,8 +368,8 @@
             {
               "date": "2026-09-03",
               "quota": 300,
-              "available": 35,
-              "sold": 265,
+              "available": 37,
+              "sold": 263,
               "status": "selling"
             }
           ]
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 521,
-          "sold": 4579,
+          "available": 519,
+          "sold": 4581,
           "status": "selling",
           "dates": [
             {
@@ -398,8 +398,8 @@
             {
               "date": "2026-09-02",
               "quota": 850,
-              "available": 101,
-              "sold": 749,
+              "available": 99,
+              "sold": 751,
               "status": "selling"
             },
             {
@@ -632,15 +632,15 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 448,
-          "sold": 1652,
+          "available": 447,
+          "sold": 1653,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-19",
               "quota": 350,
-              "available": 29,
-              "sold": 321,
+              "available": 28,
+              "sold": 322,
               "status": "selling"
             },
             {
@@ -690,8 +690,8 @@
             {
               "date": "2026-10-28",
               "quota": 600,
-              "available": 43,
-              "sold": 557,
+              "available": 41,
+              "sold": 559,
               "status": "selling"
             },
             {
@@ -704,8 +704,8 @@
             {
               "date": "2026-10-30",
               "quota": 600,
-              "available": 152,
-              "sold": 448,
+              "available": 154,
+              "sold": 446,
               "status": "selling"
             },
             {
@@ -785,8 +785,8 @@
         {
           "name": "Ruta 3-D: Huchuypicchu",
           "quota": 240,
-          "available": 52,
-          "sold": 188,
+          "available": 50,
+          "sold": 190,
           "status": "selling",
           "dates": [
             {
@@ -813,8 +813,8 @@
             {
               "date": "2026-10-28",
               "quota": 40,
-              "available": 24,
-              "sold": 16,
+              "available": 22,
+              "sold": 18,
               "status": "selling"
             },
             {
