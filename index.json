@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-10T10:01:14.487Z",
+  "utcTime": "2026-08-10T10:31:18.240Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 485,
-          "sold": 4615,
+          "available": 481,
+          "sold": 4619,
           "status": "selling",
           "dates": [
             {
@@ -412,8 +412,8 @@
             {
               "date": "2026-09-28",
               "quota": 850,
-              "available": 106,
-              "sold": 744,
+              "available": 102,
+              "sold": 748,
               "status": "selling"
             },
             {
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 426,
-          "sold": 1674,
+          "available": 422,
+          "sold": 1678,
           "status": "selling",
           "dates": [
             {
@@ -646,8 +646,8 @@
             {
               "date": "2026-10-20",
               "quota": 350,
-              "available": 27,
-              "sold": 323,
+              "available": 23,
+              "sold": 327,
               "status": "selling"
             },
             {
