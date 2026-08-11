@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-11T06:31:16.668Z",
+  "utcTime": "2026-08-11T07:01:11.264Z",
   "channels": [
     {
       "id": "in-person",
@@ -479,8 +479,8 @@
         {
           "name": "Ruta 1-D: Puente Inka",
           "quota": 480,
-          "available": 27,
-          "sold": 453,
+          "available": 30,
+          "sold": 450,
           "status": "selling",
           "dates": [
             {
@@ -493,8 +493,8 @@
             {
               "date": "2026-08-31",
               "quota": 80,
-              "available": 1,
-              "sold": 79,
+              "available": 4,
+              "sold": 76,
               "status": "selling"
             },
             {
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 528,
-          "sold": 4272,
+          "available": 526,
+          "sold": 4274,
           "status": "selling",
           "dates": [
             {
@@ -565,8 +565,8 @@
             {
               "date": "2026-11-27",
               "quota": 800,
-              "available": 88,
-              "sold": 712,
+              "available": 86,
+              "sold": 714,
               "status": "selling"
             },
             {
