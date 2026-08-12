@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-12T09:31:09.999Z",
+  "utcTime": "2026-08-12T10:01:21.382Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 231,
-          "sold": 4869,
+          "available": 229,
+          "sold": 4871,
           "status": "selling",
           "dates": [
             {
@@ -391,8 +391,8 @@
             {
               "date": "2026-09-01",
               "quota": 850,
-              "available": 56,
-              "sold": 794,
+              "available": 54,
+              "sold": 796,
               "status": "selling"
             },
             {
@@ -428,19 +428,12 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 115,
-          "sold": 665,
+          "available": 174,
+          "sold": 606,
           "status": "selling",
           "dates": [
             {
               "date": "2026-09-01",
-              "quota": 130,
-              "available": 1,
-              "sold": 129,
-              "status": "selling"
-            },
-            {
-              "date": "2026-09-02",
               "quota": 130,
               "available": 1,
               "sold": 129,
@@ -472,6 +465,13 @@
               "quota": 130,
               "available": 43,
               "sold": 87,
+              "status": "selling"
+            },
+            {
+              "date": "2026-10-01",
+              "quota": 130,
+              "available": 60,
+              "sold": 70,
               "status": "selling"
             }
           ]
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 471,
-          "sold": 4329,
+          "available": 469,
+          "sold": 4331,
           "status": "selling",
           "dates": [
             {
@@ -544,8 +544,8 @@
             {
               "date": "2026-11-21",
               "quota": 800,
-              "available": 53,
-              "sold": 747,
+              "available": 51,
+              "sold": 749,
               "status": "selling"
             },
             {
