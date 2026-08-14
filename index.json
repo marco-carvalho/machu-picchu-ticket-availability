@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-14T10:01:17.050Z",
+  "utcTime": "2026-08-14T10:31:06.260Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 787,
-          "sold": 4313,
+          "available": 785,
+          "sold": 4315,
           "status": "selling",
           "dates": [
             {
@@ -391,8 +391,8 @@
             {
               "date": "2026-09-29",
               "quota": 850,
-              "available": 35,
-              "sold": 815,
+              "available": 33,
+              "sold": 817,
               "status": "selling"
             },
             {
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 866,
-          "sold": 3934,
+          "available": 864,
+          "sold": 3936,
           "status": "selling",
           "dates": [
             {
@@ -565,8 +565,8 @@
             {
               "date": "2026-11-30",
               "quota": 800,
-              "available": 267,
-              "sold": 533,
+              "available": 265,
+              "sold": 535,
               "status": "selling"
             },
             {
