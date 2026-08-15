@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-15T06:01:12.024Z",
+  "utcTime": "2026-08-15T06:31:18.304Z",
   "channels": [
     {
       "id": "in-person",
@@ -785,15 +785,15 @@
         {
           "name": "Ruta 3-D: Huchuypicchu",
           "quota": 200,
-          "available": 55,
-          "sold": 145,
+          "available": 53,
+          "sold": 147,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-29",
               "quota": 40,
-              "available": 6,
-              "sold": 34,
+              "available": 4,
+              "sold": 36,
               "status": "selling"
             },
             {
