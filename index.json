@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-15T09:31:05.052Z",
+  "utcTime": "2026-08-15T10:31:05.512Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 310,
-          "sold": 1490,
+          "available": 307,
+          "sold": 1493,
           "status": "selling",
           "dates": [
             {
@@ -340,15 +340,15 @@
             {
               "date": "2026-09-01",
               "quota": 300,
-              "available": 81,
-              "sold": 219,
+              "available": 79,
+              "sold": 221,
               "status": "selling"
             },
             {
               "date": "2026-09-02",
               "quota": 300,
-              "available": 6,
-              "sold": 294,
+              "available": 5,
+              "sold": 295,
               "status": "selling"
             },
             {
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 1268,
-          "sold": 3532,
+          "available": 1266,
+          "sold": 3534,
           "status": "selling",
           "dates": [
             {
@@ -565,8 +565,8 @@
             {
               "date": "2026-12-01",
               "quota": 800,
-              "available": 337,
-              "sold": 463,
+              "available": 335,
+              "sold": 465,
               "status": "selling"
             },
             {
@@ -683,15 +683,15 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3000,
-          "available": 481,
-          "sold": 2519,
+          "available": 479,
+          "sold": 2521,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-30",
               "quota": 600,
-              "available": 9,
-              "sold": 591,
+              "available": 7,
+              "sold": 593,
               "status": "selling"
             },
             {
