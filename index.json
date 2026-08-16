@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-16T06:01:07.303Z",
+  "utcTime": "2026-08-16T06:31:12.479Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,15 +377,15 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 750,
-          "sold": 4350,
+          "available": 748,
+          "sold": 4352,
           "status": "selling",
           "dates": [
             {
               "date": "2026-09-29",
               "quota": 850,
-              "available": 4,
-              "sold": 846,
+              "available": 3,
+              "sold": 847,
               "status": "selling"
             },
             {
@@ -412,8 +412,8 @@
             {
               "date": "2026-10-03",
               "quota": 850,
-              "available": 296,
-              "sold": 554,
+              "available": 295,
+              "sold": 555,
               "status": "selling"
             },
             {
@@ -734,8 +734,8 @@
         {
           "name": "Ruta 3-C: Gran Caverna",
           "quota": 300,
-          "available": 134,
-          "sold": 166,
+          "available": 131,
+          "sold": 169,
           "status": "selling",
           "dates": [
             {
@@ -769,8 +769,8 @@
             {
               "date": "2026-10-27",
               "quota": 50,
-              "available": 25,
-              "sold": 25,
+              "available": 22,
+              "sold": 28,
               "status": "selling"
             },
             {
