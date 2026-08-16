@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-16T15:01:08.954Z",
+  "utcTime": "2026-08-16T15:31:15.182Z",
   "channels": [
     {
       "id": "in-person",
@@ -10,8 +10,8 @@
         {
           "date": "2026-08-17",
           "quota": 1000,
-          "available": 9,
-          "sold": 991,
+          "available": 4,
+          "sold": 996,
           "status": "selling",
           "routes": [
             {
@@ -24,8 +24,8 @@
             {
               "name": "Ruta 1-B: Terraza superior",
               "quota": 100,
-              "available": 9,
-              "sold": 91,
+              "available": 4,
+              "sold": 96,
               "status": "selling"
             },
             {
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 744,
-          "sold": 4356,
+          "available": 742,
+          "sold": 4358,
           "status": "selling",
           "dates": [
             {
@@ -391,8 +391,8 @@
             {
               "date": "2026-09-30",
               "quota": 850,
-              "available": 103,
-              "sold": 747,
+              "available": 101,
+              "sold": 749,
               "status": "selling"
             },
             {
@@ -428,8 +428,8 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 102,
-          "sold": 678,
+          "available": 101,
+          "sold": 679,
           "status": "selling",
           "dates": [
             {
@@ -470,8 +470,8 @@
             {
               "date": "2026-10-02",
               "quota": 130,
-              "available": 17,
-              "sold": 113,
+              "available": 16,
+              "sold": 114,
               "status": "selling"
             }
           ]
