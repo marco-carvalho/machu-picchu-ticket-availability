@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-16T09:01:11.547Z",
+  "utcTime": "2026-08-16T09:31:03.405Z",
   "channels": [
     {
       "id": "in-person",
@@ -682,18 +682,11 @@
         },
         {
           "name": "Ruta 3-B: Realeza diseñada",
-          "quota": 3477,
+          "quota": 3000,
           "available": 458,
-          "sold": 3019,
+          "sold": 2542,
           "status": "selling",
           "dates": [
-            {
-              "date": "2026-08-17",
-              "quota": 777,
-              "available": 1,
-              "sold": 776,
-              "status": "selling"
-            },
             {
               "date": "2026-10-30",
               "quota": 600,
@@ -724,6 +717,13 @@
             },
             {
               "date": "2026-11-04",
+              "quota": 300,
+              "available": 1,
+              "sold": 299,
+              "status": "selling"
+            },
+            {
+              "date": "2026-11-06",
               "quota": 300,
               "available": 1,
               "sold": 299,
@@ -785,8 +785,8 @@
         {
           "name": "Ruta 3-D: Huchuypicchu",
           "quota": 200,
-          "available": 49,
-          "sold": 151,
+          "available": 45,
+          "sold": 155,
           "status": "selling",
           "dates": [
             {
@@ -799,8 +799,8 @@
             {
               "date": "2026-10-30",
               "quota": 40,
-              "available": 8,
-              "sold": 32,
+              "available": 4,
+              "sold": 36,
               "status": "selling"
             },
             {
