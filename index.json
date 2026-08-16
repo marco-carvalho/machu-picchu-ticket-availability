@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-16T07:01:14.891Z",
+  "utcTime": "2026-08-16T07:31:05.183Z",
   "channels": [
     {
       "id": "in-person",
@@ -347,8 +347,8 @@
             {
               "date": "2026-09-27",
               "quota": 300,
-              "available": 61,
-              "sold": 239,
+              "available": 60,
+              "sold": 240,
               "status": "selling"
             },
             {
@@ -361,8 +361,8 @@
             {
               "date": "2026-09-29",
               "quota": 300,
-              "available": 102,
-              "sold": 198,
+              "available": 103,
+              "sold": 197,
               "status": "selling"
             },
             {
