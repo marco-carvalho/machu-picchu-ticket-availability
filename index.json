@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-17T10:31:13.941Z",
+  "utcTime": "2026-08-17T11:31:08.868Z",
   "channels": [
     {
       "id": "in-person",
@@ -10,8 +10,8 @@
         {
           "date": "2026-08-18",
           "quota": 1000,
-          "available": 415,
-          "sold": 585,
+          "available": 376,
+          "sold": 624,
           "status": "selling",
           "routes": [
             {
@@ -31,15 +31,15 @@
             {
               "name": "Ruta 2-A: Clásico Diseñada",
               "quota": 600,
-              "available": 134,
-              "sold": 466,
+              "available": 107,
+              "sold": 493,
               "status": "selling"
             },
             {
               "name": "Ruta 2-B: Terraza Inferior",
               "quota": 100,
-              "available": 16,
-              "sold": 84,
+              "available": 4,
+              "sold": 96,
               "status": "selling"
             },
             {
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 462,
-          "sold": 1338,
+          "available": 460,
+          "sold": 1340,
           "status": "selling",
           "dates": [
             {
@@ -361,8 +361,8 @@
             {
               "date": "2026-09-29",
               "quota": 300,
-              "available": 98,
-              "sold": 202,
+              "available": 96,
+              "sold": 204,
               "status": "selling"
             },
             {
@@ -683,15 +683,15 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 2700,
-          "available": 421,
-          "sold": 2279,
+          "available": 422,
+          "sold": 2278,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-31",
               "quota": 600,
-              "available": 202,
-              "sold": 398,
+              "available": 203,
+              "sold": 397,
               "status": "selling"
             },
             {
