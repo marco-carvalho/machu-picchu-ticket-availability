@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-18T06:31:09.193Z",
+  "utcTime": "2026-08-18T07:01:11.096Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 595,
-          "sold": 1205,
+          "available": 597,
+          "sold": 1203,
           "status": "selling",
           "dates": [
             {
@@ -354,8 +354,8 @@
             {
               "date": "2026-09-30",
               "quota": 300,
-              "available": 161,
-              "sold": 139,
+              "available": 163,
+              "sold": 137,
               "status": "selling"
             },
             {
@@ -479,17 +479,10 @@
         {
           "name": "Ruta 1-D: Puente Inka",
           "quota": 480,
-          "available": 191,
-          "sold": 289,
+          "available": 196,
+          "sold": 284,
           "status": "selling",
           "dates": [
-            {
-              "date": "2026-09-29",
-              "quota": 80,
-              "available": 3,
-              "sold": 77,
-              "status": "selling"
-            },
             {
               "date": "2026-09-30",
               "quota": 80,
@@ -523,6 +516,13 @@
               "quota": 80,
               "available": 22,
               "sold": 58,
+              "status": "selling"
+            },
+            {
+              "date": "2026-10-06",
+              "quota": 80,
+              "available": 8,
+              "sold": 72,
               "status": "selling"
             }
           ]
