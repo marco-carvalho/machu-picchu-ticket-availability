@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-18T12:31:17.818Z",
+  "utcTime": "2026-08-18T13:01:16.922Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,29 +326,29 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 597,
-          "sold": 1203,
+          "available": 588,
+          "sold": 1212,
           "status": "selling",
           "dates": [
             {
               "date": "2026-08-31",
               "quota": 300,
-              "available": 46,
-              "sold": 254,
+              "available": 43,
+              "sold": 257,
               "status": "selling"
             },
             {
               "date": "2026-09-01",
               "quota": 300,
-              "available": 5,
-              "sold": 295,
+              "available": 2,
+              "sold": 298,
               "status": "selling"
             },
             {
               "date": "2026-09-29",
               "quota": 300,
-              "available": 80,
-              "sold": 220,
+              "available": 79,
+              "sold": 221,
               "status": "selling"
             },
             {
@@ -361,8 +361,8 @@
             {
               "date": "2026-10-01",
               "quota": 300,
-              "available": 154,
-              "sold": 146,
+              "available": 152,
+              "sold": 148,
               "status": "selling"
             },
             {
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 541,
-          "sold": 1559,
+          "available": 542,
+          "sold": 1558,
           "status": "selling",
           "dates": [
             {
@@ -646,8 +646,8 @@
             {
               "date": "2026-10-26",
               "quota": 350,
-              "available": 137,
-              "sold": 213,
+              "available": 138,
+              "sold": 212,
               "status": "selling"
             },
             {
