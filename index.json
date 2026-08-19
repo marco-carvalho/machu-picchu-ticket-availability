@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-19T10:01:22.029Z",
+  "utcTime": "2026-08-19T10:31:17.664Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 521,
-          "sold": 4579,
+          "available": 519,
+          "sold": 4581,
           "status": "selling",
           "dates": [
             {
@@ -391,8 +391,8 @@
             {
               "date": "2026-10-01",
               "quota": 850,
-              "available": 41,
-              "sold": 809,
+              "available": 39,
+              "sold": 811,
               "status": "selling"
             },
             {
