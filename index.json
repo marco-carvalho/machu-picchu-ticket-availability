@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-19T08:31:09.633Z",
+  "utcTime": "2026-08-19T09:31:07.498Z",
   "channels": [
     {
       "id": "in-person",
@@ -581,17 +581,10 @@
         {
           "name": "Ruta 2-B: Terraza Inferior",
           "quota": 2400,
-          "available": 874,
-          "sold": 1526,
+          "available": 1164,
+          "sold": 1236,
           "status": "selling",
           "dates": [
-            {
-              "date": "2026-11-27",
-              "quota": 400,
-              "available": 2,
-              "sold": 398,
-              "status": "selling"
-            },
             {
               "date": "2026-11-28",
               "quota": 400,
@@ -625,6 +618,13 @@
               "quota": 400,
               "available": 331,
               "sold": 69,
+              "status": "selling"
+            },
+            {
+              "date": "2026-12-03",
+              "quota": 400,
+              "available": 292,
+              "sold": 108,
               "status": "selling"
             }
           ]
