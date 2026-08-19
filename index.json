@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-19T11:01:14.980Z",
+  "utcTime": "2026-08-19T11:31:07.609Z",
   "channels": [
     {
       "id": "in-person",
@@ -10,8 +10,8 @@
         {
           "date": "2026-08-20",
           "quota": 1000,
-          "available": 562,
-          "sold": 438,
+          "available": 513,
+          "sold": 487,
           "status": "selling",
           "routes": [
             {
@@ -31,15 +31,15 @@
             {
               "name": "Ruta 2-A: Clásico Diseñada",
               "quota": 600,
-              "available": 245,
-              "sold": 355,
+              "available": 202,
+              "sold": 398,
               "status": "selling"
             },
             {
               "name": "Ruta 2-B: Terraza Inferior",
               "quota": 100,
-              "available": 34,
-              "sold": 66,
+              "available": 28,
+              "sold": 72,
               "status": "selling"
             },
             {
@@ -682,11 +682,18 @@
         },
         {
           "name": "Ruta 3-B: Realeza diseñada",
-          "quota": 2700,
-          "available": 298,
-          "sold": 2402,
+          "quota": 3202,
+          "available": 315,
+          "sold": 2887,
           "status": "selling",
           "dates": [
+            {
+              "date": "2026-08-21",
+              "quota": 802,
+              "available": 21,
+              "sold": 781,
+              "status": "selling"
+            },
             {
               "date": "2026-10-31",
               "quota": 600,
@@ -720,13 +727,6 @@
               "quota": 300,
               "available": 1,
               "sold": 299,
-              "status": "selling"
-            },
-            {
-              "date": "2026-11-12",
-              "quota": 300,
-              "available": 4,
-              "sold": 296,
               "status": "selling"
             }
           ]
