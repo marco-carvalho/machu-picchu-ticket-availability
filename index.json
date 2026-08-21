@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-21T07:01:10.132Z",
+  "utcTime": "2026-08-21T07:31:10.003Z",
   "channels": [
     {
       "id": "in-person",
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 2195,
-          "sold": 2605,
+          "available": 2193,
+          "sold": 2607,
           "status": "selling",
           "dates": [
             {
@@ -544,8 +544,8 @@
             {
               "date": "2026-12-01",
               "quota": 800,
-              "available": 252,
-              "sold": 548,
+              "available": 250,
+              "sold": 550,
               "status": "selling"
             },
             {
@@ -683,8 +683,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3174,
-          "available": 146,
-          "sold": 3028,
+          "available": 148,
+          "sold": 3026,
           "status": "selling",
           "dates": [
             {
@@ -697,8 +697,8 @@
             {
               "date": "2026-10-31",
               "quota": 600,
-              "available": 94,
-              "sold": 506,
+              "available": 96,
+              "sold": 504,
               "status": "selling"
             },
             {
