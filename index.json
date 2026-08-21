@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-21T09:31:12.968Z",
+  "utcTime": "2026-08-21T10:01:16.496Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,15 +326,15 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 922,
-          "sold": 878,
+          "available": 920,
+          "sold": 880,
           "status": "selling",
           "dates": [
             {
               "date": "2026-09-30",
               "quota": 300,
-              "available": 95,
-              "sold": 205,
+              "available": 93,
+              "sold": 207,
               "status": "selling"
             },
             {
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 2190,
-          "sold": 2610,
+          "available": 2188,
+          "sold": 2612,
           "status": "selling",
           "dates": [
             {
@@ -544,8 +544,8 @@
             {
               "date": "2026-12-01",
               "quota": 800,
-              "available": 250,
-              "sold": 550,
+              "available": 248,
+              "sold": 552,
               "status": "selling"
             },
             {
@@ -683,15 +683,15 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3163,
-          "available": 163,
-          "sold": 3000,
+          "available": 156,
+          "sold": 3007,
           "status": "selling",
           "dates": [
             {
               "date": "2026-08-23",
               "quota": 763,
-              "available": 18,
-              "sold": 745,
+              "available": 15,
+              "sold": 748,
               "status": "selling"
             },
             {
@@ -704,8 +704,8 @@
             {
               "date": "2026-11-01",
               "quota": 600,
-              "available": 19,
-              "sold": 581,
+              "available": 15,
+              "sold": 585,
               "status": "selling"
             },
             {
