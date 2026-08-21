@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-21T06:01:13.225Z",
+  "utcTime": "2026-08-21T06:31:06.877Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,15 +377,15 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 284,
-          "sold": 4816,
+          "available": 283,
+          "sold": 4817,
           "status": "selling",
           "dates": [
             {
               "date": "2026-09-30",
               "quota": 850,
-              "available": 2,
-              "sold": 848,
+              "available": 1,
+              "sold": 849,
               "status": "selling"
             },
             {
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 341,
-          "sold": 1759,
+          "available": 339,
+          "sold": 1761,
           "status": "selling",
           "dates": [
             {
@@ -646,8 +646,8 @@
             {
               "date": "2026-10-26",
               "quota": 350,
-              "available": 81,
-              "sold": 269,
+              "available": 79,
+              "sold": 271,
               "status": "selling"
             },
             {
@@ -682,11 +682,18 @@
         },
         {
           "name": "Ruta 3-B: Realeza diseñada",
-          "quota": 2700,
-          "available": 150,
-          "sold": 2550,
+          "quota": 3174,
+          "available": 146,
+          "sold": 3028,
           "status": "selling",
           "dates": [
+            {
+              "date": "2026-08-22",
+              "quota": 774,
+              "available": 6,
+              "sold": 768,
+              "status": "selling"
+            },
             {
               "date": "2026-10-31",
               "quota": 600,
@@ -720,13 +727,6 @@
               "quota": 300,
               "available": 2,
               "sold": 298,
-              "status": "selling"
-            },
-            {
-              "date": "2026-11-13",
-              "quota": 300,
-              "available": 10,
-              "sold": 290,
               "status": "selling"
             }
           ]
