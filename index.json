@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-23T08:01:11.480Z",
+  "utcTime": "2026-08-23T08:31:07.965Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 809,
-          "sold": 991,
+          "available": 808,
+          "sold": 992,
           "status": "selling",
           "dates": [
             {
@@ -347,8 +347,8 @@
             {
               "date": "2026-10-02",
               "quota": 300,
-              "available": 133,
-              "sold": 167,
+              "available": 132,
+              "sold": 168,
               "status": "selling"
             },
             {
@@ -682,23 +682,30 @@
         },
         {
           "name": "Ruta 3-B: Realeza diseñada",
-          "quota": 3177,
-          "available": 140,
-          "sold": 3037,
+          "quota": 3661,
+          "available": 162,
+          "sold": 3499,
           "status": "selling",
           "dates": [
             {
               "date": "2026-08-24",
               "quota": 777,
-              "available": 32,
-              "sold": 745,
+              "available": 35,
+              "sold": 742,
+              "status": "selling"
+            },
+            {
+              "date": "2026-08-25",
+              "quota": 784,
+              "available": 22,
+              "sold": 762,
               "status": "selling"
             },
             {
               "date": "2026-10-31",
               "quota": 600,
-              "available": 78,
-              "sold": 522,
+              "available": 77,
+              "sold": 523,
               "status": "selling"
             },
             {
@@ -717,13 +724,6 @@
             },
             {
               "date": "2026-11-12",
-              "quota": 300,
-              "available": 2,
-              "sold": 298,
-              "status": "selling"
-            },
-            {
-              "date": "2026-11-13",
               "quota": 300,
               "available": 2,
               "sold": 298,
