@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-24T12:31:12.512Z",
+  "utcTime": "2026-08-24T13:01:18.219Z",
   "channels": [
     {
       "id": "in-person",
@@ -10,8 +10,8 @@
         {
           "date": "2026-08-25",
           "quota": 1000,
-          "available": 753,
-          "sold": 247,
+          "available": 723,
+          "sold": 277,
           "status": "selling",
           "routes": [
             {
@@ -31,8 +31,8 @@
             {
               "name": "Ruta 2-A: Clásico Diseñada",
               "quota": 600,
-              "available": 412,
-              "sold": 188,
+              "available": 385,
+              "sold": 215,
               "status": "selling"
             },
             {
@@ -45,8 +45,8 @@
             {
               "name": "Ruta 3-A: Montaña Waynapicchu",
               "quota": 50,
-              "available": 43,
-              "sold": 7,
+              "available": 40,
+              "sold": 10,
               "status": "selling"
             },
             {
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 391,
-          "sold": 4709,
+          "available": 389,
+          "sold": 4711,
           "status": "selling",
           "dates": [
             {
@@ -398,8 +398,8 @@
             {
               "date": "2026-10-04",
               "quota": 850,
-              "available": 15,
-              "sold": 835,
+              "available": 13,
+              "sold": 837,
               "status": "selling"
             },
             {
@@ -683,15 +683,15 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3187,
-          "available": 139,
-          "sold": 3048,
+          "available": 137,
+          "sold": 3050,
           "status": "selling",
           "dates": [
             {
               "date": "2026-08-26",
               "quota": 787,
-              "available": 51,
-              "sold": 736,
+              "available": 49,
+              "sold": 738,
               "status": "selling"
             },
             {
