@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-24T03:31:02.526Z",
+  "utcTime": "2026-08-24T04:01:06.858Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 401,
-          "sold": 4699,
+          "available": 400,
+          "sold": 4700,
           "status": "selling",
           "dates": [
             {
@@ -412,8 +412,8 @@
             {
               "date": "2026-10-18",
               "quota": 850,
-              "available": 29,
-              "sold": 821,
+              "available": 28,
+              "sold": 822,
               "status": "selling"
             },
             {
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 2002,
-          "sold": 2798,
+          "available": 2000,
+          "sold": 2800,
           "status": "selling",
           "dates": [
             {
@@ -544,8 +544,8 @@
             {
               "date": "2026-12-01",
               "quota": 800,
-              "available": 226,
-              "sold": 574,
+              "available": 224,
+              "sold": 576,
               "status": "selling"
             },
             {
@@ -632,22 +632,22 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 402,
-          "sold": 1698,
+          "available": 398,
+          "sold": 1702,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-26",
               "quota": 350,
-              "available": 56,
-              "sold": 294,
+              "available": 54,
+              "sold": 296,
               "status": "selling"
             },
             {
               "date": "2026-10-27",
               "quota": 350,
-              "available": 49,
-              "sold": 301,
+              "available": 47,
+              "sold": 303,
               "status": "selling"
             },
             {
