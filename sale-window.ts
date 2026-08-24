@@ -2,6 +2,18 @@ import { createHmac } from 'node:crypto';
 import { writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { z } from 'zod';
+import {
+  snapshotSchema,
+  statusOf,
+  totalsOf,
+  type DateAvailability,
+  type DatedAvailability,
+  type InPersonChannel,
+  type OnlineChannel,
+  type RouteAvailability,
+  type RouteWindow,
+} from './src/schema.ts';
 
 const APP_URL = 'https://tuboleto.cultura.pe';
 const PLACE = 'llaqta_machupicchu';
@@ -9,14 +21,24 @@ const PLACE = 'llaqta_machupicchu';
 // next few dates, so it is collected date by date. The online store sells all ten routes
 // months ahead, and each route opens on its own window, so it is collected route by route
 // until every one of them has enough dates or the horizon ends.
-const IN_PERSON = { id: 'in-person', label: 'In person', point: 5, days: 6 };
-const ONLINE = { id: 'online', label: 'Online', point: 3, datesPerRoute: 6, horizon: 120 };
+const IN_PERSON = { id: 'in-person', label: 'In person', point: 5, days: 6 } as const;
+const ONLINE = {
+  id: 'online',
+  label: 'Online',
+  point: 3,
+  datesPerRoute: 6,
+  horizon: 120,
+} as const;
 const TIMEOUT_MS = 15000;
 const HOUR_MS = 60 * 60 * 1000;
-const OUTPUT_FILE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'index.json');
+const OUTPUT_FILE = path.join(
+  path.dirname(fileURLToPath(import.meta.url)),
+  'public',
+  'index.json'
+);
 
 // The API WAF rejects clients that do not look like a browser.
-const HEADERS = {
+const HEADERS: Record<string, string> = {
   'user-agent':
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ' +
     '(KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',
@@ -26,14 +48,26 @@ const HEADERS = {
   origin: APP_URL,
 };
 
+const rawRouteSchema = z.object({
+  ruta: z.string(),
+  ncupo: z.coerce.number(),
+  ncupoActual: z.coerce.number(),
+});
+const serverTimeSchema = z.object({
+  tiempoServidor: z.union([z.number(), z.string()]),
+});
+type RawRoute = z.infer<typeof rawRouteSchema>;
+
 class HttpError extends Error {
-  constructor(status, url) {
+  status: number;
+
+  constructor(status: number, url: string) {
     super(`${status} at ${url}`);
     this.status = status;
   }
 }
 
-function peruDates(total) {
+function peruDates(total: number): string[] {
   const parts = Object.fromEntries(
     new Intl.DateTimeFormat('en-CA', {
       timeZone: 'America/Lima',
@@ -51,7 +85,10 @@ function peruDates(total) {
   );
 }
 
-async function request(url, options = {}) {
+async function request(
+  url: string,
+  options: Omit<RequestInit, 'headers'> & { headers?: Record<string, string> } = {}
+): Promise<Response> {
   const response = await fetch(url, {
     ...options,
     headers: { ...HEADERS, ...options.headers },
@@ -63,17 +100,19 @@ async function request(url, options = {}) {
 
 // The signing key lives in the public bundle of the app. Fetching it on every run
 // avoids keeping a third party credential here and survives rotations of the key.
-async function appConfig() {
-  const html = await (await request(APP_URL + '/')).text();
+async function appConfig(): Promise<{ key: string; api: string }> {
+  const home = await request(APP_URL + '/');
+  const html = await home.text();
   const pending = [...html.matchAll(/main-[A-Z0-9]+\.js/g)].map((match) => match[0]);
-  const visited = new Set();
+  const visited = new Set<string>();
 
   while (pending.length > 0) {
-    const file = pending.shift();
+    const file = pending.shift()!;
     if (visited.has(file)) continue;
     visited.add(file);
 
-    const source = await (await request(`${APP_URL}/${file}`)).text();
+    const bundle = await request(`${APP_URL}/${file}`);
+    const source = await bundle.text();
     const key = /securitySecretKey:"([^"]+)"/.exec(source);
     const api = /apiUrl:"([^"]+)"/.exec(source);
     if (key && api) return { key: key[1], api: api[1] };
@@ -84,8 +123,9 @@ async function appConfig() {
   throw new Error('Could not find the signing key in the app bundle.');
 }
 
-async function sign(api, key) {
-  const { tiempoServidor } = await (await request(api + '/comunes/tiempo-servidor')).json();
+async function sign(api: string, key: string): Promise<{ timestamp: string; code: string }> {
+  const clock = await request(api + '/comunes/tiempo-servidor');
+  const { tiempoServidor } = serverTimeSchema.parse(await clock.json());
   const timestamp = String(tiempoServidor);
   return {
     timestamp,
@@ -95,29 +135,23 @@ async function sign(api, key) {
 
 // Each call carries its own signature, and the API answers 403 when two calls share the
 // same server timestamp, so the collection stays sequential.
-async function availability(api, key, date, point) {
+async function availability(
+  api: string,
+  key: string,
+  date: string,
+  point: number
+): Promise<RawRoute[]> {
+  const signature = await sign(api, key);
   const response = await request(api + '/comunes/disponibilidad-actual', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ lugar: PLACE, fecha: date, punto: point, ...(await sign(api, key)) }),
+    body: JSON.stringify({ lugar: PLACE, fecha: date, punto: point, ...signature }),
   });
-  const routes = await response.json();
-  if (!Array.isArray(routes)) throw new Error(`Unexpected response for ${date} at punto ${point}`);
-  return routes;
+  const payload = await response.json();
+  return z.array(rawRouteSchema).parse(payload);
 }
 
-function statusOf(quota, available) {
-  if (available === 0) return 'sold out';
-  return quota === available ? 'no sales' : 'selling';
-}
-
-function totalsOf(parts) {
-  const quota = parts.reduce((sum, part) => sum + part.quota, 0);
-  const available = parts.reduce((sum, part) => sum + part.available, 0);
-  return { quota, available, sold: quota - available, status: statusOf(quota, available) };
-}
-
-function routeOf(raw) {
+function routeOf(raw: RawRoute): RouteAvailability {
   const quota = Number(raw.ncupo);
   const available = Number(raw.ncupoActual);
   return {
@@ -129,26 +163,35 @@ function routeOf(raw) {
   };
 }
 
-async function collectByDate(api, key, channel) {
-  const dates = [];
+async function collectByDate(
+  api: string,
+  key: string,
+  channel: typeof IN_PERSON
+): Promise<InPersonChannel> {
+  const dates: DateAvailability[] = [];
   for (const date of peruDates(channel.days)) {
-    const routes = (await availability(api, key, date, channel.point)).map(routeOf);
+    const raw = await availability(api, key, date, channel.point);
+    const routes = raw.map(routeOf);
     dates.push({ date, ...totalsOf(routes), routes });
   }
   return { ...channel, dates };
 }
 
-async function collectByRoute(api, key, channel) {
-  const buckets = new Map();
+async function collectByRoute(
+  api: string,
+  key: string,
+  channel: typeof ONLINE
+): Promise<OnlineChannel> {
+  const buckets = new Map<string, { name: string; dates: DatedAvailability[] }>();
   let scanned = 0;
 
   for (const date of peruDates(channel.horizon)) {
-    let routes;
+    let routes: RawRoute[];
     try {
       routes = await availability(api, key, date, channel.point);
     } catch (error) {
       // The endpoint answers 404 for dates the store does not sell yet, which ends the run.
-      if (error.status === 404) break;
+      if (error instanceof HttpError && error.status === 404) break;
       throw error;
     }
     scanned++;
@@ -168,7 +211,7 @@ async function collectByRoute(api, key, channel) {
     if (buckets.size > 0 && complete) break;
   }
 
-  const routes = [...buckets.values()].map((bucket) => ({
+  const routes: RouteWindow[] = [...buckets.values()].map((bucket) => ({
     name: bucket.name,
     ...totalsOf(bucket.dates),
     dates: bucket.dates,
@@ -176,7 +219,7 @@ async function collectByRoute(api, key, channel) {
   return { ...channel, scanned, routes };
 }
 
-function reportByDate(channel) {
+function reportByDate(channel: InPersonChannel): void {
   const width = Math.max(
     0,
     ...channel.dates.flatMap((entry) => entry.routes.map((route) => route.name.length))
@@ -210,7 +253,7 @@ function reportByDate(channel) {
   }
 }
 
-function reportByRoute(channel) {
+function reportByRoute(channel: OnlineChannel): void {
   const width = Math.max(0, ...channel.routes.map((route) => route.name.length));
 
   for (const route of channel.routes) {
@@ -237,16 +280,16 @@ function reportByRoute(channel) {
 }
 
 const { key, api } = await appConfig();
-const channels = [
-  await collectByDate(api, key, IN_PERSON),
-  await collectByRoute(api, key, ONLINE),
-];
+const inPerson = await collectByDate(api, key, IN_PERSON);
+const online = await collectByRoute(api, key, ONLINE);
 
-const snapshot = { utcTime: new Date().toISOString(), channels };
+const snapshot = snapshotSchema.parse({
+  utcTime: new Date().toISOString(),
+  channels: [inPerson, online],
+});
 writeFileSync(OUTPUT_FILE, JSON.stringify(snapshot, null, 2) + '\n');
 
-for (const channel of channels) {
-  console.log(`\n# ${channel.label} (punto ${channel.point})`);
-  if (channel.dates) reportByDate(channel);
-  else reportByRoute(channel);
-}
+console.log(`\n# ${inPerson.label} (punto ${inPerson.point})`);
+reportByDate(inPerson);
+console.log(`\n# ${online.label} (punto ${online.point})`);
+reportByRoute(online);
