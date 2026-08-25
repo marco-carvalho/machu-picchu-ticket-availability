@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-25T05:01:27.589Z",
+  "utcTime": "2026-08-25T05:31:18.527Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 350,
-          "sold": 4750,
+          "available": 347,
+          "sold": 4753,
           "status": "selling",
           "dates": [
             {
@@ -391,8 +391,8 @@
             {
               "date": "2026-10-03",
               "quota": 850,
-              "available": 114,
-              "sold": 736,
+              "available": 113,
+              "sold": 737,
               "status": "selling"
             },
             {
@@ -405,8 +405,8 @@
             {
               "date": "2026-10-18",
               "quota": 850,
-              "available": 5,
-              "sold": 845,
+              "available": 3,
+              "sold": 847,
               "status": "selling"
             },
             {
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 531,
-          "sold": 1569,
+          "available": 529,
+          "sold": 1571,
           "status": "selling",
           "dates": [
             {
@@ -660,8 +660,8 @@
             {
               "date": "2026-10-30",
               "quota": 350,
-              "available": 33,
-              "sold": 317,
+              "available": 31,
+              "sold": 319,
               "status": "selling"
             },
             {
@@ -683,8 +683,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3694,
-          "available": 181,
-          "sold": 3513,
+          "available": 115,
+          "sold": 3579,
           "status": "selling",
           "dates": [
             {
@@ -697,8 +697,8 @@
             {
               "date": "2026-08-27",
               "quota": 807,
-              "available": 117,
-              "sold": 690,
+              "available": 51,
+              "sold": 756,
               "status": "selling"
             },
             {
