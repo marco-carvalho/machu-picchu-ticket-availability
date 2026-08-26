@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-26T07:01:10.882Z",
+  "utcTime": "2026-08-26T07:31:09.940Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 593,
-          "sold": 1207,
+          "available": 596,
+          "sold": 1204,
           "status": "selling",
           "dates": [
             {
@@ -361,8 +361,8 @@
             {
               "date": "2026-10-05",
               "quota": 300,
-              "available": 75,
-              "sold": 225,
+              "available": 78,
+              "sold": 222,
               "status": "selling"
             },
             {
@@ -428,8 +428,8 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 134,
-          "sold": 646,
+          "available": 132,
+          "sold": 648,
           "status": "selling",
           "dates": [
             {
@@ -470,8 +470,8 @@
             {
               "date": "2026-10-20",
               "quota": 130,
-              "available": 45,
-              "sold": 85,
+              "available": 43,
+              "sold": 87,
               "status": "selling"
             }
           ]
@@ -683,22 +683,22 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3722,
-          "available": 175,
-          "sold": 3547,
+          "available": 173,
+          "sold": 3549,
           "status": "selling",
           "dates": [
             {
               "date": "2026-08-27",
               "quota": 807,
-              "available": 57,
-              "sold": 750,
+              "available": 58,
+              "sold": 749,
               "status": "selling"
             },
             {
               "date": "2026-08-28",
               "quota": 815,
-              "available": 85,
-              "sold": 730,
+              "available": 82,
+              "sold": 733,
               "status": "selling"
             },
             {
