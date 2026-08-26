@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-26T05:31:08.235Z",
+  "utcTime": "2026-08-26T06:01:24.163Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 565,
-          "sold": 4535,
+          "available": 687,
+          "sold": 4413,
           "status": "selling",
           "dates": [
             {
@@ -389,17 +389,10 @@
               "status": "selling"
             },
             {
-              "date": "2026-10-04",
-              "quota": 850,
-              "available": 1,
-              "sold": 849,
-              "status": "selling"
-            },
-            {
               "date": "2026-10-19",
               "quota": 850,
-              "available": 125,
-              "sold": 725,
+              "available": 124,
+              "sold": 726,
               "status": "selling"
             },
             {
@@ -421,6 +414,13 @@
               "quota": 850,
               "available": 191,
               "sold": 659,
+              "status": "selling"
+            },
+            {
+              "date": "2026-10-23",
+              "quota": 850,
+              "available": 124,
+              "sold": 726,
               "status": "selling"
             }
           ]
@@ -683,8 +683,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3722,
-          "available": 192,
-          "sold": 3530,
+          "available": 175,
+          "sold": 3547,
           "status": "selling",
           "dates": [
             {
@@ -697,15 +697,15 @@
             {
               "date": "2026-08-28",
               "quota": 815,
-              "available": 98,
-              "sold": 717,
+              "available": 85,
+              "sold": 730,
               "status": "selling"
             },
             {
               "date": "2026-10-31",
               "quota": 600,
-              "available": 27,
-              "sold": 573,
+              "available": 23,
+              "sold": 577,
               "status": "selling"
             },
             {
