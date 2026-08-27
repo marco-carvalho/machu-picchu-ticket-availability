@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-27T18:31:22.554Z",
+  "utcTime": "2026-08-27T19:01:31.336Z",
   "channels": [
     {
       "id": "in-person",
@@ -10,8 +10,8 @@
         {
           "date": "2026-08-28",
           "quota": 1000,
-          "available": 587,
-          "sold": 413,
+          "available": 585,
+          "sold": 415,
           "status": "selling",
           "routes": [
             {
@@ -31,8 +31,8 @@
             {
               "name": "Ruta 2-A: Clásico Diseñada",
               "quota": 600,
-              "available": 256,
-              "sold": 344,
+              "available": 254,
+              "sold": 346,
               "status": "selling"
             },
             {
@@ -377,22 +377,22 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 524,
-          "sold": 4576,
+          "available": 522,
+          "sold": 4578,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-03",
               "quota": 850,
-              "available": 23,
-              "sold": 827,
+              "available": 19,
+              "sold": 831,
               "status": "selling"
             },
             {
               "date": "2026-10-19",
               "quota": 850,
-              "available": 78,
-              "sold": 772,
+              "available": 80,
+              "sold": 770,
               "status": "selling"
             },
             {
@@ -479,8 +479,8 @@
         {
           "name": "Ruta 1-D: Puente Inka",
           "quota": 480,
-          "available": 96,
-          "sold": 384,
+          "available": 94,
+          "sold": 386,
           "status": "selling",
           "dates": [
             {
@@ -500,8 +500,8 @@
             {
               "date": "2026-10-03",
               "quota": 80,
-              "available": 9,
-              "sold": 71,
+              "available": 7,
+              "sold": 73,
               "status": "selling"
             },
             {
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 1728,
-          "sold": 3072,
+          "available": 1726,
+          "sold": 3074,
           "status": "selling",
           "dates": [
             {
@@ -544,8 +544,8 @@
             {
               "date": "2026-12-01",
               "quota": 800,
-              "available": 159,
-              "sold": 641,
+              "available": 157,
+              "sold": 643,
               "status": "selling"
             },
             {
@@ -682,16 +682,16 @@
         },
         {
           "name": "Ruta 3-B: Realeza diseñada",
-          "quota": 3418,
-          "available": 123,
-          "sold": 3295,
+          "quota": 3118,
+          "available": 141,
+          "sold": 2977,
           "status": "selling",
           "dates": [
             {
               "date": "2026-08-28",
               "quota": 815,
-              "available": 15,
-              "sold": 800,
+              "available": 24,
+              "sold": 791,
               "status": "selling"
             },
             {
@@ -704,15 +704,8 @@
             {
               "date": "2026-10-31",
               "quota": 600,
-              "available": 13,
-              "sold": 587,
-              "status": "selling"
-            },
-            {
-              "date": "2026-11-01",
-              "quota": 600,
-              "available": 1,
-              "sold": 599,
+              "available": 4,
+              "sold": 596,
               "status": "selling"
             },
             {
@@ -725,8 +718,15 @@
             {
               "date": "2026-11-16",
               "quota": 300,
-              "available": 3,
-              "sold": 297,
+              "available": 2,
+              "sold": 298,
+              "status": "selling"
+            },
+            {
+              "date": "2026-11-17",
+              "quota": 300,
+              "available": 20,
+              "sold": 280,
               "status": "selling"
             }
           ]
