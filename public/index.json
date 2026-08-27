@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-27T09:01:30.252Z",
+  "utcTime": "2026-08-27T09:31:19.275Z",
   "channels": [
     {
       "id": "in-person",
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 437,
-          "sold": 1663,
+          "available": 435,
+          "sold": 1665,
           "status": "selling",
           "dates": [
             {
@@ -674,8 +674,8 @@
             {
               "date": "2026-11-01",
               "quota": 350,
-              "available": 214,
-              "sold": 136,
+              "available": 212,
+              "sold": 138,
               "status": "selling"
             }
           ]
