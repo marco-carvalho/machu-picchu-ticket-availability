@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-29T05:01:11.191Z",
+  "utcTime": "2026-08-29T05:31:08.255Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 546,
-          "sold": 4554,
+          "available": 551,
+          "sold": 4549,
           "status": "selling",
           "dates": [
             {
@@ -398,8 +398,8 @@
             {
               "date": "2026-10-21",
               "quota": 850,
-              "available": 50,
-              "sold": 800,
+              "available": 55,
+              "sold": 795,
               "status": "selling"
             },
             {
@@ -428,8 +428,8 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 126,
-          "sold": 654,
+          "available": 127,
+          "sold": 653,
           "status": "selling",
           "dates": [
             {
@@ -463,8 +463,8 @@
             {
               "date": "2026-10-20",
               "quota": 130,
-              "available": 38,
-              "sold": 92,
+              "available": 39,
+              "sold": 91,
               "status": "selling"
             },
             {
@@ -683,22 +683,22 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3093,
-          "available": 231,
-          "sold": 2862,
+          "available": 207,
+          "sold": 2886,
           "status": "selling",
           "dates": [
             {
               "date": "2026-08-30",
               "quota": 770,
-              "available": 47,
-              "sold": 723,
+              "available": 46,
+              "sold": 724,
               "status": "selling"
             },
             {
               "date": "2026-08-31",
               "quota": 823,
-              "available": 177,
-              "sold": 646,
+              "available": 154,
+              "sold": 669,
               "status": "selling"
             },
             {
