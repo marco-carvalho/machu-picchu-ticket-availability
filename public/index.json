@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-30T09:01:18.417Z",
+  "utcTime": "2026-08-30T10:01:23.638Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 812,
-          "sold": 988,
+          "available": 811,
+          "sold": 989,
           "status": "selling",
           "dates": [
             {
@@ -361,8 +361,8 @@
             {
               "date": "2026-10-19",
               "quota": 300,
-              "available": 183,
-              "sold": 117,
+              "available": 182,
+              "sold": 118,
               "status": "selling"
             },
             {
@@ -683,8 +683,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 3162,
-          "available": 306,
-          "sold": 2856,
+          "available": 308,
+          "sold": 2854,
           "status": "selling",
           "dates": [
             {
@@ -697,8 +697,8 @@
             {
               "date": "2026-09-01",
               "quota": 839,
-              "available": 184,
-              "sold": 655,
+              "available": 186,
+              "sold": 653,
               "status": "selling"
             },
             {
