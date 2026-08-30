@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-30T08:31:18.107Z",
+  "utcTime": "2026-08-30T09:01:18.417Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 814,
-          "sold": 986,
+          "available": 812,
+          "sold": 988,
           "status": "selling",
           "dates": [
             {
@@ -354,8 +354,8 @@
             {
               "date": "2026-10-18",
               "quota": 300,
-              "available": 168,
-              "sold": 132,
+              "available": 166,
+              "sold": 134,
               "status": "selling"
             },
             {
@@ -734,15 +734,15 @@
         {
           "name": "Ruta 3-C: Gran Caverna",
           "quota": 200,
-          "available": 132,
-          "sold": 68,
+          "available": 128,
+          "sold": 72,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-30",
               "quota": 50,
-              "available": 24,
-              "sold": 26,
+              "available": 20,
+              "sold": 30,
               "status": "selling"
             },
             {
