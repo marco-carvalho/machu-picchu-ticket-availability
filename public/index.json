@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-08-31T06:31:08.908Z",
+  "utcTime": "2026-08-31T07:01:20.542Z",
   "channels": [
     {
       "id": "in-person",
@@ -479,15 +479,15 @@
         {
           "name": "Ruta 1-D: Puente Inka",
           "quota": 480,
-          "available": 134,
-          "sold": 346,
+          "available": 135,
+          "sold": 345,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-02",
               "quota": 80,
-              "available": 1,
-              "sold": 79,
+              "available": 2,
+              "sold": 78,
               "status": "selling"
             },
             {
