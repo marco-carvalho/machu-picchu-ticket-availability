@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-01T09:01:12.749Z",
+  "utcTime": "2026-09-01T10:01:13.197Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 595,
-          "sold": 1205,
+          "available": 589,
+          "sold": 1211,
           "status": "selling",
           "dates": [
             {
@@ -347,15 +347,15 @@
             {
               "date": "2026-10-04",
               "quota": 300,
-              "available": 33,
-              "sold": 267,
+              "available": 29,
+              "sold": 271,
               "status": "selling"
             },
             {
               "date": "2026-10-18",
               "quota": 300,
-              "available": 131,
-              "sold": 169,
+              "available": 129,
+              "sold": 171,
               "status": "selling"
             },
             {
@@ -530,15 +530,15 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 1607,
-          "sold": 3193,
+          "available": 1605,
+          "sold": 3195,
           "status": "selling",
           "dates": [
             {
               "date": "2026-12-01",
               "quota": 800,
-              "available": 94,
-              "sold": 706,
+              "available": 92,
+              "sold": 708,
               "status": "selling"
             },
             {
@@ -581,8 +581,8 @@
         {
           "name": "Ruta 2-B: Terraza Inferior",
           "quota": 2400,
-          "available": 1237,
-          "sold": 1163,
+          "available": 1235,
+          "sold": 1165,
           "status": "selling",
           "dates": [
             {
@@ -595,8 +595,8 @@
             {
               "date": "2026-12-01",
               "quota": 400,
-              "available": 204,
-              "sold": 196,
+              "available": 202,
+              "sold": 198,
               "status": "selling"
             },
             {
