@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-01T07:01:16.522Z",
+  "utcTime": "2026-09-01T08:01:15.622Z",
   "channels": [
     {
       "id": "in-person",
@@ -479,15 +479,15 @@
         {
           "name": "Ruta 1-D: Puente Inka",
           "quota": 480,
-          "available": 163,
-          "sold": 317,
+          "available": 162,
+          "sold": 318,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-18",
               "quota": 80,
-              "available": 10,
-              "sold": 70,
+              "available": 9,
+              "sold": 71,
               "status": "selling"
             },
             {
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 780,
-          "sold": 1320,
+          "available": 778,
+          "sold": 1322,
           "status": "selling",
           "dates": [
             {
@@ -646,8 +646,8 @@
             {
               "date": "2026-11-01",
               "quota": 350,
-              "available": 170,
-              "sold": 180,
+              "available": 168,
+              "sold": 182,
               "status": "selling"
             },
             {
