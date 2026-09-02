@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-02T10:01:19.493Z",
+  "utcTime": "2026-09-02T11:01:12.875Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 413,
-          "sold": 4687,
+          "available": 408,
+          "sold": 4692,
           "status": "selling",
           "dates": [
             {
@@ -391,8 +391,8 @@
             {
               "date": "2026-10-22",
               "quota": 850,
-              "available": 60,
-              "sold": 790,
+              "available": 55,
+              "sold": 795,
               "status": "selling"
             },
             {
@@ -428,15 +428,15 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 182,
-          "sold": 598,
+          "available": 181,
+          "sold": 599,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-19",
               "quota": 130,
-              "available": 27,
-              "sold": 103,
+              "available": 26,
+              "sold": 104,
               "status": "selling"
             },
             {
@@ -479,8 +479,8 @@
         {
           "name": "Ruta 1-D: Puente Inka",
           "quota": 480,
-          "available": 136,
-          "sold": 344,
+          "available": 134,
+          "sold": 346,
           "status": "selling",
           "dates": [
             {
@@ -521,8 +521,8 @@
             {
               "date": "2026-10-23",
               "quota": 80,
-              "available": 24,
-              "sold": 56,
+              "available": 22,
+              "sold": 58,
               "status": "selling"
             }
           ]
@@ -683,8 +683,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 2780,
-          "available": 260,
-          "sold": 2520,
+          "available": 257,
+          "sold": 2523,
           "status": "selling",
           "dates": [
             {
@@ -697,8 +697,8 @@
             {
               "date": "2026-09-04",
               "quota": 812,
-              "available": 132,
-              "sold": 680,
+              "available": 129,
+              "sold": 683,
               "status": "selling"
             },
             {
