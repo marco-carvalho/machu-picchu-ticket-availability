@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-02T05:31:10.318Z",
+  "utcTime": "2026-09-02T06:01:16.548Z",
   "channels": [
     {
       "id": "in-person",
@@ -428,8 +428,8 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 184,
-          "sold": 596,
+          "available": 182,
+          "sold": 598,
           "status": "selling",
           "dates": [
             {
@@ -463,8 +463,8 @@
             {
               "date": "2026-10-23",
               "quota": 130,
-              "available": 46,
-              "sold": 84,
+              "available": 44,
+              "sold": 86,
               "status": "selling"
             },
             {
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 713,
-          "sold": 1387,
+          "available": 715,
+          "sold": 1385,
           "status": "selling",
           "dates": [
             {
@@ -674,8 +674,8 @@
             {
               "date": "2026-11-06",
               "quota": 350,
-              "available": 136,
-              "sold": 214,
+              "available": 138,
+              "sold": 212,
               "status": "selling"
             }
           ]
@@ -683,22 +683,22 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 2780,
-          "available": 246,
-          "sold": 2534,
+          "available": 237,
+          "sold": 2543,
           "status": "selling",
           "dates": [
             {
               "date": "2026-09-03",
               "quota": 768,
-              "available": 52,
-              "sold": 716,
+              "available": 50,
+              "sold": 718,
               "status": "selling"
             },
             {
               "date": "2026-09-04",
               "quota": 812,
-              "available": 116,
-              "sold": 696,
+              "available": 109,
+              "sold": 703,
               "status": "selling"
             },
             {
