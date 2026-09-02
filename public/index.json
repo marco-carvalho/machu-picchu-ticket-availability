@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-02T09:01:16.572Z",
+  "utcTime": "2026-09-02T09:31:11.851Z",
   "channels": [
     {
       "id": "in-person",
@@ -581,8 +581,8 @@
         {
           "name": "Ruta 2-B: Terraza Inferior",
           "quota": 2400,
-          "available": 1298,
-          "sold": 1102,
+          "available": 1293,
+          "sold": 1107,
           "status": "selling",
           "dates": [
             {
@@ -623,8 +623,8 @@
             {
               "date": "2026-12-06",
               "quota": 400,
-              "available": 84,
-              "sold": 316,
+              "available": 79,
+              "sold": 321,
               "status": "selling"
             }
           ]
@@ -683,8 +683,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 2780,
-          "available": 266,
-          "sold": 2514,
+          "available": 260,
+          "sold": 2520,
           "status": "selling",
           "dates": [
             {
@@ -697,8 +697,8 @@
             {
               "date": "2026-09-04",
               "quota": 812,
-              "available": 138,
-              "sold": 674,
+              "available": 132,
+              "sold": 680,
               "status": "selling"
             },
             {
