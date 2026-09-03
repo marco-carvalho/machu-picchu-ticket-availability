@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-03T01:31:10.687Z",
+  "utcTime": "2026-09-03T02:01:25.568Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 329,
-          "sold": 4771,
+          "available": 327,
+          "sold": 4773,
           "status": "selling",
           "dates": [
             {
@@ -391,8 +391,8 @@
             {
               "date": "2026-10-22",
               "quota": 850,
-              "available": 36,
-              "sold": 814,
+              "available": 34,
+              "sold": 816,
               "status": "selling"
             },
             {
@@ -530,22 +530,22 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 1417,
-          "sold": 3383,
+          "available": 1413,
+          "sold": 3387,
           "status": "selling",
           "dates": [
             {
               "date": "2026-12-01",
               "quota": 800,
-              "available": 80,
-              "sold": 720,
+              "available": 77,
+              "sold": 723,
               "status": "selling"
             },
             {
               "date": "2026-12-02",
               "quota": 800,
-              "available": 222,
-              "sold": 578,
+              "available": 221,
+              "sold": 579,
               "status": "selling"
             },
             {
@@ -683,8 +683,8 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 2780,
-          "available": 146,
-          "sold": 2634,
+          "available": 147,
+          "sold": 2633,
           "status": "selling",
           "dates": [
             {
@@ -697,8 +697,8 @@
             {
               "date": "2026-09-04",
               "quota": 812,
-              "available": 34,
-              "sold": 778,
+              "available": 35,
+              "sold": 777,
               "status": "selling"
             },
             {
