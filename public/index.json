@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-03T16:01:25.528Z",
+  "utcTime": "2026-09-03T16:31:17.092Z",
   "channels": [
     {
       "id": "in-person",
@@ -10,8 +10,8 @@
         {
           "date": "2026-09-04",
           "quota": 1000,
-          "available": 703,
-          "sold": 297,
+          "available": 692,
+          "sold": 308,
           "status": "selling",
           "routes": [
             {
@@ -31,8 +31,8 @@
             {
               "name": "Ruta 2-A: Clásico Diseñada",
               "quota": 600,
-              "available": 360,
-              "sold": 240,
+              "available": 352,
+              "sold": 248,
               "status": "selling"
             },
             {
@@ -45,15 +45,15 @@
             {
               "name": "Ruta 3-A: Montaña Waynapicchu",
               "quota": 50,
-              "available": 39,
-              "sold": 11,
+              "available": 38,
+              "sold": 12,
               "status": "selling"
             },
             {
               "name": "Ruta 3-B: Realeza diseñada",
               "quota": 100,
-              "available": 99,
-              "sold": 1,
+              "available": 97,
+              "sold": 3,
               "status": "selling"
             }
           ]
@@ -326,15 +326,15 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 872,
-          "sold": 928,
+          "available": 868,
+          "sold": 932,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-18",
               "quota": 300,
-              "available": 29,
-              "sold": 271,
+              "available": 27,
+              "sold": 273,
               "status": "selling"
             },
             {
@@ -347,8 +347,8 @@
             {
               "date": "2026-10-20",
               "quota": 300,
-              "available": 168,
-              "sold": 132,
+              "available": 167,
+              "sold": 133,
               "status": "selling"
             },
             {
@@ -368,8 +368,8 @@
             {
               "date": "2026-10-23",
               "quota": 300,
-              "available": 187,
-              "sold": 113,
+              "available": 186,
+              "sold": 114,
               "status": "selling"
             }
           ]
@@ -377,15 +377,15 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 622,
-          "sold": 4478,
+          "available": 615,
+          "sold": 4485,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-22",
               "quota": 850,
-              "available": 29,
-              "sold": 821,
+              "available": 27,
+              "sold": 823,
               "status": "selling"
             },
             {
@@ -398,15 +398,15 @@
             {
               "date": "2026-10-24",
               "quota": 850,
-              "available": 99,
-              "sold": 751,
+              "available": 97,
+              "sold": 753,
               "status": "selling"
             },
             {
               "date": "2026-10-25",
               "quota": 850,
-              "available": 72,
-              "sold": 778,
+              "available": 70,
+              "sold": 780,
               "status": "selling"
             },
             {
@@ -419,8 +419,8 @@
             {
               "date": "2026-10-27",
               "quota": 850,
-              "available": 339,
-              "sold": 511,
+              "available": 338,
+              "sold": 512,
               "status": "selling"
             }
           ]
@@ -428,8 +428,8 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 143,
-          "sold": 637,
+          "available": 139,
+          "sold": 641,
           "status": "selling",
           "dates": [
             {
@@ -449,8 +449,8 @@
             {
               "date": "2026-10-21",
               "quota": 130,
-              "available": 35,
-              "sold": 95,
+              "available": 31,
+              "sold": 99,
               "status": "selling"
             },
             {
@@ -479,8 +479,8 @@
         {
           "name": "Ruta 1-D: Puente Inka",
           "quota": 480,
-          "available": 99,
-          "sold": 381,
+          "available": 95,
+          "sold": 385,
           "status": "selling",
           "dates": [
             {
@@ -493,8 +493,8 @@
             {
               "date": "2026-10-19",
               "quota": 80,
-              "available": 10,
-              "sold": 70,
+              "available": 8,
+              "sold": 72,
               "status": "selling"
             },
             {
@@ -521,8 +521,8 @@
             {
               "date": "2026-10-23",
               "quota": 80,
-              "available": 18,
-              "sold": 62,
+              "available": 16,
+              "sold": 64,
               "status": "selling"
             }
           ]
@@ -683,22 +683,15 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 2312,
-          "available": 74,
-          "sold": 2238,
+          "available": 95,
+          "sold": 2217,
           "status": "selling",
           "dates": [
             {
               "date": "2026-09-04",
               "quota": 812,
-              "available": 14,
-              "sold": 798,
-              "status": "selling"
-            },
-            {
-              "date": "2026-11-20",
-              "quota": 300,
-              "available": 1,
-              "sold": 299,
+              "available": 12,
+              "sold": 800,
               "status": "selling"
             },
             {
@@ -727,6 +720,13 @@
               "quota": 300,
               "available": 2,
               "sold": 298,
+              "status": "selling"
+            },
+            {
+              "date": "2026-11-26",
+              "quota": 300,
+              "available": 24,
+              "sold": 276,
               "status": "selling"
             }
           ]
@@ -785,8 +785,8 @@
         {
           "name": "Ruta 3-D: Huchuypicchu",
           "quota": 80,
-          "available": 24,
-          "sold": 56,
+          "available": 20,
+          "sold": 60,
           "status": "selling",
           "dates": [
             {
@@ -799,8 +799,8 @@
             {
               "date": "2026-12-31",
               "quota": 40,
-              "available": 21,
-              "sold": 19,
+              "available": 17,
+              "sold": 23,
               "status": "selling"
             }
           ]
