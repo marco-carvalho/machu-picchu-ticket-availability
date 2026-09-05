@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-05T05:31:12.864Z",
+  "utcTime": "2026-09-05T06:01:09.238Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 727,
-          "sold": 1073,
+          "available": 731,
+          "sold": 1069,
           "status": "selling",
           "dates": [
             {
@@ -340,8 +340,8 @@
             {
               "date": "2026-10-19",
               "quota": 300,
-              "available": 86,
-              "sold": 214,
+              "available": 84,
+              "sold": 216,
               "status": "selling"
             },
             {
@@ -361,15 +361,15 @@
             {
               "date": "2026-10-22",
               "quota": 300,
-              "available": 159,
-              "sold": 141,
+              "available": 155,
+              "sold": 145,
               "status": "selling"
             },
             {
               "date": "2026-10-23",
               "quota": 300,
-              "available": 166,
-              "sold": 134,
+              "available": 176,
+              "sold": 124,
               "status": "selling"
             }
           ]
