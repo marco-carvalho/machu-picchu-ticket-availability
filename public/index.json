@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-06T05:01:08.696Z",
+  "utcTime": "2026-09-06T06:01:07.812Z",
   "channels": [
     {
       "id": "in-person",
@@ -683,15 +683,15 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 2315,
-          "available": 161,
-          "sold": 2154,
+          "available": 112,
+          "sold": 2203,
           "status": "selling",
           "dates": [
             {
               "date": "2026-09-08",
               "quota": 815,
-              "available": 112,
-              "sold": 703,
+              "available": 61,
+              "sold": 754,
               "status": "selling"
             },
             {
@@ -725,8 +725,8 @@
             {
               "date": "2026-11-27",
               "quota": 300,
-              "available": 5,
-              "sold": 295,
+              "available": 7,
+              "sold": 293,
               "status": "selling"
             }
           ]
