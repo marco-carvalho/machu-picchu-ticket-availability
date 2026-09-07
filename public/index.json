@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-07T06:01:22.371Z",
+  "utcTime": "2026-09-07T06:31:08.705Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 820,
-          "sold": 980,
+          "available": 822,
+          "sold": 978,
           "status": "selling",
           "dates": [
             {
@@ -347,8 +347,8 @@
             {
               "date": "2026-10-21",
               "quota": 300,
-              "available": 173,
-              "sold": 127,
+              "available": 175,
+              "sold": 125,
               "status": "selling"
             },
             {
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 395,
-          "sold": 4705,
+          "available": 393,
+          "sold": 4707,
           "status": "selling",
           "dates": [
             {
@@ -398,8 +398,8 @@
             {
               "date": "2026-10-24",
               "quota": 850,
-              "available": 44,
-              "sold": 806,
+              "available": 42,
+              "sold": 808,
               "status": "selling"
             },
             {
@@ -682,9 +682,9 @@
         },
         {
           "name": "Ruta 3-B: Realeza diseñada",
-          "quota": 2776,
-          "available": 83,
-          "sold": 2693,
+          "quota": 2315,
+          "available": 85,
+          "sold": 2230,
           "status": "selling",
           "dates": [
             {
@@ -692,13 +692,6 @@
               "quota": 815,
               "available": 54,
               "sold": 761,
-              "status": "selling"
-            },
-            {
-              "date": "2026-09-09",
-              "quota": 761,
-              "available": 2,
-              "sold": 759,
               "status": "selling"
             },
             {
@@ -727,6 +720,13 @@
               "quota": 300,
               "available": 10,
               "sold": 290,
+              "status": "selling"
+            },
+            {
+              "date": "2026-11-27",
+              "quota": 300,
+              "available": 4,
+              "sold": 296,
               "status": "selling"
             }
           ]
