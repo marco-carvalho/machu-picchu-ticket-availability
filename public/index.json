@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-07T06:31:08.705Z",
+  "utcTime": "2026-09-07T07:01:14.882Z",
   "channels": [
     {
       "id": "in-person",
@@ -479,8 +479,8 @@
         {
           "name": "Ruta 1-D: Puente Inka",
           "quota": 480,
-          "available": 31,
-          "sold": 449,
+          "available": 33,
+          "sold": 447,
           "status": "selling",
           "dates": [
             {
@@ -493,8 +493,8 @@
             {
               "date": "2026-10-20",
               "quota": 80,
-              "available": 2,
-              "sold": 78,
+              "available": 4,
+              "sold": 76,
               "status": "selling"
             },
             {
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 506,
-          "sold": 1594,
+          "available": 507,
+          "sold": 1593,
           "status": "selling",
           "dates": [
             {
@@ -646,8 +646,8 @@
             {
               "date": "2026-11-01",
               "quota": 350,
-              "available": 130,
-              "sold": 220,
+              "available": 131,
+              "sold": 219,
               "status": "selling"
             },
             {
@@ -683,15 +683,15 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 2315,
-          "available": 85,
-          "sold": 2230,
+          "available": 81,
+          "sold": 2234,
           "status": "selling",
           "dates": [
             {
               "date": "2026-09-08",
               "quota": 815,
-              "available": 54,
-              "sold": 761,
+              "available": 55,
+              "sold": 760,
               "status": "selling"
             },
             {
@@ -718,8 +718,8 @@
             {
               "date": "2026-11-26",
               "quota": 300,
-              "available": 10,
-              "sold": 290,
+              "available": 5,
+              "sold": 295,
               "status": "selling"
             },
             {
