@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-08T02:01:16.929Z",
+  "utcTime": "2026-09-08T02:31:05.217Z",
   "channels": [
     {
       "id": "in-person",
@@ -10,8 +10,8 @@
         {
           "date": "2026-09-08",
           "quota": 1000,
-          "available": 160,
-          "sold": 840,
+          "available": 133,
+          "sold": 867,
           "status": "selling",
           "routes": [
             {
@@ -24,8 +24,8 @@
             {
               "name": "Ruta 1-B: Terraza superior",
               "quota": 100,
-              "available": 65,
-              "sold": 35,
+              "available": 52,
+              "sold": 48,
               "status": "selling"
             },
             {
@@ -52,8 +52,8 @@
             {
               "name": "Ruta 3-B: Realeza diseñada",
               "quota": 100,
-              "available": 35,
-              "sold": 65,
+              "available": 21,
+              "sold": 79,
               "status": "selling"
             }
           ]
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 565,
-          "sold": 4535,
+          "available": 567,
+          "sold": 4533,
           "status": "selling",
           "dates": [
             {
@@ -391,8 +391,8 @@
             {
               "date": "2026-10-24",
               "quota": 850,
-              "available": 28,
-              "sold": 822,
+              "available": 30,
+              "sold": 820,
               "status": "selling"
             },
             {
@@ -581,8 +581,8 @@
         {
           "name": "Ruta 2-B: Terraza Inferior",
           "quota": 2400,
-          "available": 1090,
-          "sold": 1310,
+          "available": 1089,
+          "sold": 1311,
           "status": "selling",
           "dates": [
             {
@@ -623,8 +623,8 @@
             {
               "date": "2026-12-06",
               "quota": 400,
-              "available": 27,
-              "sold": 373,
+              "available": 26,
+              "sold": 374,
               "status": "selling"
             }
           ]
