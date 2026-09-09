@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-09T09:31:12.908Z",
+  "utcTime": "2026-09-09T10:31:17.867Z",
   "channels": [
     {
       "id": "in-person",
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 378,
-          "sold": 1722,
+          "available": 374,
+          "sold": 1726,
           "status": "selling",
           "dates": [
             {
@@ -660,8 +660,8 @@
             {
               "date": "2026-11-04",
               "quota": 350,
-              "available": 5,
-              "sold": 345,
+              "available": 1,
+              "sold": 349,
               "status": "selling"
             },
             {
@@ -683,15 +683,15 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 2256,
-          "available": 85,
-          "sold": 2171,
+          "available": 79,
+          "sold": 2177,
           "status": "selling",
           "dates": [
             {
               "date": "2026-09-11",
               "quota": 756,
-              "available": 23,
-              "sold": 733,
+              "available": 17,
+              "sold": 739,
               "status": "selling"
             },
             {
