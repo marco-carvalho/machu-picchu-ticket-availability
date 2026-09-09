@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-09T00:31:16.358Z",
+  "utcTime": "2026-09-09T01:01:16.855Z",
   "channels": [
     {
       "id": "in-person",
@@ -10,8 +10,8 @@
         {
           "date": "2026-09-09",
           "quota": 1000,
-          "available": 29,
-          "sold": 971,
+          "available": 28,
+          "sold": 972,
           "status": "selling",
           "routes": [
             {
@@ -24,9 +24,9 @@
             {
               "name": "Ruta 1-B: Terraza superior",
               "quota": 100,
-              "available": 1,
-              "sold": 99,
-              "status": "selling"
+              "available": 0,
+              "sold": 100,
+              "status": "sold out"
             },
             {
               "name": "Ruta 2-A: Clásico Diseñada",
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 834,
-          "sold": 966,
+          "available": 817,
+          "sold": 983,
           "status": "selling",
           "dates": [
             {
@@ -340,15 +340,15 @@
             {
               "date": "2026-10-21",
               "quota": 300,
-              "available": 139,
-              "sold": 161,
+              "available": 134,
+              "sold": 166,
               "status": "selling"
             },
             {
               "date": "2026-10-22",
               "quota": 300,
-              "available": 134,
-              "sold": 166,
+              "available": 122,
+              "sold": 178,
               "status": "selling"
             },
             {
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 510,
-          "sold": 4590,
+          "available": 509,
+          "sold": 4591,
           "status": "selling",
           "dates": [
             {
@@ -391,8 +391,8 @@
             {
               "date": "2026-10-24",
               "quota": 850,
-              "available": 21,
-              "sold": 829,
+              "available": 20,
+              "sold": 830,
               "status": "selling"
             },
             {
@@ -530,15 +530,15 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 1051,
-          "sold": 3749,
+          "available": 1045,
+          "sold": 3755,
           "status": "selling",
           "dates": [
             {
               "date": "2026-12-01",
               "quota": 800,
-              "available": 53,
-              "sold": 747,
+              "available": 51,
+              "sold": 749,
               "status": "selling"
             },
             {
@@ -558,8 +558,8 @@
             {
               "date": "2026-12-04",
               "quota": 800,
-              "available": 355,
-              "sold": 445,
+              "available": 354,
+              "sold": 446,
               "status": "selling"
             },
             {
@@ -572,8 +572,8 @@
             {
               "date": "2026-12-06",
               "quota": 800,
-              "available": 6,
-              "sold": 794,
+              "available": 3,
+              "sold": 797,
               "status": "selling"
             }
           ]
@@ -581,8 +581,8 @@
         {
           "name": "Ruta 2-B: Terraza Inferior",
           "quota": 2400,
-          "available": 1064,
-          "sold": 1336,
+          "available": 1062,
+          "sold": 1338,
           "status": "selling",
           "dates": [
             {
@@ -595,8 +595,8 @@
             {
               "date": "2026-12-02",
               "quota": 400,
-              "available": 269,
-              "sold": 131,
+              "available": 267,
+              "sold": 133,
               "status": "selling"
             },
             {
@@ -682,18 +682,11 @@
         },
         {
           "name": "Ruta 3-B: Realeza diseñada",
-          "quota": 2310,
-          "available": 70,
-          "sold": 2240,
+          "quota": 1800,
+          "available": 71,
+          "sold": 1729,
           "status": "selling",
           "dates": [
-            {
-              "date": "2026-09-10",
-              "quota": 810,
-              "available": 2,
-              "sold": 808,
-              "status": "selling"
-            },
             {
               "date": "2026-11-23",
               "quota": 300,
@@ -727,6 +720,13 @@
               "quota": 300,
               "available": 62,
               "sold": 238,
+              "status": "selling"
+            },
+            {
+              "date": "2026-11-29",
+              "quota": 300,
+              "available": 3,
+              "sold": 297,
               "status": "selling"
             }
           ]
