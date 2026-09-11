@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-11T16:31:07.880Z",
+  "utcTime": "2026-09-11T17:01:18.924Z",
   "channels": [
     {
       "id": "in-person",
@@ -10,8 +10,8 @@
         {
           "date": "2026-09-12",
           "quota": 1000,
-          "available": 298,
-          "sold": 702,
+          "available": 297,
+          "sold": 703,
           "status": "selling",
           "routes": [
             {
@@ -31,8 +31,8 @@
             {
               "name": "Ruta 2-A: Clásico Diseñada",
               "quota": 600,
-              "available": 46,
-              "sold": 554,
+              "available": 45,
+              "sold": 555,
               "status": "selling"
             },
             {
@@ -493,8 +493,8 @@
             {
               "date": "2026-10-26",
               "quota": 80,
-              "available": 29,
-              "sold": 51,
+              "available": 27,
+              "sold": 53,
               "status": "selling"
             },
             {
@@ -507,8 +507,8 @@
             {
               "date": "2026-10-28",
               "quota": 80,
-              "available": 30,
-              "sold": 50,
+              "available": 32,
+              "sold": 48,
               "status": "selling"
             },
             {
@@ -734,8 +734,8 @@
         {
           "name": "Ruta 3-C: Gran Caverna",
           "quota": 250,
-          "available": 145,
-          "sold": 105,
+          "available": 142,
+          "sold": 108,
           "status": "selling",
           "dates": [
             {
@@ -748,8 +748,8 @@
             {
               "date": "2026-11-01",
               "quota": 50,
-              "available": 21,
-              "sold": 29,
+              "available": 18,
+              "sold": 32,
               "status": "selling"
             },
             {
