@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-11T07:01:06.742Z",
+  "utcTime": "2026-09-11T07:31:05.685Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 1940,
-          "sold": 3160,
+          "available": 1938,
+          "sold": 3162,
           "status": "selling",
           "dates": [
             {
@@ -419,8 +419,8 @@
             {
               "date": "2026-11-01",
               "quota": 850,
-              "available": 440,
-              "sold": 410,
+              "available": 438,
+              "sold": 412,
               "status": "selling"
             }
           ]
@@ -428,8 +428,8 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 150,
-          "sold": 630,
+          "available": 148,
+          "sold": 632,
           "status": "selling",
           "dates": [
             {
@@ -442,8 +442,8 @@
             {
               "date": "2026-10-23",
               "quota": 130,
-              "available": 3,
-              "sold": 127,
+              "available": 1,
+              "sold": 129,
               "status": "selling"
             },
             {
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 444,
-          "sold": 1656,
+          "available": 442,
+          "sold": 1658,
           "status": "selling",
           "dates": [
             {
@@ -646,8 +646,8 @@
             {
               "date": "2026-11-01",
               "quota": 350,
-              "available": 94,
-              "sold": 256,
+              "available": 92,
+              "sold": 258,
               "status": "selling"
             },
             {
