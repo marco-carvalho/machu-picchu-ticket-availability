@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-13T11:01:07.939Z",
+  "utcTime": "2026-09-13T12:01:07.556Z",
   "channels": [
     {
       "id": "in-person",
@@ -10,9 +10,9 @@
         {
           "date": "2026-09-14",
           "quota": 1000,
-          "available": 1000,
-          "sold": 0,
-          "status": "no sales",
+          "available": 830,
+          "sold": 170,
+          "status": "selling",
           "routes": [
             {
               "name": "Ruta 1-A: Montaña Machupicchu",
@@ -24,30 +24,30 @@
             {
               "name": "Ruta 1-B: Terraza superior",
               "quota": 100,
-              "available": 100,
-              "sold": 0,
-              "status": "no sales"
+              "available": 98,
+              "sold": 2,
+              "status": "selling"
             },
             {
               "name": "Ruta 2-A: Clásico Diseñada",
               "quota": 600,
-              "available": 600,
-              "sold": 0,
-              "status": "no sales"
+              "available": 477,
+              "sold": 123,
+              "status": "selling"
             },
             {
               "name": "Ruta 2-B: Terraza Inferior",
               "quota": 100,
-              "available": 100,
-              "sold": 0,
-              "status": "no sales"
+              "available": 60,
+              "sold": 40,
+              "status": "selling"
             },
             {
               "name": "Ruta 3-A: Montaña Waynapicchu",
               "quota": 50,
-              "available": 50,
-              "sold": 0,
-              "status": "no sales"
+              "available": 45,
+              "sold": 5,
+              "status": "selling"
             },
             {
               "name": "Ruta 3-B: Realeza diseñada",
@@ -377,15 +377,15 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 1799,
-          "sold": 3301,
+          "available": 1798,
+          "sold": 3302,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-27",
               "quota": 850,
-              "available": 148,
-              "sold": 702,
+              "available": 147,
+              "sold": 703,
               "status": "selling"
             },
             {
@@ -428,8 +428,8 @@
         {
           "name": "Ruta 1-C: Portada Intipunku",
           "quota": 780,
-          "available": 254,
-          "sold": 526,
+          "available": 253,
+          "sold": 527,
           "status": "selling",
           "dates": [
             {
@@ -456,8 +456,8 @@
             {
               "date": "2026-10-28",
               "quota": 130,
-              "available": 32,
-              "sold": 98,
+              "available": 31,
+              "sold": 99,
               "status": "selling"
             },
             {
