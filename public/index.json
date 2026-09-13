@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-13T07:31:13.767Z",
+  "utcTime": "2026-09-13T08:31:13.370Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,15 +377,15 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 1798,
-          "sold": 3302,
+          "available": 1800,
+          "sold": 3300,
           "status": "selling",
           "dates": [
             {
               "date": "2026-10-27",
               "quota": 850,
-              "available": 149,
-              "sold": 701,
+              "available": 150,
+              "sold": 700,
               "status": "selling"
             },
             {
@@ -398,22 +398,22 @@
             {
               "date": "2026-10-29",
               "quota": 850,
-              "available": 238,
-              "sold": 612,
+              "available": 237,
+              "sold": 613,
               "status": "selling"
             },
             {
               "date": "2026-10-30",
               "quota": 850,
-              "available": 398,
-              "sold": 452,
+              "available": 397,
+              "sold": 453,
               "status": "selling"
             },
             {
               "date": "2026-10-31",
               "quota": 850,
-              "available": 428,
-              "sold": 422,
+              "available": 431,
+              "sold": 419,
               "status": "selling"
             },
             {
@@ -632,8 +632,8 @@
         {
           "name": "Ruta 3-A: Montaña Waynapicchu",
           "quota": 2100,
-          "available": 356,
-          "sold": 1744,
+          "available": 355,
+          "sold": 1745,
           "status": "selling",
           "dates": [
             {
@@ -646,8 +646,8 @@
             {
               "date": "2026-11-01",
               "quota": 350,
-              "available": 87,
-              "sold": 263,
+              "available": 86,
+              "sold": 264,
               "status": "selling"
             },
             {
