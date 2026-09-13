@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-13T03:01:16.107Z",
+  "utcTime": "2026-09-13T03:31:02.474Z",
   "channels": [
     {
       "id": "in-person",
@@ -479,8 +479,8 @@
         {
           "name": "Ruta 1-D: Puente Inka",
           "quota": 480,
-          "available": 246,
-          "sold": 234,
+          "available": 244,
+          "sold": 236,
           "status": "selling",
           "dates": [
             {
@@ -507,8 +507,8 @@
             {
               "date": "2026-10-28",
               "quota": 80,
-              "available": 28,
-              "sold": 52,
+              "available": 26,
+              "sold": 54,
               "status": "selling"
             },
             {
@@ -581,8 +581,8 @@
         {
           "name": "Ruta 2-B: Terraza Inferior",
           "quota": 2400,
-          "available": 977,
-          "sold": 1423,
+          "available": 975,
+          "sold": 1425,
           "status": "selling",
           "dates": [
             {
@@ -616,8 +616,8 @@
             {
               "date": "2026-12-05",
               "quota": 400,
-              "available": 253,
-              "sold": 147,
+              "available": 251,
+              "sold": 149,
               "status": "selling"
             },
             {
