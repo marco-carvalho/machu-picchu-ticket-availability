@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-13T06:01:16.033Z",
+  "utcTime": "2026-09-13T06:31:09.402Z",
   "channels": [
     {
       "id": "in-person",
@@ -326,8 +326,8 @@
         {
           "name": "Ruta 1-A: Montaña Machupicchu",
           "quota": 1800,
-          "available": 617,
-          "sold": 1183,
+          "available": 615,
+          "sold": 1185,
           "status": "selling",
           "dates": [
             {
@@ -340,8 +340,8 @@
             {
               "date": "2026-10-22",
               "quota": 300,
-              "available": 80,
-              "sold": 220,
+              "available": 78,
+              "sold": 222,
               "status": "selling"
             },
             {
@@ -530,15 +530,15 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 922,
-          "sold": 3878,
+          "available": 917,
+          "sold": 3883,
           "status": "selling",
           "dates": [
             {
               "date": "2026-12-01",
               "quota": 800,
-              "available": 22,
-              "sold": 778,
+              "available": 17,
+              "sold": 783,
               "status": "selling"
             },
             {
