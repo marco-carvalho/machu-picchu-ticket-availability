@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-14T02:31:07.698Z",
+  "utcTime": "2026-09-14T03:01:12.558Z",
   "channels": [
     {
       "id": "in-person",
@@ -10,15 +10,15 @@
         {
           "date": "2026-09-14",
           "quota": 1000,
-          "available": 15,
-          "sold": 985,
+          "available": 4,
+          "sold": 996,
           "status": "selling",
           "routes": [
             {
               "name": "Ruta 1-A: Montaña Machupicchu",
               "quota": 50,
-              "available": 14,
-              "sold": 36,
+              "available": 3,
+              "sold": 47,
               "status": "selling"
             },
             {
@@ -530,8 +530,8 @@
         {
           "name": "Ruta 2-A: Clásico Diseñada",
           "quota": 4800,
-          "available": 877,
-          "sold": 3923,
+          "available": 875,
+          "sold": 3925,
           "status": "selling",
           "dates": [
             {
@@ -544,8 +544,8 @@
             {
               "date": "2026-12-02",
               "quota": 800,
-              "available": 93,
-              "sold": 707,
+              "available": 91,
+              "sold": 709,
               "status": "selling"
             },
             {
@@ -734,8 +734,8 @@
         {
           "name": "Ruta 3-C: Gran Caverna",
           "quota": 250,
-          "available": 125,
-          "sold": 125,
+          "available": 122,
+          "sold": 128,
           "status": "selling",
           "dates": [
             {
@@ -755,8 +755,8 @@
             {
               "date": "2026-11-02",
               "quota": 50,
-              "available": 9,
-              "sold": 41,
+              "available": 6,
+              "sold": 44,
               "status": "selling"
             },
             {
