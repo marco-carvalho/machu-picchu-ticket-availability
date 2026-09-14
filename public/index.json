@@ -1,5 +1,5 @@
 {
-  "utcTime": "2026-09-14T08:01:22.134Z",
+  "utcTime": "2026-09-14T08:31:05.207Z",
   "channels": [
     {
       "id": "in-person",
@@ -377,8 +377,8 @@
         {
           "name": "Ruta 1-B: Terraza superior",
           "quota": 5100,
-          "available": 1767,
-          "sold": 3333,
+          "available": 1765,
+          "sold": 3335,
           "status": "selling",
           "dates": [
             {
@@ -398,8 +398,8 @@
             {
               "date": "2026-10-29",
               "quota": 850,
-              "available": 236,
-              "sold": 614,
+              "available": 234,
+              "sold": 616,
               "status": "selling"
             },
             {
@@ -683,10 +683,17 @@
         {
           "name": "Ruta 3-B: Realeza diseñada",
           "quota": 1800,
-          "available": 1001,
-          "sold": 799,
+          "available": 762,
+          "sold": 1038,
           "status": "selling",
           "dates": [
+            {
+              "date": "2026-11-26",
+              "quota": 300,
+              "available": 1,
+              "sold": 299,
+              "status": "selling"
+            },
             {
               "date": "2026-11-28",
               "quota": 300,
@@ -720,13 +727,6 @@
               "quota": 300,
               "available": 247,
               "sold": 53,
-              "status": "selling"
-            },
-            {
-              "date": "2026-12-04",
-              "quota": 300,
-              "available": 240,
-              "sold": 60,
               "status": "selling"
             }
           ]
